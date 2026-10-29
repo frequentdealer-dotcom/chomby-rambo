@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101010">
+  <title>Spin Show Archives | Chomby Rambo</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --bg: #101010;
+      --panel: #191919;
+      --yellow: #f5d323;
+      --text: #f7f7f7;
+      --muted: #a6a6a6;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 30px 18px;
+      text-align: center;
+      border-bottom: 1px solid #303030;
+    }
+
+    .brand {
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 12px 0 6px;
+      font-size: clamp(32px, 7vw, 46px);
+      line-height: 1.15;
+    }
+
+    header p {
+      color: var(--muted);
+      margin: 10px auto 0;
+      max-width: 520px;
+    }
+
+    main {
+      width: min(100% - 28px, 1000px);
+      margin: 28px auto 42px;
+    }
+
+    .events {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .event {
+      background: var(--panel);
+      border: 1px solid #303030;
+      border-radius: 10px;
+      padding: 22px;
+    }
+
+    .event-label {
+      color: var(--yellow);
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 8px 0;
+      font-size: 23px;
+      line-height: 1.3;
+    }
+
+    .date {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0 0 16px;
+    }
+
+    .event-link {
+      display: inline-block;
+      background: var(--yellow);
+      color: #101010;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 14px;
+      border-radius: 5px;
+    }
+
+    .coming {
+      display: inline-block;
+      color: var(--muted);
+      border: 1px solid #444;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-size: 13px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 28px;
+      color: var(--yellow);
+      text-decoration: none;
+    }
+
+    footer {
+      border-top: 1px solid #303030;
+      padding: 22px 14px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (min-width: 650px) {
+      .events {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">Shot by Chomby Rambo</div>
+    <h1>Spin Show Archives</h1>
+    <p>Explore the events, the atmosphere and the moments captured through my lens.</p>
+  </header>
+
+  <main>
+    <div class="events">
+      <article class="event">
+        <div class="event-label">Event archive</div>
+        <h2>Woza 4.0 Spin Show</h2>
+        <p class="date">Date and event details confirmed on its dedicated page.</p>
+        <a class="event-link" href="woza-4-0.html">View event gallery →</a>
+      </article>
+
+      <article class="event">
+        <div class="event-label">Event archive</div>
+        <h2>Winter Spin Fest 2026</h2>
+        <p class="date">July 2026 — date to be confirmed</p>
+        <span class="coming">Gallery coming soon</span>
+      </article>
+
+      <article class="event">
+        <div class="event-label">Event archive</div>
+        <h2>Old School v New School</h2>
+        <p class="date">April 2026 — date to be confirmed</p>
+        <span class="coming">Gallery coming soon</span>
+      </article>
+
+      <article class="event">
+        <div class="event-label">Event archive</div>
+        <h2>Masenga Championship 1.0</h2>
+        <p class="date">April 2026 — date to be confirmed</p>
+        <span class="coming">Gallery coming soon</span>
+      </article>
+
+      <article class="event">
+        <div class="event-label">Event archive</div>
+        <h2>Woza 3.0</h2>
+        <p class="date">2025 — date to be confirmed</p>
+        <span class="coming">Gallery coming soon</span>
+      </article>
+
+      <article class="event">
+        <div class="event-label">Event archive</div>
+        <h2>Woza 1.0</h2>
+        <p class="date">2023 — date to be confirmed</p>
+        <span class="coming">Gallery coming soon</span>
+      </article>
+    </div>
+
+    <a class="back-link" href="./">← Back to Home</a>
+  </main>
+
+  <footer>
+    © 2026 Chomby Rambo · Shot by Chomby Rambo
+  </footer>
+</body>
+</html>
