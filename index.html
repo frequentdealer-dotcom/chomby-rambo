@@ -189,10 +189,20 @@
     }
   /* SHOWS I'VE ATTENDED */
 .shows-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  display: flex;
   gap: 18px;
   margin-top: 25px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 15px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.shows-grid .show-card {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
 }
 
 .show-card {
