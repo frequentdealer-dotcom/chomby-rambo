@@ -187,6 +187,58 @@
       h1 { letter-spacing: -1.5px; }
       .video-panel, .campaign { padding: 23px; }
     }
+  /* SHOWS I'VE ATTENDED */
+.shows-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: 25px;
+}
+
+.show-card {
+  display: block;
+  background: var(--panel);
+  border: 1px solid #303030;
+  border-radius: 12px;
+  padding: 15px;
+  color: var(--text);
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.show-card:hover {
+  transform: translateY(-4px);
+}
+
+.show-logo {
+  height: 160px;
+  background: #101010;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  margin-bottom: 14px;
+}
+
+.show-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.show-card h3 {
+  margin: 0 0 6px;
+  font-size: 17px;
+}
+
+.show-card p {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0;
+}
   </style>
 </head>
 <body>
@@ -214,7 +266,45 @@
         </div>
       </div>
     </section>
+<section class="section wrap" id="shows-attended">
+  <div class="eyebrow">MY SPIN SHOW JOURNEY</div>
+  <h2>Shows I've Attended</h2>
+  <p class="muted">
+    A look back at the spin shows I've experienced through my eyes.
+  </p>
 
+  <div class="shows-grid">
+
+    <a class="show-card" href="woza-4-0.html">
+      <div class="show-logo">
+        <img src="gallery/woza-spin-fest-4-transparent.png"
+             alt="Woza 4.0 logo">
+      </div>
+      <h3>Woza 4.0</h3>
+      <p>2026 · NASDEC</p>
+    </a>
+
+    <div class="show-card">
+      <div class="show-logo">
+        <img src="gallery/winter-spin-fest-logo.png"
+             alt="Winter Spin Fest logo">
+      </div>
+      <h3>Winter Spin Fest 2026</h3>
+      <p>2026</p>
+    </div>
+
+    <div class="show-card">
+      <div class="show-logo">
+        <img src="gallery/old-school-vs-new-school-logo.png"
+             alt="Old School v New School logo">
+      </div>
+      <h3>Old School v New School</h3>
+      <p>2026</p>
+    </div>
+
+  </div>
+</section>
+    
     <section class="section wrap" id="videos">
       <div class="eyebrow">From behind the camera</div>
       <h2>The action speaks for itself.</h2>
