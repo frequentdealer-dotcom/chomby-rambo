@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Spin Bin | Chomby Rambo</title>
+
+  <style>
+    :root {
+      --yellow: #FFD230;
+      --dark: #101010;
+      --panel: #191919;
+      --white: #ffffff;
+      --muted: #b5b5b5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--dark);
+      color: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+    }
+
+    .wrap {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid #292929;
+    }
+
+    .brand {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 20px;
+      letter-spacing: 1px;
+    }
+
+    .brand span {
+      color: var(--yellow);
+    }
+
+    .hero {
+      padding: 100px 0 90px;
+      background:
+        linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.85)),
+        var(--dark);
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: clamp(42px, 8vw, 76px);
+      line-height: 1.1;
+      margin: 20px 0;
+    }
+
+    .tagline {
+      font-size: clamp(18px, 3vw, 25px);
+      color: var(--yellow);
+      font-style: italic;
+    }
+
+    .intro {
+      max-width: 750px;
+      margin: 25px auto 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    section {
+      padding: 65px 0;
+    }
+
+    .section-title {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .topics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+      margin-top: 35px;
+    }
+
+    .topic {
+      background: var(--panel);
+      border: 1px solid #303030;
+      border-top: 3px solid var(--yellow);
+      border-radius: 8px;
+      padding: 25px;
+    }
+
+    .topic h3 {
+      margin-top: 0;
+      color: var(--yellow);
+    }
+
+    .topic p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .coming-soon {
+      background: #191919;
+      text-align: center;
+      border-top: 1px solid #333;
+      border-bottom: 1px solid #333;
+    }
+
+    .coming-soon p {
+      color: var(--muted);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: var(--yellow);
+      text-decoration: none;
+    }
+
+    footer {
+      padding: 30px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        CHOMBY <span>RAMBO</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="wrap">
+        <div class="eyebrow">An Automotive Knowledge Feature</div>
+
+        <h1>THE SPIN BIN</h1>
+
+        <div class="tagline">
+          A Closer Look at What Makes It Spin.
+        </div>
+
+        <p class="intro">
+          Spinning is more than what happens on the track.
+          Behind every spinning car is a combination of
+          engineering, mechanical components, preparation
+          and commitment.
+
+          The Spin Bin explores the cars, the components,
+          the builds and the knowledge behind the culture.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="eyebrow">Explore The Spin Bin</div>
+
+        <h2 class="section-title">
+          Beyond the Spin
+        </h2>
+
+        <p class="section-intro">
+          A closer look at the knowledge, preparation
+          and machinery behind spinning.
+        </p>
+
+        <div class="topics">
+
+          <div class="topic">
+            <h3>The Cars</h3>
+            <p>
+              Exploring suitable vehicles, body condition,
+              chassis, drivetrain configurations and
+              vehicle selection.
+            </p>
+          </div>
+
+          <div class="topic">
+            <h3>The Components</h3>
+            <p>
+              Understanding the parts and mechanical
+              systems that contribute to a properly
+              prepared spinning car.
+            </p>
+          </div>
+
+          <div class="topic">
+            <h3>The Build</h3>
+            <p>
+              Exploring modifications, fabrication,
+              tuning, preparation and the journey
+              from an ordinary vehicle to a spinning car.
+            </p>
+          </div>
+
+          <div class="topic">
+            <h3>The Ownership Journey</h3>
+            <p>
+              Looking at acquisition, budgeting,
+              maintenance and the commitments involved
+              in owning a spinning car.
+            </p>
+          </div>
+
+          <div class="topic">
+            <h3>The People</h3>
+            <p>
+              Stories, experiences and insights from
+              spinners, mechanics, builders and
+              automotive enthusiasts.
+            </p>
+          </div>
+
+          <div class="topic">
+            <h3>The Culture</h3>
+            <p>
+              Documenting the events, personalities,
+              experiences and culture surrounding
+              the spinning scene.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="coming-soon">
+      <div class="wrap">
+        <div class="eyebrow">The Journey Begins</div>
+
+        <h2>Knowledge Behind the Spin.</h2>
+
+        <p>
+          This is an ongoing journey of research,
+          discovery and documentation.
+        </p>
+
+        <p>
+          Follow along as we explore what it takes
+          to understand, prepare and own a spinning car.
+        </p>
+
+        <a class="back-link" href="index.html">
+          ← Back to Chomby Rambo
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © Chomby Rambo. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
