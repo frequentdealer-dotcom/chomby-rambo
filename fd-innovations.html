@@ -219,6 +219,55 @@
     flex-basis: 30%;
   }
 }
+  
+/* SOCIAL MEDIA ICON CARDS */
+
+.social-links .link-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-align: left;
+  padding: 20px;
+  transition: 0.2s ease;
+}
+
+.social-links .link-card:hover {
+  border-color: var(--yellow);
+  transform: translateY(-3px);
+}
+
+.social-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--yellow);
+}
+
+.social-icon svg {
+  width: 32px;
+  height: 32px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.social-icon.behance {
+  font-size: 29px;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.social-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
   </style>
 </head>
 
