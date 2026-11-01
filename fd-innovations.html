@@ -146,6 +146,79 @@
     footer strong {
       color: var(--yellow);
     }
+    /* BRANDS CAROUSEL */
+
+.brands-section {
+  padding: 65px 20px;
+  text-align: center;
+}
+
+.brands-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+.brands-section h2 span {
+  color: var(--yellow);
+}
+
+.brands-section .section-intro {
+  margin-bottom: 30px;
+}
+
+.brand-carousel {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 10px 2px 20px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.brand-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.brand-card {
+  flex: 0 0 75%;
+  min-height: 145px;
+  background: var(--charcoal);
+  border: 1px solid #393939;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  scroll-snap-align: center;
+}
+
+.brand-placeholder {
+  width: 65px;
+  height: 65px;
+  border: 2px dashed var(--yellow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--yellow);
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.brand-card strong {
+  color: var(--white);
+  font-size: 0.95rem;
+}
+
+@media (min-width: 700px) {
+  .brand-card {
+    flex-basis: 30%;
+  }
+}
   </style>
 </head>
 
