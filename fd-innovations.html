@@ -268,6 +268,80 @@
   gap: 3px;
 }
 
+/* FOUNDER / CREATIVE LEAD SECTION */
+
+.founder-section {
+  padding: 80px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.founder-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 45px;
+  flex-wrap: wrap;
+}
+
+.founder-photo {
+  width: 100%;
+  max-width: 340px;
+  flex-shrink: 0;
+}
+
+.founder-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.founder-text {
+  flex: 1;
+  min-width: 260px;
+  max-width: 560px;
+  text-align: left;
+}
+
+.founder-text h2 {
+  margin-bottom: 12px;
+  color: var(--white);
+}
+
+.founder-text h2 span {
+  color: var(--yellow);
+}
+
+.founder-role {
+  color: var(--yellow);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.founder-text p {
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 700px) {
+  .founder-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .founder-photo {
+    max-width: 290px;
+  }
+
+  .founder-text {
+    text-align: center;
+  }
+}
+
+
   </style>
 </head>
 
@@ -292,6 +366,49 @@
   </header>
 
   <main>
+    
+<section class="founder-section">
+  <div class="founder-content">
+
+    <div class="founder-photo">
+      <img
+        src="gallery/fd-founder-portrait.png"
+        alt="Chomba Mwiche, Founder and Creative Lead of FD Innovations"
+      >
+    </div>
+
+    <div class="founder-text">
+      <h2>Meet the <span>Founder</span></h2>
+
+      <div class="founder-role">
+        Chomba Mwiche | Founder &amp; Creative Lead
+      </div>
+
+      <p>
+        FD Innovations is driven by a passion for creativity,
+        design and turning ideas into practical solutions.
+        Behind the brand is a founder who works closely with
+        clients to understand their ideas, develop concepts
+        and bring projects to life.
+      </p>
+
+      <p>
+        From design and branding to printing and project
+        coordination, each assignment is approached with
+        attention to detail and a commitment to quality.
+      </p>
+
+      <p>
+        Where a project requires additional expertise or
+        production capacity, FD Innovations collaborates
+        with independent professionals and specialised
+        service providers to deliver the required results.
+      </p>
+    </div>
+
+  </div>
+</section>
+
 
     <section class="section">
       <h2>Connect <span>With Us</span></h2>
