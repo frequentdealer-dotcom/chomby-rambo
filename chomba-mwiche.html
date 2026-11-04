@@ -1,0 +1,620 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Chomba Mwiche | Personal Website</title>
+
+  <meta name="description" content="The personal website of Chomba Mwiche. Exploring law, creativity, entrepreneurship, lifestyle and ideas.">
+
+  <style>
+    :root {
+      --background: #111111;
+      --surface: #1c1c1c;
+      --surface-light: #262626;
+      --text: #f4f1eb;
+      --muted: #aaa69e;
+      --accent: #c6a96b;
+      --border: #36332d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    /* NAVIGATION */
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* HERO */
+
+    .hero {
+      padding: 90px 0 85px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-description {
+      color: var(--muted);
+      max-width: 520px;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 22px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 13px;
+      transition: 0.2s ease;
+    }
+
+    .button:hover {
+      background: var(--accent);
+      color: #111;
+    }
+
+    .hero-image {
+      min-height: 390px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 390px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-placeholder {
+      color: var(--muted);
+      text-align: center;
+      padding: 25px;
+      font-size: 13px;
+    }
+
+    /* GENERAL SECTIONS */
+
+    section {
+      padding: 75px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-heading {
+      margin-bottom: 35px;
+    }
+
+    .section-heading .eyebrow {
+      margin-bottom: 8px;
+    }
+
+    .section-heading h2 {
+      font-size: 32px;
+      font-weight: 600;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 650px;
+      margin-top: 10px;
+    }
+
+    /* ABOUT */
+
+    .about-content {
+      max-width: 800px;
+    }
+
+    .about-content p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    /* INTEREST CARDS */
+
+    .interest-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .interest-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 27px;
+      transition: 0.25s ease;
+    }
+
+    .interest-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .interest-number {
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .interest-card h3 {
+      font-size: 21px;
+      margin-bottom: 10px;
+    }
+
+    .interest-card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* PROJECTS */
+
+    .project-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .project {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .project h3 {
+      font-size: 17px;
+    }
+
+    .project p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .project-arrow {
+      color: var(--accent);
+      font-size: 20px;
+    }
+
+    /* CONNECT */
+
+    .connect {
+      text-align: center;
+      padding: 85px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .connect h2 {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .connect p {
+      color: var(--muted);
+      margin-bottom: 25px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .social-links a {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 30px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    footer a {
+      color: var(--accent);
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 700px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 65px 0;
+        gap: 35px;
+      }
+
+      .hero-image {
+        min-height: 300px;
+      }
+
+      .hero-image img {
+        height: 300px;
+      }
+
+      .interest-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading h2 {
+        font-size: 27px;
+      }
+
+      .project {
+        padding: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="brand">CHOMBA<span>.</span></a>
+
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#interests">Interests</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+
+    <div class="container">
+      <section class="hero" style="border-top:none;">
+
+        <div>
+          <div class="eyebrow">A PERSONAL SPACE</div>
+
+          <h1>
+            Chomba<br>
+            <span>Mwiche.</span>
+          </h1>
+
+          <p class="hero-description">
+            Law, creativity, entrepreneurship and life.
+            A personal space documenting my professional
+            journey, interests, experiences and ideas.
+          </p>
+
+          <div class="hero-links">
+            <a href="#about" class="button">Get to know me</a>
+            <a href="#contact" class="button">Get in touch</a>
+          </div>
+        </div>
+
+        <div class="hero-image">
+          <!-- Add your portrait here when ready -->
+          <div class="image-placeholder">
+            YOUR PORTRAIT GOES HERE
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+    <!-- ABOUT -->
+
+    <section id="about">
+      <div class="container">
+
+        <div class="section-heading">
+          <div class="eyebrow">01 / INTRODUCTION</div>
+          <h2>A little about me.</h2>
+        </div>
+
+        <div class="about-content">
+          <p>
+            I am Chomba Mwiche, a legal professional
+            with an interest in creativity, business,
+            technology and personal development.
+          </p>
+
+          <p>
+            Beyond my professional pursuits, I enjoy
+            exploring different interests, developing
+            ideas, documenting experiences and
+            undertaking projects that allow me to
+            learn and create.
+          </p>
+
+          <p>
+            This website is a space to bring together
+            the different sides of my life, the work
+            I do, the things I enjoy and the ideas
+            I continue to explore.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTERESTS -->
+
+    <section id="interests">
+      <div class="container">
+
+        <div class="section-heading">
+          <div class="eyebrow">02 / BEYOND THE EVERYDAY</div>
+          <h2>Things that interest me.</h2>
+          <p class="section-intro">
+            Different interests, perspectives and
+            pursuits that contribute to who I am.
+          </p>
+        </div>
+
+        <div class="interest-grid">
+
+          <div class="interest-card">
+            <div class="interest-number">01</div>
+            <h3>Law & Professional Life</h3>
+            <p>
+              Legal practice, professional development,
+              research, writing and the law.
+            </p>
+          </div>
+
+          <div class="interest-card">
+            <div class="interest-number">02</div>
+            <h3>Creativity & Design</h3>
+            <p>
+              Photography, visual communication,
+              graphic design and creative expression.
+            </p>
+          </div>
+
+          <div class="interest-card">
+            <div class="interest-number">03</div>
+            <h3>Entrepreneurship</h3>
+            <p>
+              Business ideas, building ventures,
+              innovation and turning concepts into
+              practical projects.
+            </p>
+          </div>
+
+          <div class="interest-card">
+            <div class="interest-number">04</div>
+            <h3>Books & Ideas</h3>
+            <p>
+              Reading, philosophy, personal reflections
+              and conversations about life.
+            </p>
+          </div>
+
+          <div class="interest-card">
+            <div class="interest-number">05</div>
+            <h3>Automotive Culture</h3>
+            <p>
+              Cars, motorsport, spinning culture
+              and automotive photography.
+            </p>
+          </div>
+
+          <div class="interest-card">
+            <div class="interest-number">06</div>
+            <h3>Lifestyle & Experiences</h3>
+            <p>
+              Everyday experiences, exploration,
+              personal interests and the moments
+              worth documenting.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+
+    <section id="projects">
+      <div class="container">
+
+        <div class="section-heading">
+          <div class="eyebrow">03 / WHAT I'M BUILDING</div>
+          <h2>Projects & ventures.</h2>
+          <p class="section-intro">
+            Some of the projects and creative spaces
+            connected to my journey.
+          </p>
+        </div>
+
+        <div class="project-list">
+
+          <a href="https://frequentdealer-dotcom.github.io/chomby-rambo/"
+             class="project">
+            <div>
+              <h3>Chomby Rambo</h3>
+              <p>Automotive culture, photography and stories.</p>
+            </div>
+            <span class="project-arrow">↗</span>
+          </a>
+
+          <a href="https://frequentdealer-dotcom.github.io/chomby-rambo/fd-innovations.html"
+             class="project">
+            <div>
+              <h3>FD Innovations</h3>
+              <p>Design, printing, branding and creative solutions.</p>
+            </div>
+            <span class="project-arrow">↗</span>
+          </a>
+
+          <div class="project">
+            <div>
+              <h3>Professional Development</h3>
+              <p>Continuing to grow in law and professional practice.</p>
+            </div>
+            <span class="project-arrow">↗</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+
+    <section id="contact">
+      <div class="container">
+
+        <div class="connect">
+          <div class="eyebrow">04 / CONNECTION</div>
+
+          <h2>Let's connect.</h2>
+
+          <p>
+            For professional enquiries, collaborations
+            or simply a conversation.
+          </p>
+
+       <a href="mailto:cmwiche79@gmail.com"
+   class="button">
+  Get in touch
+</a>
+          <div class="social-links">
+
+            <!-- Replace these links with your personal profiles -->
+
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Facebook</a>
+            <a href="#">Behance</a>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Chomba Mwiche. All rights reserved.</p>
+      <p style="margin-top:8px;">
+        <a href="https://frequentdealer-dotcom.github.io/chomby-rambo/">
+          Visit Chomby Rambo
+        </a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
