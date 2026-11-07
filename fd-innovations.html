@@ -35,15 +35,19 @@
     }
 
     .hero {
-      min-height: 85vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 70px 20px;
-      background: radial-gradient(circle at center, #292929 0%, #000000 70%);
-    }
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 70px 20px;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(0,0,0,0.48), rgba(0,0,0,0.65)),
+    url("gallery/fd-hero-background.jpg") center/cover no-repeat;
+}
 
     .logo {
       width: 190px;
