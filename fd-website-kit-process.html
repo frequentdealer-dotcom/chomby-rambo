@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FD Website Kit | Client Implementation Process</title>
+<style>
+:root {
+  --yellow: #FFD230;
+  --black: #000000;
+  --dark: #171717;
+  --card: #222222;
+  --white: #ffffff;
+  --muted: #b5b5b5;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.65;
+}
+header {
+  padding: 22px 7%;
+  border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand { font-size: 23px; font-weight: 800; }
+.brand span, .accent { color: var(--yellow); }
+.header-label {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+.hero {
+  padding: 85px 7% 70px;
+  text-align: center;
+  background: linear-gradient(135deg,#171717,#050505);
+}
+.eyebrow {
+  color: var(--yellow);
+  letter-spacing: 3px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.hero h1 {
+  font-size: clamp(36px,7vw,65px);
+  line-height: 1.1;
+  margin: 18px 0;
+}
+.hero p {
+  max-width: 680px;
+  margin: auto;
+  color: var(--muted);
+  font-size: 17px;
+}
+.hero-tag {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 8px 15px;
+  border: 1px solid var(--yellow);
+  color: var(--yellow);
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.container {
+  max-width: 1050px;
+  margin: auto;
+  padding: 65px 22px;
+}
+.section-heading { margin-bottom: 35px; }
+.section-heading h2 { font-size: 30px; margin: 8px 0; }
+.section-heading p { color: var(--muted); }
+.process-list {
+  display: grid;
+  gap: 17px;
+}
+.process-card {
+  display: grid;
+  grid-template-columns: 65px 1fr;
+  gap: 18px;
+  background: var(--card);
+  border: 1px solid #333;
+  border-radius: 14px;
+  padding: 25px;
+}
+.number {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--black);
+  font-size: 21px;
+  font-weight: 800;
+}
+.process-card h3 {
+  font-size: 21px;
+  margin-bottom: 7px;
+}
+.process-card p { color: var(--muted); }
+.record {
+  margin-top: 15px;
+  padding: 12px 15px;
+  background: #181818;
+  border-left: 3px solid var(--yellow);
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.record strong { color: var(--yellow); }
+.notice {
+  margin-top: 30px;
+  padding: 23px;
+  border: 1px solid #555;
+  border-radius: 12px;
+  color: var(--muted);
+}
+.notice strong { color: var(--yellow); }
+.cta {
+  background: var(--yellow);
+  color: var(--black);
+  text-align: center;
+  padding: 55px 22px;
+}
+.cta h2 { font-size: 30px; margin-bottom: 10px; }
+.cta p { margin-bottom: 20px; }
+.cta a {
+  display: inline-block;
+  padding: 13px 24px;
+  background: var(--black);
+  color: var(--white);
+  text-decoration: none;
+  border-radius: 7px;
+  font-weight: bold;
+}
+footer {
+  padding: 28px 20px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+footer span { color: var(--yellow); }
+@media(max-width:600px) {
+  header { padding: 18px 20px; }
+  .header-label { font-size: 9px; letter-spacing: 1px; }
+  .hero { padding: 65px 20px; }
+  .process-card {
+    grid-template-columns: 45px 1fr;
+    gap: 12px;
+    padding: 18px 14px;
+  }
+  .number { width: 40px; height: 40px; }
+  .process-card h3 { font-size: 18px; }
+  .container { padding: 50px 16px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">FD<span>▲</span> Innovations</div>
+  <div class="header-label">DIGITAL PRODUCTS</div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">FD WEBSITE KIT</div>
+  <h1>Your Website.<br><span class="accent">Our Process.</span></h1>
+  <p>
+    From your first enquiry to the launch of your website,
+    we follow a structured process designed to make
+    getting your business online straightforward.
+  </p>
+  <div class="hero-tag">PROUDLY ZAMBIAN PRODUCT</div>
+</section>
+
+<main class="container">
+  <div class="section-heading">
+    <div class="eyebrow">HOW IT WORKS</div>
+    <h2>Our Implementation Process</h2>
+    <p>
+      Every FD Website Kit project follows these
+      stages to ensure clarity, accountability and
+      a well-coordinated delivery.
+    </p>
+  </div>
+
+  <div class="process-list">
+
+    <article class="process-card">
+      <div class="number">01</div>
+      <div>
+        <h3>Enquiry & Consultation</h3>
+        <p>
+          We discuss your business, objectives and
+          website requirements to understand the
+          solution you need.
+        </p>
+        <div class="record">
+          <strong>Related documentation:</strong>
+          Enquiry record and consultation notes.
+          <br><em>Documentation to be added.</em>
+        </div>
+      </div>
+    </article>
+
+    <article class="process-card">
+      <div class="number">02</div>
+      <div>
+        <h3>Quotation & Scope of Work</h3>
+        <p>
+          We propose a suitable website solution,
+          identifying the agreed features, deliverables,
+          costs and estimated implementation period.
+        </p>
+        <div class="record">
+          <strong>Related documentation:</strong>
+          Quotation and scope of work.
+          <br><em>Documentation to be added.</em>
+        </div>
+      </div>
+    </article>
+
+    <article class="process-card">
+      <div class="number">03</div>
+      <div>
+        <h3>Agreement & Acceptance</h3>
+        <p>
+          Once the proposal is accepted, we establish
+          the terms of engagement, responsibilities
+          and agreed project scope.
+        </p>
+        <div class="record">
+          <strong>Related documentation:</strong>
+          Client service agreement and acceptance.
+          <br><em>Documentation to be added.</em>
+        </div>
+      </div>
+    </article>
+
+    <article class="process-card">
+      <div class="number">04</div>
+      <div>
+        <h3>Payment Confirmation</h3>
+        <p>
+          Payment is confirmed and recorded.
+          This triggers the formal client onboarding
+          and requirements collection process.
+        </p>
+        <div class="record">
+          <strong>Related documentation:</strong>
+          Payment confirmation and receipt.
+          <br><em>Documentation to be added.</em>
+        </div>
+      </div>
+    </article>
+
+    <article class="process-card">
+      <div class="number">05</div>
+      <div>
+        <h3>Client Onboarding & Requirements</h3>
+        <p>
+          We provide a requirements checklist and
+          collect the business information, logo,
+          photographs, written content and other
+          materials needed for the website.
+        </p>
+        <div class="record">
+          <strong>Related documentation:</strong>
+          Client onboarding form, requirements checklist
+          and content permission declaration.
+          <br><em>Documentation to be added.</em>
+        </div>
+      </div>
+    </article>
+
+    <article class="process-card">
+      <div class="number">06</div>
+      <div>
+        <h3>Website Development & Configuration</h3>
+        <p>
+          We customise the selected template,
+          incorporate the approved content, configure
+          agreed functionality and test the website
+          across supported devices.
+        </p>
+        <div class="record">
+          <strong>Related documentation:</strong>
+          Project progress and testing records.
+          <br><em>Documentation to be added.</em>
+        </div>
+      </div>
+    </article>
+
+    <article class="process-card">
+      <div class="number">07</div>
+      <div>
+        <h3>Client Review & Approval</h3>
+        <p>
+          We present the completed website for review.
+          Agreed corrections are addressed before
+          the customer approves the final version
+          for publication.
+        </p>
+        <div class="record">
+          <strong>Related documentation:</strong>
+          Website review and approval form.
+          <br><em>Documentation to be added.</em>
+        </div>
+      </div>
+    </article>
+
+    <article class="process-card">
+      <div class="number">08</div>
+      <div>
+        <h3>Deployment & Handover</h3>
+        <p>
+          The website is published to the agreed
+          hosting platform. We provide the agreed
+          access credentials, handover information
+          and support arrangements.
+        </p>
+        <div class="record">
+          <strong>Related documentation:</strong>
+          Deployment checklist, handover certificate
+          and support terms.
+          <br><em>Documentation to be added.</em>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="notice">
+    <strong>Important:</strong>
+    Implementation timelines depend on the agreed
+    project scope and the timely submission of
+    complete client materials. Additional features,
+    services and work outside the agreed scope may
+    require a separate quotation.
+  </div>
+</main>
+
+<section class="cta">
+  <h2>Ready to Take Your Business Online?</h2>
+  <p>Get in touch with FD Innovations to discuss your website.</p>
+  <a href="mailto:frequentdealer@gmail.com">
+    Contact FD Innovations
+  </a>
+</section>
+
+<footer>
+  <p>© 2026 <span>FD Innovations</span>. All rights reserved.</p>
+  <p>FD Digital Products · Proudly Zambian</p>
+</footer>
+
+</body>
+</html>
