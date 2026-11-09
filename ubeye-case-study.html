@@ -1,0 +1,423 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="UBEYE Transformation — A project retrospective by FD Innovations.">
+
+<title>UBEYE Transformation | FD Innovations Case Study</title>
+
+<style>
+:root {
+  --yellow: #FFD230;
+  --black: #000000;
+  --charcoal: #171717;
+  --white: #FFFFFF;
+  --muted: #BDBDBD;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+nav {
+  padding: 18px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #292929;
+}
+
+.nav-brand {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.nav-brand span {
+  color: var(--yellow);
+}
+
+.nav-link {
+  color: var(--yellow);
+  font-size: 0.9rem;
+}
+
+.hero {
+  padding: 100px 7% 85px;
+  text-align: center;
+  background:
+    linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.9)),
+    radial-gradient(circle at center, #353535, #000000 75%);
+}
+
+.eyebrow {
+  color: var(--yellow);
+  font-size: 0.78rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  color: var(--yellow);
+}
+
+.hero p {
+  max-width: 650px;
+  margin: auto;
+  color: var(--muted);
+}
+
+.status {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 7px 15px;
+  border: 1px solid var(--yellow);
+  border-radius: 30px;
+  color: var(--yellow);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.container {
+  max-width: 950px;
+  margin: auto;
+  padding: 65px 22px;
+}
+
+.section-label {
+  color: var(--yellow);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 5vw, 2.3rem);
+  line-height: 1.25;
+  margin-bottom: 20px;
+}
+
+h2 span {
+  color: var(--yellow);
+}
+
+p {
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.intro-card,
+.case-card {
+  background: var(--charcoal);
+  border: 1px solid #333333;
+  border-radius: 12px;
+  padding: 28px;
+  margin-top: 25px;
+}
+
+.case-card h3 {
+  color: var(--yellow);
+  margin-bottom: 12px;
+}
+
+.placeholder {
+  border-left: 3px solid var(--yellow);
+  padding: 15px 18px;
+  background: #202020;
+  color: var(--muted);
+  margin-top: 18px;
+  font-size: 0.95rem;
+}
+
+.project-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.detail {
+  padding: 20px;
+  background: var(--charcoal);
+  border: 1px solid #333333;
+  border-radius: 8px;
+}
+
+.detail small {
+  display: block;
+  color: var(--yellow);
+  margin-bottom: 7px;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+}
+
+.detail strong {
+  font-size: 0.95rem;
+}
+
+.divider {
+  height: 1px;
+  background: #292929;
+  max-width: 950px;
+  margin: auto;
+}
+
+.instagram-link {
+  display: inline-block;
+  padding: 12px 22px;
+  background: var(--yellow);
+  color: var(--black);
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.disclaimer {
+  font-size: 0.82rem;
+  border-top: 1px solid #333333;
+  padding-top: 20px;
+  margin-top: 35px;
+}
+
+footer {
+  padding: 30px 15px;
+  text-align: center;
+  border-top: 1px solid #292929;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+footer strong {
+  color: var(--yellow);
+}
+
+@media(max-width: 600px) {
+  .hero {
+    padding: 75px 22px;
+  }
+
+  .container {
+    padding: 50px 20px;
+  }
+
+  .intro-card,
+  .case-card {
+    padding: 22px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="nav-brand">FD <span>INNOVATIONS</span></div>
+  <a class="nav-link" href="fd-innovations.html">← Back to FD</a>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">FD Innovations | Project Retrospective</div>
+
+  <h1>UBEYE <span>TRANSFORMATION</span></h1>
+
+  <p>
+    An honest examination of a project, its original vision,
+    the challenges encountered and the lessons drawn from
+    the experience.
+  </p>
+
+  <div class="status">CASE STUDY IN DEVELOPMENT</div>
+</header>
+
+<section class="container">
+
+  <div class="section-label">01 / Project Overview</div>
+  <h2>The <span>Project</span></h2>
+
+  <div class="intro-card">
+    <p>
+      UBEYE Transformation is a project associated with
+      FD Innovations. This case study will document the
+      project's origins, objectives, execution and eventual
+      outcome.
+    </p>
+
+    <div class="placeholder">
+      PROJECT BACKGROUND TO BE ADDED:
+      Describe the business idea, the services or products,
+      the target market and the circumstances surrounding
+      the project's establishment.
+    </div>
+  </div>
+
+  <div class="project-details">
+    <div class="detail">
+      <small>Project</small>
+      <strong>UBEYE Transformation</strong>
+    </div>
+
+    <div class="detail">
+      <small>Project type</small>
+      <strong>Business / Venture</strong>
+    </div>
+
+    <div class="detail">
+      <small>Project status</small>
+      <strong>Retrospective</strong>
+    </div>
+
+    <div class="detail">
+      <small>Project reference</small>
+      <strong>FD-PROJ-001</strong>
+    </div>
+  </div>
+
+</section>
+
+<div class="divider"></div>
+
+<section class="container">
+  <div class="section-label">02 / The Original Vision</div>
+  <h2>What Were We <span>Trying to Achieve?</span></h2>
+
+  <div class="placeholder">
+    Document the original business vision, objectives,
+    expectations and what success was supposed to look like.
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="container">
+  <div class="section-label">03 / FD's Involvement</div>
+  <h2>Our <span>Role</span></h2>
+
+  <div class="placeholder">
+    Explain how FD Innovations became involved, the
+    responsibilities undertaken, resources committed
+    and the actual contribution made to the project.
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="container">
+  <div class="section-label">04 / Execution</div>
+  <h2>How the Project <span>Unfolded</span></h2>
+
+  <div class="placeholder">
+    Record the timeline, key decisions, activities,
+    milestones and important developments during
+    the project's implementation.
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="container">
+  <div class="section-label">05 / Challenges</div>
+  <h2>What Went <span>Wrong?</span></h2>
+
+  <div class="placeholder">
+    Identify the challenges, setbacks, mistakes and
+    missed opportunities. Distinguish documented events
+    from recollections and assumptions.
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="container">
+  <div class="section-label">06 / Analysis</div>
+  <h2>Why Did the Project <span>Fail?</span></h2>
+
+  <div class="placeholder">
+    Analyse the underlying causes of the project's
+    failure. Consider business planning, finances,
+    operations, marketing, management, execution
+    and external circumstances where relevant.
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="container">
+  <div class="section-label">07 / Lessons</div>
+  <h2>What Did We <span>Learn?</span></h2>
+
+  <div class="placeholder">
+    Identify the lessons FD Innovations has taken
+    from this experience and the changes that should
+    be made when undertaking future projects.
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="container">
+  <div class="section-label">08 / Reflection</div>
+  <h2>Looking <span>Back</span></h2>
+
+  <div class="placeholder">
+    Add the final reflection: what could have been done
+    differently, what remains valuable from the experience
+    and how the project has influenced FD Innovations.
+  </div>
+
+  <p class="disclaimer">
+    This case study is being developed as a project
+    retrospective. Its conclusions will be based on
+    information available and verified during the review.
+  </p>
+</section>
+
+<section class="container" style="text-align:center;">
+  <div class="section-label">Explore the Project</div>
+  <h2>UBEYE <span>Transformation</span></h2>
+  <p>Visit the project's Instagram page.</p>
+
+  <a class="instagram-link"
+     href="https://www.instagram.com/ubeye_transformation/"
+     target="_blank"
+     rel="noopener noreferrer">
+    Visit UBEYE on Instagram ↗
+  </a>
+</section>
+
+<footer>
+  <strong>FD INNOVATIONS</strong>
+  <p>Creative ideas. Practical solutions.</p>
+  © FD Innovations
+</footer>
+
+</body>
+</html>
