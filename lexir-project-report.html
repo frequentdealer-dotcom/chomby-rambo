@@ -1,0 +1,788 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LEXIR Business Development and Project Performance Review by FD Innovations.">
+<title>LEXIR | Project Performance Review — FD Innovations</title>
+
+<style>
+:root {
+  --yellow: #FFD230;
+  --black: #000;
+  --dark: #171717;
+  --panel: #202020;
+  --white: #fff;
+  --muted: #bdbdbd;
+  --line: #383838;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+nav {
+  padding: 18px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.brand span { color: var(--yellow); }
+
+.back {
+  color: var(--yellow);
+  font-size: .85rem;
+}
+
+.hero {
+  padding: 90px 7% 80px;
+  background:
+    radial-gradient(ellipse at 75% 20%, #39311a 0%, transparent 45%),
+    linear-gradient(130deg, #171717, #000);
+}
+
+.eyebrow {
+  color: var(--yellow);
+  font-size: .75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(2.8rem, 9vw, 6rem);
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+}
+
+.hero h1 span { color: var(--yellow); }
+
+.hero p {
+  max-width: 680px;
+  color: var(--muted);
+}
+
+.report-tag {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 7px 14px;
+  border: 1px solid var(--yellow);
+  color: var(--yellow);
+  border-radius: 30px;
+  font-size: .72rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.container {
+  max-width: 1050px;
+  margin: auto;
+  padding: 65px 22px;
+}
+
+.section-number {
+  color: var(--yellow);
+  font-size: .75rem;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: clamp(1.7rem, 5vw, 2.5rem);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+h2 span { color: var(--yellow); }
+
+h3 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+p {
+  color: var(--muted);
+  margin-bottom: 15px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.card {
+  background: var(--dark);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 23px;
+}
+
+.card h3 { color: var(--yellow); }
+
+.card p:last-child { margin-bottom: 0; }
+
+.stat {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--yellow);
+  margin-bottom: 5px;
+}
+
+.callout {
+  background: #201d12;
+  border-left: 4px solid var(--yellow);
+  padding: 22px;
+  margin-top: 25px;
+}
+
+.callout p { margin-bottom: 0; }
+
+.status {
+  display: inline-block;
+  font-size: .72rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #343434;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.status.done { color: #a9e6b5; }
+.status.pending { color: var(--yellow); }
+.status.review { color: #bdbdbd; }
+
+.review-card {
+  background: var(--dark);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 24px;
+  margin-top: 16px;
+}
+
+.review-card h3 { color: var(--yellow); }
+
+.review-card ul {
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+.review-card li { margin-bottom: 8px; }
+
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 25px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 570px;
+}
+
+th, td {
+  padding: 15px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  font-size: .9rem;
+}
+
+th {
+  color: var(--yellow);
+  background: var(--dark);
+}
+
+td { color: var(--muted); }
+
+.action {
+  counter-reset: action;
+  margin-top: 25px;
+}
+
+.action-item {
+  background: var(--dark);
+  border-left: 3px solid var(--yellow);
+  padding: 20px;
+  margin-bottom: 13px;
+}
+
+.action-item h3 { color: var(--white); }
+
+.action-item p { margin-bottom: 0; }
+
+.divider {
+  max-width: 1050px;
+  height: 1px;
+  background: var(--line);
+  margin: auto;
+}
+
+.financial-box {
+  background: linear-gradient(140deg, #242116, #171717);
+  border: 1px solid #66531c;
+  border-radius: 12px;
+  padding: 28px;
+  margin-top: 25px;
+}
+
+.financial-box h3 { color: var(--yellow); }
+
+.notice {
+  color: var(--muted);
+  font-size: .83rem;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  margin-top: 25px;
+}
+
+.footer-cta {
+  text-align: center;
+  padding: 70px 22px;
+  background: #151515;
+}
+
+.footer-cta h2 { max-width: 650px; margin: 0 auto 15px; }
+
+footer {
+  text-align: center;
+  padding: 30px 15px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+footer strong { color: var(--yellow); }
+
+@media(max-width: 600px) {
+  .hero { padding: 70px 23px; }
+  .container { padding: 48px 20px; }
+  .card, .review-card { padding: 19px; }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="brand">FD <span>INNOVATIONS</span></div>
+  <a class="back" href="fd-innovations.html">← Back to FD</a>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">FD Innovations / Client Project Review</div>
+  <h1>LEXIR<span>.</span></h1>
+  <p>
+    Business Development, Brand Establishment
+    & Project Performance Review.
+  </p>
+  <div class="report-tag">Prepared by FD Innovations</div>
+</header>
+
+<!-- 01 EXECUTIVE SUMMARY -->
+<section class="container">
+  <div class="section-number">01 / EXECUTIVE SUMMARY</div>
+  <h2>Understanding the <span>Engagement</span></h2>
+
+  <p>
+    This report presents a review of the work undertaken by
+    FD Innovations in connection with LEXIR and its product,
+    SNOW Dishwasher.
+  </p>
+
+  <p>
+    The engagement involved various aspects of business
+    development, brand establishment, administrative
+    organisation and digital presence.
+  </p>
+
+  <p>
+    Beyond documenting the work undertaken, this review
+    considers the progress achieved, areas requiring further
+    attention and opportunities to strengthen the business.
+  </p>
+
+  <div class="callout">
+    <p>
+      <strong style="color:#FFD230;">Our objective:</strong>
+      To help establish a foundation for LEXIR while identifying
+      practical improvements that can support its development
+      as a sustainable one-person business.
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 02 PROJECT PROFILE -->
+<section class="container">
+  <div class="section-number">02 / PROJECT PROFILE</div>
+  <h2>Introducing <span>LEXIR</span></h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Business</h3>
+      <p>LEXIR</p>
+    </div>
+    <div class="card">
+      <h3>Product</h3>
+      <p>SNOW Dishwasher</p>
+    </div>
+    <div class="card">
+      <h3>Business Model</h3>
+      <p>One-person business</p>
+    </div>
+    <div class="card">
+      <h3>Engagement</h3>
+      <p>Business development and brand establishment</p>
+    </div>
+  </div>
+
+  <div class="review-card">
+    <h3>Business Background</h3>
+    <p>
+      [Insert the background of LEXIR, the business concept,
+      target market, product offering and original objectives.]
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 03 SCOPE -->
+<section class="container">
+  <div class="section-number">03 / SCOPE OF ENGAGEMENT</div>
+  <h2>Areas of <span>Development</span></h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Business Foundation</h3>
+      <p>Business structure, business profile and business plan.</p>
+    </div>
+    <div class="card">
+      <h3>Brand Identity</h3>
+      <p>Brand establishment and visual identity development.</p>
+    </div>
+    <div class="card">
+      <h3>Administration</h3>
+      <p>Business files, incorporation documents and stationery.</p>
+    </div>
+    <div class="card">
+      <h3>Financial Management</h3>
+      <p>Cashbook, petty cashbook and income statements.</p>
+    </div>
+    <div class="card">
+      <h3>Marketing & Sales</h3>
+      <p>Marketing direction, sales development and promotion.</p>
+    </div>
+    <div class="card">
+      <h3>Digital Presence</h3>
+      <p>Social media platforms and WhatsApp Business.</p>
+    </div>
+    <div class="card">
+      <h3>Intellectual Property</h3>
+      <p>Identification of relevant intellectual property matters.</p>
+    </div>
+    <div class="card">
+      <h3>Record Keeping</h3>
+      <p>Organisation of business records and documentation.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 04 WORK UNDERTAKEN -->
+<section class="container">
+  <div class="section-number">04 / WORK UNDERTAKEN</div>
+  <h2>Building the <span>Business Foundation</span></h2>
+
+  <div class="review-card">
+    <span class="status review">DOCUMENTATION REVIEW REQUIRED</span>
+    <h3>Business Structure & Documentation</h3>
+    <p>
+      Workstreams identified include the business structure,
+      business profile, business plan and incorporation
+      documentation.
+    </p>
+    <p>
+      <strong>Evidence to display:</strong> Approved business
+      profile, business plan, structure documents and relevant
+      incorporation records.
+    </p>
+  </div>
+
+  <div class="review-card">
+    <span class="status done">IDENTIFIED AS COMPLETED</span>
+    <h3>Brand Identity</h3>
+    <p>
+      Brand identity development was recorded as completed.
+      This section will showcase the identity created for LEXIR
+      and SNOW Dishwasher.
+    </p>
+    <p>
+      <strong>Evidence to display:</strong> Logo, brand colours,
+      typography and branding applications.
+    </p>
+  </div>
+
+  <div class="review-card">
+    <span class="status done">IDENTIFIED AS COMPLETED</span>
+    <h3>Record Keeping</h3>
+    <p>
+      Record-keeping development was recorded as completed.
+      The identified materials include two business files,
+      incorporation documents and administrative stationery.
+    </p>
+    <p>
+      <strong>Evidence to display:</strong> File organisation,
+      letterhead, envelopes, receipts, invoices and quotations.
+    </p>
+  </div>
+
+  <div class="review-card">
+    <span class="status review">IMPLEMENTATION TO BE VERIFIED</span>
+    <h3>Financial Management</h3>
+    <p>
+      The proposed financial records include a cashbook,
+      petty cashbook and income statements.
+    </p>
+    <p>
+      <strong>Evidence to display:</strong> Actual templates,
+      completed entries and sample financial reports, with
+      confidential information removed.
+    </p>
+  </div>
+
+  <div class="review-card">
+    <span class="status done">SOCIAL MEDIA RECORDED AS COMPLETED</span>
+    <h3>Digital Presence</h3>
+    <p>
+      Facebook, TikTok, Instagram and WhatsApp Business
+      were identified as platforms for LEXIR.
+    </p>
+    <p>
+      <strong>Evidence to display:</strong> Platform links,
+      screenshots, profile branding and account setup.
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 05 PERFORMANCE -->
+<section class="container">
+  <div class="section-number">05 / PERFORMANCE ASSESSMENT</div>
+  <h2>Assessing the <span>Engagement</span></h2>
+
+  <p>
+    A meaningful project review must consider both the work
+    undertaken by FD Innovations and the extent to which the
+    resulting systems are being used by LEXIR.
+  </p>
+
+  <div class="review-card">
+    <h3>FD Innovations — Delivery Review</h3>
+    <ul>
+      <li>Were agreed deliverables completed?</li>
+      <li>Were timelines and commitments met?</li>
+      <li>Was communication sufficiently consistent?</li>
+      <li>Were documents and materials properly handed over?</li>
+      <li>Were client expectations adequately managed?</li>
+    </ul>
+    <div class="callout">
+      <p>[Insert verified findings, including FD's own shortcomings.]</p>
+    </div>
+  </div>
+
+  <div class="review-card">
+    <h3>LEXIR — Business Readiness Review</h3>
+    <ul>
+      <li>Are business records being maintained?</li>
+      <li>Are financial records regularly updated?</li>
+      <li>Is the brand consistently presented?</li>
+      <li>Is the product positioned for its intended market?</li>
+      <li>Are marketing and sales activities consistent?</li>
+      <li>Are digital platforms actively used?</li>
+    </ul>
+    <div class="callout">
+      <p>[Insert findings following discussion with the proprietor.]</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 06 ONE PERSON BUSINESS -->
+<section class="container">
+  <div class="section-number">06 / OPERATIONAL REALITIES</div>
+  <h2>Operating as a <span>One-Person Business</span></h2>
+
+  <p>
+    LEXIR operates through a single proprietor. Its development
+    must therefore take into account the limited human resources,
+    time and operational capacity available to the business.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Administration</h3>
+      <p>
+        Business administration competes with product operations,
+        customer service and other daily responsibilities.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Financial Management</h3>
+      <p>
+        Financial records must be simple enough to maintain
+        consistently without creating excessive administrative work.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Marketing</h3>
+      <p>
+        Promotional activities should be realistic and sustainable
+        within the proprietor's available time.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Business Growth</h3>
+      <p>
+        Expansion should be aligned with available resources,
+        production capacity and market demand.
+      </p>
+    </div>
+  </div>
+
+  <p class="notice">
+    These are considerations arising from the one-person
+    business model, not findings that every identified problem
+    currently exists at LEXIR.
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<!-- 07 SHORTFALLS -->
+<section class="container">
+  <div class="section-number">07 / SHORTFALLS & GAPS</div>
+  <h2>Where Could We <span>Have Done Better?</span></h2>
+
+  <p>
+    This section records the shortcomings identified during
+    the review. It is intended to promote accountability,
+    transparency and improvement.
+  </p>
+
+  <div class="review-card">
+    <h3>FD Innovations' Shortfalls</h3>
+    <p>
+      [Record specific delivery, communication, documentation,
+      timing or project-management shortcomings established
+      during the review.]
+    </p>
+  </div>
+
+  <div class="review-card">
+    <h3>LEXIR's Development Gaps</h3>
+    <p>
+      [Record verified gaps in business operations, financial
+      administration, marketing, sales or implementation.]
+    </p>
+  </div>
+
+  <div class="review-card">
+    <h3>Uncompleted or Partially Implemented Work</h3>
+    <p>
+      [Identify work that remains outstanding, who is responsible
+      for it and what is required to complete it.]
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 08 RECOMMENDATIONS -->
+<section class="container">
+  <div class="section-number">08 / RECOMMENDATIONS</div>
+  <h2>A Practical <span>Way Forward</span></h2>
+
+  <div class="action">
+    <div class="action-item">
+      <h3>01. Simplify Administration</h3>
+      <p>
+        Establish a simple weekly administrative routine
+        for maintaining business records and correspondence.
+      </p>
+    </div>
+
+    <div class="action-item">
+      <h3>02. Strengthen Financial Records</h3>
+      <p>
+        Maintain regular cashbook and petty cash entries,
+        monitor income and expenditure and periodically
+        review financial performance.
+      </p>
+    </div>
+
+    <div class="action-item">
+      <h3>03. Develop a Sales Routine</h3>
+      <p>
+        Establish a practical process for receiving enquiries,
+        following up prospective customers and recording sales.
+      </p>
+    </div>
+
+    <div class="action-item">
+      <h3>04. Improve Marketing Consistency</h3>
+      <p>
+        Adopt a manageable promotional schedule and use
+        consistent product branding across digital platforms.
+      </p>
+    </div>
+
+    <div class="action-item">
+      <h3>05. Review Business Readiness</h3>
+      <p>
+        Assess product positioning, operational capacity,
+        applicable compliance requirements and opportunities
+        for sustainable growth.
+      </p>
+    </div>
+
+    <div class="action-item">
+      <h3>06. Establish Regular Reviews</h3>
+      <p>
+        Introduce periodic business reviews to assess progress,
+        identify challenges and agree on the next priorities.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 09 FINANCIAL POSITION -->
+<section class="container">
+  <div class="section-number">09 / FINANCIAL POSITION</div>
+  <h2>Project Investment & <span>Accountability</span></h2>
+
+  <p>
+    This section will provide a transparent account of the
+    financial position of the engagement.
+  </p>
+
+  <div class="financial-box">
+    <h3>Engagement Summary</h3>
+    <div class="table-wrap">
+      <table>
+        <tr>
+          <th>Description</th>
+          <th>Amount (ZMW)</th>
+        </tr>
+        <tr>
+          <td>Agreed project fee</td>
+          <td>[To be confirmed]</td>
+        </tr>
+        <tr>
+          <td>Additional approved work</td>
+          <td>[To be confirmed]</td>
+        </tr>
+        <tr>
+          <td>Payments received</td>
+          <td>[To be confirmed]</td>
+        </tr>
+        <tr>
+          <td>Outstanding balance</td>
+          <td>[To be confirmed]</td>
+        </tr>
+      </table>
+    </div>
+
+    <p class="notice">
+      Figures will be inserted after verification against
+      the agreed quotation, scope and payment records.
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 10 WAY FORWARD -->
+<section class="container">
+  <div class="section-number">10 / WAY FORWARD</div>
+  <h2>Moving <span>Forward Together</span></h2>
+
+  <p>
+    The objective of this review is not merely to document
+    past activities. It is to establish a clear understanding
+    of the project's present position and identify the steps
+    necessary to move LEXIR forward.
+  </p>
+
+  <div class="review-card">
+    <h3>Proposed Next Steps</h3>
+    <ul>
+      <li>Review and confirm the work already delivered.</li>
+      <li>Agree on any outstanding deliverables.</li>
+      <li>Resolve the project's financial position.</li>
+      <li>Prioritise the recommended improvements.</li>
+      <li>Agree on responsibilities and implementation timelines.</li>
+    </ul>
+  </div>
+
+  <div class="callout">
+    <p>
+      <strong style="color:#FFD230;">Our position</strong><br>
+      FD Innovations recognises that business development
+      is an ongoing process. Our aim is to provide practical
+      solutions, learn from the engagement and contribute
+      to a stronger foundation for LEXIR.
+    </p>
+  </div>
+</section>
+
+<section class="footer-cta">
+  <div class="section-number">FD INNOVATIONS</div>
+  <h2>Building a stronger foundation for <span>LEXIR.</span></h2>
+  <p>Creative ideas. Practical solutions.</p>
+</section>
+
+<footer>
+  <strong>FD INNOVATIONS</strong>
+  <p>LEXIR — Project Performance & Review Report</p>
+  <p>Confidential client presentation | Draft for review</p>
+</footer>
+
+</body>
+</html>
