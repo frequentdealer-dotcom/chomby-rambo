@@ -5,17 +5,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="UBEYE Transformation — A project retrospective by FD Innovations.">
+<title>UBEYE Transformation | FD Innovations</title>
 
-<title>UBEYE Transformation | FD Innovations Case Study</title>
+<meta name="description" content="UBEYE Transformation: A business project retrospective examining the concept, creative development, market entry, operational challenges and lessons learned. A case study by FD Innovations.">
 
 <style>
 :root {
   --yellow: #FFD230;
   --black: #000000;
-  --charcoal: #171717;
+  --dark: #171717;
+  --panel: #202020;
   --white: #FFFFFF;
   --muted: #BDBDBD;
+  --line: #383838;
 }
 
 * {
@@ -32,7 +34,7 @@ body {
   background: var(--black);
   color: var(--white);
   font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
 a {
@@ -45,88 +47,101 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #292929;
+  border-bottom: 1px solid var(--line);
 }
 
-.nav-brand {
-  font-weight: bold;
+.brand {
+  font-weight: 800;
   letter-spacing: 1px;
 }
 
-.nav-brand span {
+.brand span {
   color: var(--yellow);
 }
 
-.nav-link {
+.back {
   color: var(--yellow);
-  font-size: 0.9rem;
+  font-size: .85rem;
 }
 
 .hero {
-  padding: 100px 7% 85px;
-  text-align: center;
+  min-height: 470px;
+  padding: 100px 7%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background:
-    linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.9)),
-    radial-gradient(circle at center, #353535, #000000 75%);
+    radial-gradient(ellipse at 75% 25%, #383018 0%, transparent 45%),
+    linear-gradient(130deg, #171717, #000000);
 }
 
 .eyebrow {
   color: var(--yellow);
-  font-size: 0.78rem;
+  font-size: .75rem;
   letter-spacing: 3px;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .hero h1 {
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  line-height: 1.1;
-  margin-bottom: 20px;
+  font-size: clamp(3rem, 10vw, 6.5rem);
+  line-height: 1;
+  letter-spacing: -3px;
+  margin-bottom: 24px;
 }
 
 .hero h1 span {
   color: var(--yellow);
 }
 
-.hero p {
-  max-width: 650px;
-  margin: auto;
+.hero-description {
+  max-width: 700px;
+  font-size: 1.05rem;
   color: var(--muted);
 }
 
-.status {
-  display: inline-block;
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-top: 30px;
-  padding: 7px 15px;
-  border: 1px solid var(--yellow);
-  border-radius: 30px;
+}
+
+.tag {
+  border: 1px solid #68551c;
   color: var(--yellow);
-  font-size: 0.75rem;
-  letter-spacing: 1px;
+  padding: 6px 13px;
+  border-radius: 30px;
+  font-size: .72rem;
+  letter-spacing: .7px;
 }
 
 .container {
-  max-width: 950px;
+  max-width: 1050px;
   margin: auto;
   padding: 65px 22px;
 }
 
-.section-label {
+.section-number {
   color: var(--yellow);
-  font-size: 0.75rem;
+  font-size: .75rem;
   letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 h2 {
-  font-size: clamp(1.6rem, 5vw, 2.3rem);
-  line-height: 1.25;
-  margin-bottom: 20px;
+  font-size: clamp(1.7rem, 5vw, 2.6rem);
+  line-height: 1.2;
+  margin-bottom: 22px;
 }
 
 h2 span {
   color: var(--yellow);
+}
+
+h3 {
+  font-size: 1.12rem;
+  margin-bottom: 12px;
 }
 
 p {
@@ -134,66 +149,177 @@ p {
   margin-bottom: 16px;
 }
 
-.intro-card,
-.case-card {
-  background: var(--charcoal);
-  border: 1px solid #333333;
-  border-radius: 12px;
-  padding: 28px;
-  margin-top: 25px;
+.lead {
+  font-size: 1.1rem;
+  color: #E5E5E5;
 }
 
-.case-card h3 {
-  color: var(--yellow);
-  margin-bottom: 12px;
-}
-
-.placeholder {
-  border-left: 3px solid var(--yellow);
-  padding: 15px 18px;
-  background: #202020;
-  color: var(--muted);
-  margin-top: 18px;
-  font-size: 0.95rem;
-}
-
-.project-details {
+.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 15px;
-  margin-top: 30px;
+  margin-top: 28px;
 }
 
-.detail {
-  padding: 20px;
-  background: var(--charcoal);
-  border: 1px solid #333333;
-  border-radius: 8px;
+.card {
+  background: var(--dark);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 23px;
 }
 
-.detail small {
-  display: block;
+.card h3 {
   color: var(--yellow);
-  margin-bottom: 7px;
-  text-transform: uppercase;
-  font-size: 0.7rem;
-  letter-spacing: 1px;
 }
 
-.detail strong {
-  font-size: 0.95rem;
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+.highlight {
+  background: #211e13;
+  border-left: 4px solid var(--yellow);
+  padding: 23px;
+  margin-top: 25px;
+  border-radius: 0 8px 8px 0;
+}
+
+.highlight p:last-child {
+  margin-bottom: 0;
+}
+
+.timeline {
+  border-left: 2px solid #62511c;
+  margin: 30px 0 0 8px;
+  padding-left: 25px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.timeline-item::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: -32px;
+  top: 8px;
+  background: var(--yellow);
+  border-radius: 50%;
+}
+
+.timeline-item h3 {
+  color: var(--white);
+}
+
+.deliverable {
+  background: var(--dark);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 22px;
+}
+
+.deliverable h3 {
+  color: var(--yellow);
+}
+
+.deliverable p:last-child {
+  margin-bottom: 0;
 }
 
 .divider {
   height: 1px;
-  background: #292929;
-  max-width: 950px;
+  background: var(--line);
+  max-width: 1050px;
   margin: auto;
+}
+
+.finding {
+  background: var(--dark);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 24px;
+  margin-top: 17px;
+}
+
+.finding h3 {
+  color: var(--yellow);
+}
+
+.finding p:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  display: inline-block;
+  color: var(--yellow);
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 25px;
+}
+
+table {
+  width: 100%;
+  min-width: 580px;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  font-size: .9rem;
+}
+
+th {
+  background: var(--dark);
+  color: var(--yellow);
+}
+
+td {
+  color: var(--muted);
+}
+
+.action {
+  display: grid;
+  gap: 14px;
+  margin-top: 25px;
+}
+
+.action-item {
+  background: var(--dark);
+  padding: 22px;
+  border-left: 3px solid var(--yellow);
+  border-radius: 0 8px 8px 0;
+}
+
+.action-item h3 {
+  color: var(--white);
+}
+
+.action-item p {
+  margin-bottom: 0;
+}
+
+.quote {
+  font-size: 1.3rem;
+  color: var(--white);
+  font-weight: 600;
+  line-height: 1.6;
 }
 
 .instagram-link {
   display: inline-block;
-  padding: 12px 22px;
+  padding: 13px 22px;
   background: var(--yellow);
   color: var(--black);
   border-radius: 5px;
@@ -201,19 +327,31 @@ p {
   margin-top: 10px;
 }
 
-.disclaimer {
-  font-size: 0.82rem;
-  border-top: 1px solid #333333;
+.notice {
+  border-top: 1px solid var(--line);
   padding-top: 20px;
-  margin-top: 35px;
+  margin-top: 30px;
+  font-size: .82rem;
+}
+
+.closing {
+  text-align: center;
+  padding: 80px 22px;
+  background:
+    radial-gradient(ellipse at center, #302817, #121212 65%);
+}
+
+.closing h2 {
+  max-width: 720px;
+  margin: 0 auto 20px;
 }
 
 footer {
   padding: 30px 15px;
   text-align: center;
-  border-top: 1px solid #292929;
+  border-top: 1px solid var(--line);
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: .83rem;
 }
 
 footer strong {
@@ -221,17 +359,25 @@ footer strong {
 }
 
 @media(max-width: 600px) {
+  nav {
+    padding: 16px 20px;
+  }
+
   .hero {
+    min-height: 400px;
     padding: 75px 22px;
+  }
+
+  .hero h1 {
+    letter-spacing: -1.5px;
   }
 
   .container {
     padding: 50px 20px;
   }
 
-  .intro-card,
-  .case-card {
-    padding: 22px;
+  .card, .finding, .deliverable {
+    padding: 19px;
   }
 }
 </style>
@@ -240,183 +386,620 @@ footer strong {
 <body>
 
 <nav>
-  <div class="nav-brand">FD <span>INNOVATIONS</span></div>
-  <a class="nav-link" href="fd-innovations.html">← Back to FD</a>
+  <div class="brand">FD <span>INNOVATIONS</span></div>
+  <a class="back" href="fd-innovations.html">← Back to FD</a>
 </nav>
 
+<!-- HERO -->
 <header class="hero">
-  <div class="eyebrow">FD Innovations | Project Retrospective</div>
+  <div class="eyebrow">FD Innovations / Project Retrospective / 001</div>
 
-  <h1>UBEYE <span>TRANSFORMATION</span></h1>
+  <h1>UBEYE<span>.</span></h1>
 
-  <p>
-    An honest examination of a project, its original vision,
-    the challenges encountered and the lessons drawn from
-    the experience.
+  <p class="hero-description">
+    An online barbershop venture that reached paying customers
+    but struggled to establish the financial, managerial and
+    operational foundations necessary for continuity.
   </p>
 
-  <div class="status">CASE STUDY IN DEVELOPMENT</div>
+  <div class="hero-meta">
+    <span class="tag">Business Development</span>
+    <span class="tag">Brand Identity</span>
+    <span class="tag">Project Retrospective</span>
+  </div>
 </header>
 
+<!-- 01 -->
 <section class="container">
+  <div class="section-number">01 / INTRODUCTION</div>
+  <h2>A Business Idea With <span>Potential</span></h2>
 
-  <div class="section-label">01 / Project Overview</div>
-  <h2>The <span>Project</span></h2>
+  <p class="lead">
+    UBEYE Transformation was conceived as an online barbershop
+    targeting students around the University of Lusaka campus
+    in the Leopards Hill area.
+  </p>
 
-  <div class="intro-card">
+  <p>
+    The concept sought to connect customers with barbering
+    services through an appointment-based arrangement.
+    Rather than relying solely on walk-in customers, the venture
+    intended to use social media to create awareness, attract
+    bookings and establish a recognisable brand.
+  </p>
+
+  <p>
+    The project was originated by a colleague of the founder's
+    circle. The founder developed the business idea, while a
+    colleague was to provide the barbering service.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Business Concept</h3>
+      <p>Online barbershop</p>
+    </div>
+
+    <div class="card">
+      <h3>Target Market</h3>
+      <p>Students around UNILUS, Leopards Hill</p>
+    </div>
+
+    <div class="card">
+      <h3>Service Model</h3>
+      <p>Appointment-based barbering services</p>
+    </div>
+
+    <div class="card">
+      <h3>Marketing Channel</h3>
+      <p>Social media, particularly Instagram</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 02 -->
+<section class="container">
+  <div class="section-number">02 / THE ORIGINAL MODEL</div>
+  <h2>How UBEYE Was <span>Supposed to Work</span></h2>
+
+  <p>
+    The venture relied on an appointment-based arrangement.
+    Customers would be attracted through social media and
+    arrange barbering services through the business.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>01. Awareness</h3>
+      <p>Social media posts introduced UBEYE to its target market.</p>
+    </div>
+
+    <div class="card">
+      <h3>02. Enquiry</h3>
+      <p>Interested students would make contact and enquire about services.</p>
+    </div>
+
+    <div class="card">
+      <h3>03. Appointment</h3>
+      <p>Customers would arrange a suitable appointment.</p>
+    </div>
+
+    <div class="card">
+      <h3>04. Service Delivery</h3>
+      <p>The participating barber would provide the barbering service.</p>
+    </div>
+  </div>
+
+  <div class="highlight">
     <p>
-      UBEYE Transformation is a project associated with
-      FD Innovations. This case study will document the
-      project's origins, objectives, execution and eventual
-      outcome.
+      <strong style="color:#FFD230;">The critical dependency:</strong>
+      UBEYE depended on the continued participation of its barber.
+      The availability and commitment of this individual were
+      therefore central to the operation of the venture.
     </p>
+  </div>
+</section>
 
-    <div class="placeholder">
-      PROJECT BACKGROUND TO BE ADDED:
-      Describe the business idea, the services or products,
-      the target market and the circumstances surrounding
-      the project's establishment.
+<div class="divider"></div>
+
+<!-- 03 -->
+<section class="container">
+  <div class="section-number">03 / FD'S INVOLVEMENT</div>
+  <h2>Building the <span>UBEYE Identity</span></h2>
+
+  <p>
+    FD Innovations contributed to the creative and promotional
+    development of UBEYE. The involvement went beyond applying
+    watermarks to images and included work on the brand's visual
+    identity and promotional materials.
+  </p>
+
+  <div class="grid">
+    <div class="deliverable">
+      <h3>Logo Design</h3>
+      <p>
+        Development of the UBEYE logo to give the venture
+        a recognisable visual identity.
+      </p>
+    </div>
+
+    <div class="deliverable">
+      <h3>Visual Identity</h3>
+      <p>
+        Development of the visual presentation of the UBEYE brand.
+      </p>
+    </div>
+
+    <div class="deliverable">
+      <h3>Promotional Posters</h3>
+      <p>
+        Promotional poster design undertaken in conjunction
+        with Nase Arts Studio.
+      </p>
+    </div>
+
+    <div class="deliverable">
+      <h3>Social Media Materials</h3>
+      <p>
+        Preparation of promotional social media posts and
+        watermarking of images.
+      </p>
     </div>
   </div>
 
-  <div class="project-details">
-    <div class="detail">
-      <small>Project</small>
-      <strong>UBEYE Transformation</strong>
-    </div>
-
-    <div class="detail">
-      <small>Project type</small>
-      <strong>Business / Venture</strong>
-    </div>
-
-    <div class="detail">
-      <small>Project status</small>
-      <strong>Retrospective</strong>
-    </div>
-
-    <div class="detail">
-      <small>Project reference</small>
-      <strong>FD-PROJ-001</strong>
-    </div>
+  <div class="highlight">
+    <p>
+      <strong style="color:#FFD230;">Creative collaboration:</strong>
+      FD Innovations worked in conjunction with Nase Arts Studio
+      on some of the promotional materials. Further details of
+      that collaboration may be documented separately.
+    </p>
   </div>
 
-</section>
-
-<div class="divider"></div>
-
-<section class="container">
-  <div class="section-label">02 / The Original Vision</div>
-  <h2>What Were We <span>Trying to Achieve?</span></h2>
-
-  <div class="placeholder">
-    Document the original business vision, objectives,
-    expectations and what success was supposed to look like.
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<section class="container">
-  <div class="section-label">03 / FD's Involvement</div>
-  <h2>Our <span>Role</span></h2>
-
-  <div class="placeholder">
-    Explain how FD Innovations became involved, the
-    responsibilities undertaken, resources committed
-    and the actual contribution made to the project.
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<section class="container">
-  <div class="section-label">04 / Execution</div>
-  <h2>How the Project <span>Unfolded</span></h2>
-
-  <div class="placeholder">
-    Record the timeline, key decisions, activities,
-    milestones and important developments during
-    the project's implementation.
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<section class="container">
-  <div class="section-label">05 / Challenges</div>
-  <h2>What Went <span>Wrong?</span></h2>
-
-  <div class="placeholder">
-    Identify the challenges, setbacks, mistakes and
-    missed opportunities. Distinguish documented events
-    from recollections and assumptions.
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<section class="container">
-  <div class="section-label">06 / Analysis</div>
-  <h2>Why Did the Project <span>Fail?</span></h2>
-
-  <div class="placeholder">
-    Analyse the underlying causes of the project's
-    failure. Consider business planning, finances,
-    operations, marketing, management, execution
-    and external circumstances where relevant.
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<section class="container">
-  <div class="section-label">07 / Lessons</div>
-  <h2>What Did We <span>Learn?</span></h2>
-
-  <div class="placeholder">
-    Identify the lessons FD Innovations has taken
-    from this experience and the changes that should
-    be made when undertaking future projects.
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<section class="container">
-  <div class="section-label">08 / Reflection</div>
-  <h2>Looking <span>Back</span></h2>
-
-  <div class="placeholder">
-    Add the final reflection: what could have been done
-    differently, what remains valuable from the experience
-    and how the project has influenced FD Innovations.
-  </div>
-
-  <p class="disclaimer">
-    This case study is being developed as a project
-    retrospective. Its conclusions will be based on
-    information available and verified during the review.
+  <p class="notice">
+    Visual evidence of the original logo, posters and social
+    media materials can be added to this section as a project
+    gallery. Only actual project artwork should be displayed.
   </p>
 </section>
 
-<section class="container" style="text-align:center;">
-  <div class="section-label">Explore the Project</div>
-  <h2>UBEYE <span>Transformation</span></h2>
-  <p>Visit the project's Instagram page.</p>
+<div class="divider"></div>
+
+<!-- 04 -->
+<section class="container">
+  <div class="section-number">04 / MARKET ENTRY</div>
+  <h2>UBEYE Reached <span>Real Customers</span></h2>
+
+  <p>
+    UBEYE was not merely a concept that remained on paper.
+    The venture reached the market, attracted paying customers
+    and provided barbering services for which customers paid.
+  </p>
+
+  <p>
+    Social media, particularly Instagram, was the principal
+    promotional channel identified during the project.
+  </p>
+
+  <div class="highlight">
+    <p class="quote">
+      UBEYE demonstrated that it could attract paying customers.
+      The challenge was sustaining the business behind the service.
+    </p>
+  </div>
+
+  <h3 style="margin-top:35px;">The Digital Footprint</h3>
+
+  <p>
+    The original Instagram account remains accessible and
+    provides a potential historical reference for the venture.
+  </p>
 
   <a class="instagram-link"
      href="https://www.instagram.com/ubeye_transformation/"
      target="_blank"
      rel="noopener noreferrer">
-    Visit UBEYE on Instagram ↗
+    Visit UBEYE Instagram ↗
+  </a>
+</section>
+
+<div class="divider"></div>
+
+<!-- 05 -->
+<section class="container">
+  <div class="section-number">05 / THE DECLINE</div>
+  <h2>When the Business <span>Could Not Continue</span></h2>
+
+  <p>
+    Despite reaching paying customers, UBEYE encountered
+    difficulties that affected its ability to continue operating.
+  </p>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <h3>Inadequate Business Planning</h3>
+      <p>
+        In retrospect, the project lacked a sufficiently
+        developed business plan and a clearly documented
+        framework for managing the venture.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>No Defined Budgets</h3>
+      <p>
+        According to the project contributor's assessment,
+        budgets were not established to guide expenditure,
+        service costs and the financial requirements of
+        operating the business.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Difficulty Compensating the Barber</h3>
+      <p>
+        The business struggled to pay its barber. The barber
+        also regarded participation in UBEYE as a side hustle,
+        rather than a primary business commitment.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Loss of the Barber</h3>
+      <p>
+        The barber eventually left the venture. According to
+        the account provided, he departed with UBEYE's machines.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Business Closure</h3>
+      <p>
+        Following the barber's departure, no attempt was made
+        to restart operations, replace the barber or recover
+        the equipment. The venture did not resume operations.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 06 -->
+<section class="container">
+  <div class="section-number">06 / WHY IT FAILED</div>
+  <h2>Understanding the <span>Underlying Problems</span></h2>
+
+  <p>
+    The following findings are based on the observations of
+    the person who contributed to the project. They represent
+    a retrospective assessment rather than an independent
+    financial or operational audit.
+  </p>
+
+  <div class="finding">
+    <span class="label">01 / Strategic planning</span>
+    <h3>Absence of a Defined Business Plan</h3>
+    <p>
+      The venture lacked a sufficiently developed plan setting
+      out its objectives, operational structure, financial
+      requirements and approach to sustainable growth.
+    </p>
+    <p>
+      Without a clear plan, the project had no established
+      framework against which its progress could be assessed.
+    </p>
+  </div>
+
+  <div class="finding">
+    <span class="label">02 / Financial management</span>
+    <h3>Inadequate Budgeting</h3>
+    <p>
+      No budgets were established to guide the financial
+      operations of the venture. This contributed to a situation
+      in which the business could not adequately compensate
+      its barber.
+    </p>
+    <p>
+      The difficulty in meeting this essential operational cost
+      exposed a weakness in the financial foundation of the business.
+    </p>
+  </div>
+
+  <div class="finding">
+    <span class="label">03 / Human resources</span>
+    <h3>Dependence on One Service Provider</h3>
+    <p>
+      UBEYE relied on a single barber whose participation was
+      essential to delivering the service. His involvement was
+      treated as a side hustle, creating a potential mismatch
+      between the commitment required by the business and
+      the commitment available.
+    </p>
+  </div>
+
+  <div class="finding">
+    <span class="label">04 / Governance</span>
+    <h3>Absence of Written Arrangements</h3>
+    <p>
+      The parties did not establish written arrangements
+      clearly defining their respective responsibilities,
+      financial contributions, compensation and the
+      management of business property.
+    </p>
+    <p>
+      This left important matters dependent on informal
+      understandings rather than documented terms.
+    </p>
+  </div>
+
+  <div class="finding">
+    <span class="label">05 / Asset management</span>
+    <h3>Unclear Equipment Ownership and Custody</h3>
+    <p>
+      Following the barber's departure, he reportedly left
+      with UBEYE's machines. The FD contributor only became
+      aware of this after the fallout.
+    </p>
+    <p>
+      The circumstances surrounding the acquisition and
+      ownership of the machines were not known to the
+      contributor. It is therefore not possible to establish
+      who owned them or what arrangements governed their use.
+    </p>
+  </div>
+
+  <div class="finding">
+    <span class="label">06 / Project management</span>
+    <h3>No Structured Exit or Continuity Arrangements</h3>
+    <p>
+      The venture had no documented arrangements identified
+      for what would happen if its essential service provider
+      withdrew. Once the barber departed, the business did
+      not resume operations.
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 07 -->
+<section class="container">
+  <div class="section-number">07 / FD'S OWN EXPERIENCE</div>
+  <h2>A Lesson in <span>Commercial Engagements</span></h2>
+
+  <p>
+    The UBEYE experience also exposed shortcomings in how
+    FD Innovations approached its own business engagements.
+  </p>
+
+  <p>
+    FD contributed to the development of the UBEYE brand and
+    its promotional presence. However, there was no formal
+    arrangement establishing payment, commission, equity
+    participation or deferred compensation for the work.
+  </p>
+
+  <p>
+    The contributor confirms that FD received no payment
+    from the venture for its creative and promotional work.
+  </p>
+
+  <div class="highlight">
+    <p class="quote">
+      Goodwill is not a substitute for a commercial agreement.
+    </p>
+  </div>
+
+  <h3 style="margin-top:30px;">What FD Should Have Done Differently</h3>
+
+  <div class="action">
+    <div class="action-item">
+      <h3>Define the Engagement</h3>
+      <p>
+        Establish whether FD is acting as a service provider,
+        business partner, investor or collaborator.
+      </p>
+    </div>
+
+    <div class="action-item">
+      <h3>Agree on Compensation</h3>
+      <p>
+        Establish fees, commission or other consideration
+        before creative work begins.
+      </p>
+    </div>
+
+    <div class="action-item">
+      <h3>Document the Scope</h3>
+      <p>
+        Clearly identify the work to be undertaken, deliverables,
+        responsibilities and expected timelines.
+      </p>
+    </div>
+
+    <div class="action-item">
+      <h3>Maintain Project Records</h3>
+      <p>
+        Keep records of work undertaken, approvals, revisions,
+        payments and outstanding obligations.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 08 -->
+<section class="container">
+  <div class="section-number">08 / LESSONS LEARNED</div>
+  <h2>What UBEYE Taught <span>Us</span></h2>
+
+  <div class="finding">
+    <h3>01. A Business Needs More Than a Good Idea</h3>
+    <p>
+      A commercially attractive concept requires planning,
+      financial preparation and an operational structure
+      capable of supporting its activities.
+    </p>
+  </div>
+
+  <div class="finding">
+    <h3>02. Revenue Does Not Automatically Mean Sustainability</h3>
+    <p>
+      Attracting paying customers is only one part of running
+      a business. The venture must also meet its costs,
+      compensate its service providers and maintain operations.
+    </p>
+  </div>
+
+  <div class="finding">
+    <h3>03. People Are Critical Business Resources</h3>
+    <p>
+      A business that depends on one individual must establish
+      clear expectations, compensation arrangements and
+      continuity measures.
+    </p>
+  </div>
+
+  <div class="finding">
+    <h3>04. Business Assets Must Be Properly Documented</h3>
+    <p>
+      Ownership, custody and use of equipment should be
+      recorded. Written arrangements help reduce uncertainty
+      when relationships change or a participant leaves.
+    </p>
+  </div>
+
+  <div class="finding">
+    <h3>05. Creative Work Has Commercial Value</h3>
+    <p>
+      Design, branding and promotional services require time
+      and resources. FD must establish commercial terms
+      before undertaking work for other ventures.
+    </p>
+  </div>
+
+  <div class="finding">
+    <h3>06. Small Businesses Need Basic Formal Systems</h3>
+    <p>
+      Even a small venture should have basic records,
+      financial controls, written agreements and a clear
+      allocation of responsibilities.
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 09 -->
+<section class="container">
+  <div class="section-number">09 / THE WAY FORWARD</div>
+  <h2>How This Experience Shapes <span>FD Innovations</span></h2>
+
+  <p>
+    UBEYE provides a practical reference point for how
+    FD Innovations approaches future projects and client
+    engagements.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Formal Engagements</h3>
+      <p>Written scopes of work and clear commercial terms.</p>
+    </div>
+
+    <div class="card">
+      <h3>Project Planning</h3>
+      <p>Defined objectives, deliverables, budgets and timelines.</p>
+    </div>
+
+    <div class="card">
+      <h3>Financial Discipline</h3>
+      <p>Clear fees, payment milestones and expenditure planning.</p>
+    </div>
+
+    <div class="card">
+      <h3>Accountability</h3>
+      <p>Documented responsibilities, approvals and project records.</p>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <p>
+      UBEYE did not become the sustainable venture originally
+      envisioned. Nevertheless, the experience provides
+      valuable lessons for FD Innovations as it develops
+      its own services, products and future client relationships.
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 10 -->
+<section class="container">
+  <div class="section-number">10 / FINAL REFLECTION</div>
+  <h2>Beyond the <span>Outcome</span></h2>
+
+  <p class="lead">
+    UBEYE was an attempt to turn an idea into a functioning
+    business. It reached customers, generated paid transactions
+    and established a visual identity.
+  </p>
+
+  <p>
+    Its eventual collapse illustrates the importance of
+    connecting a business idea with financial planning,
+    reliable operational arrangements and proper governance.
+  </p>
+
+  <p>
+    For FD Innovations, the experience also marked an
+    important lesson in recognising the value of its
+    creative services and protecting its commercial interests.
+  </p>
+
+  <div class="highlight">
+    <p class="quote">
+      Not every project becomes a success story.
+      Some become lessons that shape the next one.
+    </p>
+  </div>
+
+  <p class="notice">
+    This retrospective is based on the account and observations
+    of an individual who contributed to UBEYE's creative
+    development. It is not an independently audited account
+    of the venture. Certain matters, including equipment
+    ownership and the precise financial history, remain unverified.
+    The account may be supplemented with further records
+    and perspectives.
+  </p>
+</section>
+
+<!-- PROJECT LINK -->
+<section class="closing">
+  <div class="section-number">THE ORIGINAL PROJECT</div>
+  <h2>UBEYE <span>Transformation</span></h2>
+  <p>Explore the project's original social media presence.</p>
+
+  <a class="instagram-link"
+     href="https://www.instagram.com/ubeye_transformation/"
+     target="_blank"
+     rel="noopener noreferrer">
+    Visit UBEYE Instagram ↗
   </a>
 </section>
 
 <footer>
   <strong>FD INNOVATIONS</strong>
   <p>Creative ideas. Practical solutions.</p>
-  © FD Innovations
+  <p>UBEYE — Project Retrospective / Project 001</p>
 </footer>
 
 </body>
