@@ -1,0 +1,997 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FD Innovations | Finance & Management</title>
+
+<style>
+:root {
+  --yellow: #FFD230;
+  --black: #111111;
+  --white: #ffffff;
+  --background: #f6f6f4;
+  --muted: #777777;
+  --border: #e5e5e5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--black);
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background: var(--black);
+  color: white;
+  padding: 22px;
+  border-bottom: 5px solid var(--yellow);
+}
+
+.brand {
+  font-size: 21px;
+  font-weight: 900;
+}
+
+.tagline {
+  color: #cccccc;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+main {
+  max-width: 1150px;
+  margin: auto;
+  padding: 22px 15px 50px;
+}
+
+.notice {
+  background: #fff7d6;
+  border: 1px solid #e8ce68;
+  border-radius: 10px;
+  padding: 13px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+h1 {
+  font-size: 25px;
+  margin: 0;
+}
+
+h2 {
+  font-size: 17px;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 0;
+}
+
+.kpi small {
+  color: var(--muted);
+}
+
+.kpi strong {
+  display: block;
+  font-size: 23px;
+  margin-top: 7px;
+}
+
+button {
+  background: var(--yellow);
+  color: black;
+  border: none;
+  padding: 11px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: white;
+  border: 1px solid var(--border);
+}
+
+nav {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  margin: 22px 0 15px;
+}
+
+nav button {
+  white-space: nowrap;
+  background: white;
+  border: 1px solid var(--border);
+}
+
+nav button.active {
+  background: black;
+  color: white;
+}
+
+.panel {
+  display: none;
+}
+
+.panel.active {
+  display: block;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.num {
+  text-align: right;
+}
+
+.tablewrap {
+  overflow-x: auto;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+label {
+  display: grid;
+  gap: 5px;
+  font-size: 12px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  background: white;
+  font-size: 14px;
+}
+
+form button {
+  grid-column: 1 / -1;
+}
+
+.bar {
+  height: 8px;
+  background: #eeeeee;
+  border-radius: 20px;
+  margin: 7px 0;
+  overflow: hidden;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  background: var(--yellow);
+}
+
+.tag {
+  background: #eeeeee;
+  border-radius: 20px;
+  padding: 3px 8px;
+  font-size: 11px;
+}
+
+.footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 30px;
+}
+
+@media(max-width:720px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media(max-width:420px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">FD INNOVATIONS</div>
+  <div class="tagline">
+    Creative Ideas. Practical Solutions.
+  </div>
+</header>
+
+<main>
+
+<div class="notice">
+  <strong>Development prototype:</strong>
+  This version uses demonstration figures.
+  Records are stored locally in this browser.
+  Do not enter confidential financial information.
+  Secure login and online storage will be added later.
+</div>
+
+<div class="top">
+  <div>
+    <h1>Finance & Management</h1>
+    <p class="muted">
+      Monitor finances, manage operations and review performance.
+    </p>
+  </div>
+
+  <div>
+    <button class="secondary" id="export">Export CSV</button>
+    <button class="secondary" id="reset">Reset demo</button>
+  </div>
+</div>
+
+<!-- FINANCIAL SUMMARY -->
+
+<div class="cards">
+
+  <div class="card kpi">
+    <small>Total income</small>
+    <strong id="income">K0.00</strong>
+  </div>
+
+  <div class="card kpi">
+    <small>Total expenses</small>
+    <strong id="expenses">K0.00</strong>
+  </div>
+
+  <div class="card kpi">
+    <small>Net movement</small>
+    <strong id="net">K0.00</strong>
+  </div>
+
+  <div class="card kpi">
+    <small>Budget remaining</small>
+    <strong id="remaining">K0.00</strong>
+  </div>
+
+</div>
+
+<!-- NAVIGATION -->
+
+<nav>
+  <button class="active" data-tab="overview">Overview</button>
+  <button data-tab="transactions">Transactions</button>
+  <button data-tab="budget">Budget</button>
+  <button data-tab="operations">Operations</button>
+  <button data-tab="health">Business Health</button>
+  <button data-tab="datasets">Data Register</button>
+</nav>
+
+<!-- OVERVIEW -->
+
+<section id="overview" class="panel active">
+
+  <div class="cols">
+
+    <div class="card">
+      <h2>Recent Transactions</h2>
+
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Type</th>
+              <th class="num">Amount</th>
+            </tr>
+          </thead>
+
+          <tbody id="recent"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Accounting Principles</h2>
+
+      <p class="muted">
+        Capital is not sales revenue.
+        Drawings are not operating expenses.
+        Allocated funds are not expenses until spent.
+        Unverified figures must remain flagged.
+      </p>
+
+      <h2>Management Routine</h2>
+
+      <p class="muted">
+        Daily: record transactions.<br>
+        Weekly: review budgets and inventory.<br>
+        Monthly: prepare reports and assess performance.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- TRANSACTIONS -->
+
+<section id="transactions" class="panel">
+
+  <div class="cols">
+
+    <div class="card">
+      <h2>Add Transaction</h2>
+
+      <form id="txform">
+
+        <label>
+          Date
+          <input type="date" id="date" required>
+        </label>
+
+        <label>
+          Transaction type
+          <select id="type">
+            <option>Income</option>
+            <option>Expense</option>
+            <option>Capital</option>
+            <option>Drawing</option>
+            <option>Allocation</option>
+          </select>
+        </label>
+
+        <label>
+          Description
+          <input id="description" required
+          placeholder="e.g. Customer order">
+        </label>
+
+        <label>
+          Category
+          <select id="category">
+            <option>Sales</option>
+            <option>Materials</option>
+            <option>Transport</option>
+            <option>Utilities</option>
+            <option>Labour</option>
+            <option>Marketing</option>
+            <option>Household</option>
+            <option>Other</option>
+          </select>
+        </label>
+
+        <label>
+          Amount (K)
+          <input type="number" id="amount"
+          min="0.01" step="0.01" required>
+        </label>
+
+        <label>
+          Verification status
+          <select id="status">
+            <option>Unverified</option>
+            <option>Verified</option>
+            <option>Reconstructed</option>
+            <option>Pending confirmation</option>
+          </select>
+        </label>
+
+        <button type="submit">Add Transaction</button>
+
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Transaction Register</h2>
+
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Type</th>
+              <th class="num">Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+
+      <p class="muted" id="count"></p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- BUDGET -->
+
+<section id="budget" class="panel">
+
+  <div class="cols">
+
+    <div class="card">
+      <h2>Set Monthly Budget</h2>
+
+      <form id="budgetform">
+
+        <label>
+          Category
+          <select id="bcat">
+            <option>Materials</option>
+            <option>Transport</option>
+            <option>Utilities</option>
+            <option>Marketing</option>
+            <option>Labour</option>
+            <option>Other</option>
+          </select>
+        </label>
+
+        <label>
+          Budget amount (K)
+          <input type="number" id="bamount"
+          min="0" step="0.01" required>
+        </label>
+
+        <button type="submit">Save Budget</button>
+
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Budget Versus Actual</h2>
+      <div id="budgetrows"></div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- OPERATIONS -->
+
+<section id="operations" class="panel">
+
+  <div class="cards">
+
+    <div class="card">
+      <h2>Sales & Customers</h2>
+      <p class="muted">
+        Track sales, enquiries, orders and repeat customers.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Inventory</h2>
+      <p class="muted">
+        Track materials purchased, stock and usage.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Projects</h2>
+      <p class="muted">
+        Track deliverables, deadlines and project budgets.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Marketing</h2>
+      <p class="muted">
+        Plan content, campaigns and marketing results.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <h2>Operational Targets</h2>
+    <p class="muted">
+      Future feature: set targets, planned amounts,
+      actual spending, deadlines and progress.
+    </p>
+  </div>
+
+</section>
+
+<!-- BUSINESS HEALTH -->
+
+<section id="health" class="panel">
+
+  <div class="cards">
+
+    <div class="card">
+      <h2>Financial Health</h2>
+      <p class="muted">
+        Revenue, costs, profit and cash position.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Market Health</h2>
+      <p class="muted">
+        Customer feedback, demand, competitors and pricing.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Operational Health</h2>
+      <p class="muted">
+        Delivery, stock control and productivity.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Growth</h2>
+      <p class="muted">
+        Customer acquisition and repeat sales.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <h2>Corrective Action Tracker</h2>
+    <p class="muted">
+      Future feature: identify a problem, record an action,
+      set a deadline and monitor the outcome.
+    </p>
+  </div>
+
+</section>
+
+<!-- HISTORICAL DATASETS -->
+
+<section id="datasets" class="panel">
+
+  <div class="card">
+
+    <h2>
+      Historical Datasets Captured
+      <span class="tag">8 summaries</span>
+    </h2>
+
+    <div class="tablewrap">
+      <table>
+
+        <thead>
+          <tr>
+            <th>Dataset</th>
+            <th>Period</th>
+            <th>Type</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>001 Household expenses</td>
+            <td>Oct–Nov 2024</td>
+            <td>Household</td>
+            <td>Reconciliation pending</td>
+          </tr>
+
+          <tr>
+            <td>002 Personal expenses</td>
+            <td>Not specified</td>
+            <td>Personal</td>
+            <td>Period to confirm</td>
+          </tr>
+
+          <tr>
+            <td>003 Financial reconstruction</td>
+            <td>27 Feb–14 Mar 2025</td>
+            <td>Personal & business</td>
+            <td>Draft</td>
+          </tr>
+
+          <tr>
+            <td>004 Car wash review</td>
+            <td>Jan–24 Nov 2024</td>
+            <td>Business operations</td>
+            <td>Incomplete records</td>
+          </tr>
+
+          <tr>
+            <td>005 FD financial records</td>
+            <td>16 Aug–23 Nov 2024</td>
+            <td>Business accounts</td>
+            <td>Reconciliation pending</td>
+          </tr>
+
+          <tr>
+            <td>006 Operations & targets</td>
+            <td>To confirm</td>
+            <td>Expenses & allocations</td>
+            <td>Classification pending</td>
+          </tr>
+
+          <tr>
+            <td>007 Business management</td>
+            <td>Ongoing</td>
+            <td>Requirements</td>
+            <td>Captured</td>
+          </tr>
+
+          <tr>
+            <td>008 Business health check</td>
+            <td>Ongoing</td>
+            <td>Performance framework</td>
+            <td>Captured</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+    </div>
+
+    <p class="muted">
+      This register contains no underlying personal
+      or business transaction details.
+    </p>
+
+  </div>
+
+</section>
+
+<div class="footer">
+  FD Innovations · Finance & Management Prototype
+  · Not connected to secure online storage
+</div>
+
+</main>
+
+<script>
+
+// DEMONSTRATION DATA
+
+const demo = [
+  {
+    date: "2026-01-05",
+    description: "Demo customer order",
+    type: "Income",
+    category: "Sales",
+    amount: 500,
+    status: "Demonstration"
+  },
+  {
+    date: "2026-01-06",
+    description: "Demo materials purchase",
+    type: "Expense",
+    category: "Materials",
+    amount: 180,
+    status: "Demonstration"
+  },
+  {
+    date: "2026-01-08",
+    description: "Demo transport",
+    type: "Expense",
+    category: "Transport",
+    amount: 40,
+    status: "Demonstration"
+  }
+];
+
+let tx = JSON.parse(
+  localStorage.getItem("fd_tx") || "null"
+) || demo;
+
+let budgets = JSON.parse(
+  localStorage.getItem("fd_budgets") || "null"
+) || [
+  { category: "Materials", amount: 300 },
+  { category: "Transport", amount: 100 },
+  { category: "Utilities", amount: 150 }
+];
+
+// FORMATTING
+
+const cash = n =>
+  "K" + Number(n || 0).toLocaleString("en-ZM", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+
+const esc = s =>
+  String(s).replace(/[&<>"']/g, c => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[c]));
+
+// SAVE RECORDS
+
+function save() {
+  localStorage.setItem("fd_tx", JSON.stringify(tx));
+  localStorage.setItem("fd_budgets", JSON.stringify(budgets));
+}
+
+// UPDATE DASHBOARD
+
+function render() {
+
+  const inc = tx
+    .filter(x => x.type === "Income")
+    .reduce((a, x) => a + x.amount, 0);
+
+  const exp = tx
+    .filter(x => x.type === "Expense")
+    .reduce((a, x) => a + x.amount, 0);
+
+  const totalBudget = budgets
+    .reduce((a, x) => a + x.amount, 0);
+
+  document.getElementById("income").textContent = cash(inc);
+  document.getElementById("expenses").textContent = cash(exp);
+  document.getElementById("net").textContent = cash(inc - exp);
+  document.getElementById("remaining").textContent =
+    cash(totalBudget - exp);
+
+  const sorted = tx.slice().sort(
+    (a, b) => b.date.localeCompare(a.date)
+  );
+
+  document.getElementById("recent").innerHTML =
+    sorted.slice(0, 5).map(x => `
+      <tr>
+        <td>${x.date}</td>
+        <td>${esc(x.description)}</td>
+        <td>${esc(x.type)}</td>
+        <td class="num">${cash(x.amount)}</td>
+      </tr>
+    `).join("");
+
+  document.getElementById("rows").innerHTML =
+    sorted.map(x => `
+      <tr>
+        <td>${x.date}</td>
+        <td>${esc(x.description)}</td>
+        <td>${esc(x.type)}</td>
+        <td class="num">${cash(x.amount)}</td>
+        <td>${esc(x.status)}</td>
+      </tr>
+    `).join("");
+
+  document.getElementById("count").textContent =
+    tx.length + " transactions";
+
+  document.getElementById("budgetrows").innerHTML =
+    budgets.map(x => {
+
+      const actual = tx
+        .filter(t =>
+          t.type === "Expense" &&
+          t.category === x.category
+        )
+        .reduce((s, t) => s + t.amount, 0);
+
+      const percent = x.amount
+        ? Math.min(100, actual / x.amount * 100)
+        : 0;
+
+      return `
+        <div style="margin-bottom:15px">
+
+          <strong>${esc(x.category)}</strong>
+
+          <span style="float:right">
+            ${cash(actual)} / ${cash(x.amount)}
+          </span>
+
+          <div class="bar">
+            <span style="width:${percent}%"></span>
+          </div>
+
+          <small>
+            ${actual > x.amount
+              ? "Over budget by " + cash(actual - x.amount)
+              : "Remaining " + cash(x.amount - actual)}
+          </small>
+
+        </div>
+      `;
+
+    }).join("");
+
+}
+
+// NAVIGATION
+
+document.querySelectorAll("nav button").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    document.querySelectorAll("nav button, .panel")
+      .forEach(x => x.classList.remove("active"));
+
+    button.classList.add("active");
+
+    document.getElementById(
+      button.dataset.tab
+    ).classList.add("active");
+
+  });
+
+});
+
+// ADD TRANSACTION
+
+document.getElementById("txform")
+  .addEventListener("submit", e => {
+
+    e.preventDefault();
+
+    tx.push({
+      date: document.getElementById("date").value,
+      type: document.getElementById("type").value,
+      description: document.getElementById("description").value.trim(),
+      category: document.getElementById("category").value,
+      amount: Number(document.getElementById("amount").value),
+      status: document.getElementById("status").value
+    });
+
+    save();
+    render();
+    e.target.reset();
+
+  });
+
+// ADD OR UPDATE BUDGET
+
+document.getElementById("budgetform")
+  .addEventListener("submit", e => {
+
+    e.preventDefault();
+
+    const category = document.getElementById("bcat").value;
+    const amount = Number(
+      document.getElementById("bamount").value
+    );
+
+    const found = budgets.find(
+      x => x.category === category
+    );
+
+    if (found) {
+      found.amount = amount;
+    } else {
+      budgets.push({ category, amount });
+    }
+
+    save();
+    render();
+    e.target.reset();
+
+  });
+
+// RESET DEMONSTRATION DATA
+
+document.getElementById("reset")
+  .addEventListener("click", () => {
+
+    if (confirm("Clear local entries and restore demonstration data?")) {
+
+      tx = demo.slice();
+
+      budgets = [
+        { category: "Materials", amount: 300 },
+        { category: "Transport", amount: 100 },
+        { category: "Utilities", amount: 150 }
+      ];
+
+      save();
+      render();
+
+    }
+
+  });
+
+// EXPORT TRANSACTIONS
+
+document.getElementById("export")
+  .addEventListener("click", () => {
+
+    const data = [
+      ["Date", "Description", "Type", "Category", "Amount", "Status"],
+      ...tx.map(x => [
+        x.date,
+        x.description,
+        x.type,
+        x.category,
+        x.amount,
+        x.status
+      ])
+    ];
+
+    const csv = data.map(row =>
+      row.map(value =>
+        '"' + String(value).replace(/"/g, '""') + '"'
+      ).join(",")
+    ).join("\n");
+
+    const file = new Blob([csv], {
+      type: "text/csv"
+    });
+
+    const link = document.createElement("a");
+
+    link.href = URL.createObjectURL(file);
+    link.download = "fd-finance-transactions.csv";
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+
+  });
+
+// INITIALISE
+
+document.getElementById("date").value =
+  new Date().toISOString().slice(0, 10);
+
+render();
+
+</script>
+
+</body>
+</html>
