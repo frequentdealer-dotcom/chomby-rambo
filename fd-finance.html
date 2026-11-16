@@ -10,20 +10,25 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--background);color:var(--black);font-family:Arial,sans-serif}
 header{background:var(--black);color:#fff;padding:22px;border-bottom:5px solid var(--yellow)}
-.brand{font-size:21px;font-weight:900}.tagline{color:#ccc;font-size:12px;margin-top:4px}
+.brand{font-size:21px;font-weight:900}
+.tagline{color:#ccc;font-size:12px;margin-top:4px}
 main{max-width:1250px;margin:auto;padding:22px 15px 50px}
 .notice{background:#fff7d6;border:1px solid #e8ce68;border-radius:10px;padding:13px;margin-bottom:20px;font-size:13px}
-h1{font-size:25px;margin:0}h2{font-size:17px}.muted{color:var(--muted);font-size:12px}
+h1{font-size:25px;margin:0}
+h2{font-size:17px}
+.muted{color:var(--muted);font-size:12px}
 .top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px}
 .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;min-width:0}
-.kpi small{color:var(--muted)}.kpi strong{display:block;font-size:23px;margin-top:7px}
+.kpi small{color:var(--muted)}
+.kpi strong{display:block;font-size:23px;margin-top:7px}
 button{background:var(--yellow);color:#000;border:0;padding:11px 15px;border-radius:8px;font-weight:bold;cursor:pointer}
 button.secondary{background:#fff;border:1px solid var(--border)}
 nav{display:flex;gap:7px;overflow-x:auto;margin:22px 0 15px}
 nav button{white-space:nowrap;background:#fff;border:1px solid var(--border)}
 nav button.active{background:#000;color:#fff}
-.panel{display:none}.panel.active{display:block}
+.panel{display:none}
+.panel.active{display:block}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--border);white-space:nowrap}
@@ -49,6 +54,9 @@ form button{grid-column:1/-1}
 .balance-strip .card{padding:12px}
 .form-note{grid-column:1/-1}
 .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.entitybar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0}
+.entitybar label{min-width:220px}
+.status-historical{background:#eee7ff;color:#51358c}
 @media(max-width:850px){.cashbook-grid{grid-template-columns:1fr}}
 @media(max-width:720px){.cards{grid-template-columns:1fr 1fr}.cols{grid-template-columns:1fr}}
 @media(max-width:420px){form{grid-template-columns:1fr}.top h1{font-size:22px}}
@@ -60,17 +68,30 @@ form button{grid-column:1/-1}
 <div class="tagline">Creative Ideas. Practical Solutions.</div>
 </header>
 <main>
-<div class="notice"><strong>Development prototype:</strong> This version uses demonstration figures. Records are stored locally in this browser. Do not enter confidential financial information. Secure login and online storage will be added later.</div>
+
+<div class="notice">
+<strong>Development prototype:</strong>
+Records are stored locally in this browser. This version is not connected to secure online storage. Do not enter confidential financial information.
+</div>
 
 <div class="top">
 <div>
 <h1>Finance &amp; Management</h1>
-<p class="muted">Monitor finances, manage operations and review performance.</p>
+<p class="muted">Monitor finances, manage ventures and review performance.</p>
 </div>
 <div>
 <button class="secondary" id="export">Export Cash Book CSV</button>
 <button class="secondary" id="reset">Reset demo</button>
 </div>
+</div>
+
+<div class="card entitybar">
+<label>View financial records
+<select id="entityFilter">
+<option value="all">All FD Innovations ventures — consolidated</option>
+</select>
+</label>
+<span class="muted">All ventures remain under FD Innovations. Select one to view its records.</span>
 </div>
 
 <div class="cards">
@@ -82,8 +103,10 @@ form button{grid-column:1/-1}
 
 <nav>
 <button class="active" data-tab="overview">Overview</button>
+<button data-tab="ventures">Ventures</button>
 <button data-tab="cashbook">Cash Book</button>
 <button data-tab="budget">Budget</button>
+<button data-tab="historical">Historical Records</button>
 <button data-tab="operations">Operations</button>
 <button data-tab="health">Business Health</button>
 <button data-tab="datasets">Data Register</button>
@@ -109,11 +132,44 @@ form button{grid-column:1/-1}
 </div>
 </section>
 
+<section id="ventures" class="panel">
+<div class="cols">
+<div class="card">
+<h2>Register a Venture</h2>
+<form id="ventureForm">
+<label>Venture name<input id="ventureName" placeholder="e.g. Printing & Design" required></label>
+<label>Description<input id="ventureDescription" placeholder="What does this venture do?"></label>
+<button type="submit">Add Venture</button>
+</form>
+<p class="muted">Every income-generating activity is a business unit under FD Innovations. Do not create personal or household accounts here.</p>
+</div>
+<div class="card">
+<h2>Business Units</h2>
+<div id="ventureList"></div>
+</div>
+</div>
+
+<div class="card" style="margin-top:12px">
+<h2>Opening Balances</h2>
+<p class="muted">Enter a verified opening cash or bank balance for a venture as at a specific date. Opening balances are carried into its cash position; they are not treated as sales or expenses.</p>
+<form id="openingForm">
+<label>Venture<select id="openingVenture" required></select></label>
+<label>As at date<input type="date" id="openingDate" required></label>
+<label>Account<select id="openingAccount"><option value="cash">Cash</option><option value="bank">Bank</option></select></label>
+<label>Opening balance (K)<input type="number" id="openingAmount" min="0" step="0.01" required></label>
+<label>Verification<select id="openingStatus"><option>Pending confirmation</option><option>Verified</option><option>Reconstructed</option></select></label>
+<button type="submit">Save Opening Balance</button>
+</form>
+<div id="openingList"></div>
+</div>
+</section>
+
 <section id="cashbook" class="panel">
 <div class="card" style="margin-bottom:12px">
 <h2>Enter Cash Book Item</h2>
 <form id="cbform">
 <label>Date<input type="date" id="cbdate" required></label>
+<label>Business venture<select id="cbventure" required></select></label>
 <label>Entry side<select id="side"><option value="receipt">Receipts (Debit)</option><option value="payment">Payments (Credit)</option></select></label>
 <label>Details<input id="details" required placeholder="e.g. Cash sales / Materials purchased"></label>
 <label>Folio<input id="folio" placeholder="Ledger reference"></label>
@@ -166,7 +222,8 @@ form button{grid-column:1/-1}
 <div class="card"><small class="muted">Cash balance</small><h2 id="cashBalance">K0.00</h2></div>
 <div class="card"><small class="muted">Bank balance</small><h2 id="bankBalance">K0.00</h2></div>
 </div>
-<p class="muted">Balances shown are calculated from recorded receipts less payments. Opening balances are currently zero. Contra entries are marked “C” in the folio column.</p>
+
+<p class="muted">Balances incorporate the latest opening balance and subsequent recorded movements. Contra entries are marked “C” in the folio column.</p>
 
 <div class="card" style="margin-top:12px">
 <h2>Entry Register &amp; Verification</h2>
@@ -193,12 +250,53 @@ form button{grid-column:1/-1}
 <label>Budget amount (K)<input type="number" id="bamount" min="0.01" step="0.01" required></label>
 <button type="submit">Add Budget Item</button>
 </form>
-<p class="muted">Enter your own categories and specific items. You can add multiple items under the same category.</p>
+<p class="muted">Enter your own categories and specific items. Multiple items can belong to one category.</p>
 </div>
 <div class="card">
 <h2>Budget Items — Budget Versus Actual</h2>
 <div id="budgetrows"></div>
 </div>
+</div>
+</section>
+
+<section id="historical" class="panel">
+<div class="card" style="margin-bottom:12px">
+<h2>Enter Historical Transaction</h2>
+<p class="muted">Enter actual historical figures one transaction at a time. These records are added to the same Cash Book as current transactions and labelled Historical. Do not enter summary totals as individual transactions.</p>
+<form id="historicalForm">
+<label>Transaction date<input type="date" id="histDate" required></label>
+<label>Venture<select id="histVenture" required></select></label>
+<label>Entry type<select id="histSide"><option value="receipt">Receipt</option><option value="payment">Payment</option></select></label>
+<label>Account<select id="histAccount"><option value="cash">Cash</option><option value="bank">Bank</option></select></label>
+<label>Details<input id="histDetails" required placeholder="Original transaction description"></label>
+<label>Category<input id="histCategory" required placeholder="e.g. Materials"></label>
+<label>Amount (K)<input type="number" id="histAmount" min="0.01" step="0.01" required></label>
+<label>Source dataset<select id="histSource">
+<option>FD financial records</option>
+<option>Car wash review</option>
+<option>Financial reconstruction</option>
+<option>Other business record</option>
+</select></label>
+<label>Verification status<select id="histStatus">
+<option>Unverified</option>
+<option>Verified</option>
+<option>Reconstructed</option>
+<option>Pending confirmation</option>
+</select></label>
+<button type="submit">Add Historical Transaction</button>
+</form>
+</div>
+
+<div class="card">
+<h2>Historical Transaction Register</h2>
+<p class="muted">Historical transactions are stored in the main Cash Book with their original transaction dates. They are not duplicated in a separate ledger.</p>
+<div class="tablewrap">
+<table>
+<thead><tr><th>Date</th><th>Venture</th><th>Details</th><th>Source</th><th>Side</th><th>Amount</th><th>Status</th></tr></thead>
+<tbody id="historicalRows"></tbody>
+</table>
+</div>
+<p id="historicalCount" class="muted"></p>
 </div>
 </section>
 
@@ -246,7 +344,7 @@ form button{grid-column:1/-1}
 </tbody>
 </table>
 </div>
-<p class="muted">This register contains no underlying personal or business transaction details.</p>
+<p class="muted">The eight datasets are source summaries, not imported transactions. Enter verified underlying business transactions in Historical Records. Household and personal records are excluded from consolidated FD Innovations accounts.</p>
 </div>
 </section>
 
@@ -254,149 +352,338 @@ form button{grid-column:1/-1}
 </main>
 
 <script>
+const DEFAULT_VENTURES=[
+{id:"printing",name:"Printing & Design",description:"Printing, graphic design and related services"},
+{id:"carwash",name:"Car Wash",description:"Car washing and cleaning services"},
+{id:"logistics",name:"Logistics & Transport",description:"Transport and logistics activities"},
+{id:"other",name:"Other Ventures",description:"Other income-generating activities"}
+];
+
 const demoEntries=[
-{id:1,date:"2026-01-05",details:"Demo customer order",folio:"",side:"receipt",account:"cash",amount:500,category:"Sales",status:"Demonstration"},
-{id:2,date:"2026-01-06",details:"Demo materials purchase",folio:"",side:"payment",account:"cash",amount:180,category:"Materials",status:"Demonstration"},
-{id:3,date:"2026-01-08",details:"Demo transport",folio:"",side:"payment",account:"cash",amount:40,category:"Transport",status:"Demonstration"}
+{id:1,date:"2026-01-05",details:"Demo customer order",folio:"",side:"receipt",account:"cash",amount:500,category:"Sales",status:"Demonstration",ventureId:"printing",recordType:"demo"},
+{id:2,date:"2026-01-06",details:"Demo materials purchase",folio:"",side:"payment",account:"cash",amount:180,category:"Materials",status:"Demonstration",ventureId:"printing",recordType:"demo"},
+{id:3,date:"2026-01-08",details:"Demo transport",folio:"",side:"payment",account:"cash",amount:40,category:"Transport",status:"Demonstration",ventureId:"carwash",recordType:"demo"}
 ];
 
-function loadEntries(){
-const saved=localStorage.getItem("fd_cashbook");
-if(saved){try{return JSON.parse(saved)}catch(e){}}
-const old=localStorage.getItem("fd_tx");
-if(old){
+function read(key,fallback){
 try{
-return JSON.parse(old).filter(x=>["Income","Expense","Capital","Drawing"].includes(x.type)).map((x,i)=>({
-id:Date.now()+i,date:x.date,details:x.description||"Migrated entry",folio:"",
+const v=JSON.parse(localStorage.getItem(key));
+return v??fallback;
+}catch(e){return fallback}
+}
+
+let ventures=read("fd_ventures",DEFAULT_VENTURES);
+let entries=read("fd_cashbook",null);
+
+if(!entries){
+const old=read("fd_tx",null);
+if(old){
+entries=old.filter(x=>["Income","Expense","Capital","Drawing"].includes(x.type)).map((x,i)=>({
+id:Date.now()+i,
+date:x.date,
+details:x.description||"Migrated entry",
+folio:"",
 side:["Income","Capital"].includes(x.type)?"receipt":"payment",
-account:"cash",amount:Number(x.amount)||0,category:x.category||"Other",status:x.status||"Unverified"
+account:"cash",
+amount:Number(x.amount)||0,
+category:x.category||"Other",
+status:x.status||"Unverified",
+ventureId:"other",
+recordType:"historical",
+sourceDataset:"Migrated legacy records"
 }));
-}catch(e){}
+}else{
+entries=demoEntries.map(x=>({...x}));
 }
-return demoEntries.map(x=>({...x}));
 }
 
-let entries=loadEntries();
-let budgets=JSON.parse(localStorage.getItem("fd_budgets")||"null")||[
-{id:"b-demo-materials",category:"Materials",item:"General materials",amount:300},
-{id:"b-demo-transport",category:"Transport",item:"General transport",amount:100},
-{id:"b-demo-utilities",category:"Utilities",item:"General utilities",amount:150}
-];
+let budgets=read("fd_budgets",[
+{id:"b-demo-materials",category:"Materials",item:"General materials",amount:300,ventureId:"printing"},
+{id:"b-demo-transport",category:"Transport",item:"General transport",amount:100,ventureId:"carwash"},
+{id:"b-demo-utilities",category:"Utilities",item:"General utilities",amount:150,ventureId:"printing"}
+]);
 
-budgets=budgets.map((b,i)=>({...b,id:b.id||("b-"+(i+1)),item:b.item||("General "+String(b.category||"budget").toLowerCase())}));
+budgets=budgets.map((b,i)=>({
+...b,
+id:b.id||("b-"+(i+1)),
+item:b.item||("General "+String(b.category||"budget").toLowerCase()),
+ventureId:b.ventureId||"printing"
+}));
+
+let openings=read("fd_opening_balances",[]);
+let activeEntity="all";
 
 const cash=n=>"K"+Number(n||0).toLocaleString("en-ZM",{minimumFractionDigits:2,maximumFractionDigits:2});
-const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({
+"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+}[c]));
+
+const ventureName=id=>ventures.find(v=>v.id===id)?.name||"Unassigned / legacy";
 
 function save(){
 localStorage.setItem("fd_cashbook",JSON.stringify(entries));
 localStorage.setItem("fd_budgets",JSON.stringify(budgets));
+localStorage.setItem("fd_ventures",JSON.stringify(ventures));
+localStorage.setItem("fd_opening_balances",JSON.stringify(openings));
 }
 
-function sum(side,account){
-return entries.filter(x=>x.side===side&&x.account===account).reduce((a,x)=>a+Number(x.amount||0),0);
+function visible(list){
+return activeEntity==="all"?list:list.filter(x=>x.ventureId===activeEntity);
+}
+
+function latestOpening(ventureId,account){
+return openings.filter(x=>x.ventureId===ventureId&&x.account===account)
+.sort((a,b)=>b.date.localeCompare(a.date))[0]||null;
+}
+
+function balanceFor(account){
+const ids=activeEntity==="all"?ventures.map(v=>v.id):[activeEntity];
+
+return ids.reduce((total,vid)=>{
+const op=latestOpening(vid,account);
+const start=op?op.date:"0000-01-01";
+const base=op?Number(op.amount||0):0;
+
+const movement=entries.filter(x=>
+x.ventureId===vid &&
+x.account===account &&
+x.date>start
+).reduce((s,x)=>s+(x.side==="receipt"?1:-1)*Number(x.amount||0),0);
+
+return total+base+movement;
+},0);
+}
+
+function sum(side,account,list=visible(entries)){
+return list.filter(x=>x.side===side&&x.account===account)
+.reduce((a,x)=>a+Number(x.amount||0),0);
 }
 
 function rowHTML(x){
 return `<tr>
 <td>${esc(x.date)}</td>
-<td>${esc(x.details)}</td>
+<td>${esc(x.details)}${x.recordType==="historical"?' <span class="tag status-historical">Historical</span>':''}</td>
 <td>${esc(x.folio||"")}</td>
 <td class="num">${x.account==="cash"?cash(x.amount):"—"}</td>
 <td class="num">${x.account==="bank"?cash(x.amount):"—"}</td>
 </tr>`;
 }
 
-function render(){
-const receipts=entries.filter(x=>x.side==="receipt").sort((a,b)=>a.date.localeCompare(b.date)||a.id-b.id);
-const payments=entries.filter(x=>x.side==="payment").sort((a,b)=>a.date.localeCompare(b.date)||a.id-b.id);
-const receiptTotal=receipts.reduce((s,x)=>s+x.amount,0);
-const paymentTotal=payments.reduce((s,x)=>s+x.amount,0);
+function fillVentureSelect(id,includeAll=false){
+const el=document.getElementById(id);
+if(!el)return;
+const old=el.value;
 
-document.getElementById("income").textContent=cash(receiptTotal);
-document.getElementById("expenses").textContent=cash(paymentTotal);
-document.getElementById("net").textContent=cash(receiptTotal-paymentTotal);
+el.innerHTML=(includeAll?'<option value="all">All FD Innovations ventures — consolidated</option>':'')+
+ventures.map(v=>`<option value="${esc(v.id)}">${esc(v.name)}</option>`).join("");
+
+if([...el.options].some(o=>o.value===old))el.value=old;
+else if(includeAll)el.value="all";
+}
+
+function render(){
+
+const list=visible(entries);
+
+const receipts=list.filter(x=>x.side==="receipt")
+.sort((a,b)=>a.date.localeCompare(b.date)||a.id-b.id);
+
+const payments=list.filter(x=>x.side==="payment")
+.sort((a,b)=>a.date.localeCompare(b.date)||a.id-b.id);
+
+const rTotal=receipts.reduce((s,x)=>s+x.amount,0);
+const pTotal=payments.reduce((s,x)=>s+x.amount,0);
+
+document.getElementById("income").textContent=cash(rTotal);
+document.getElementById("expenses").textContent=cash(pTotal);
+document.getElementById("net").textContent=cash(rTotal-pTotal);
+
+const viewBudgets=visible(budgets);
 
 document.getElementById("remaining").textContent=cash(
-budgets.reduce((s,x)=>s+x.amount,0)-
-budgets.reduce((s,b)=>s+entries.filter(t=>t.side==="payment"&&t.budgetItemId===b.id).reduce((a,t)=>a+Number(t.amount||0),0),0)
+viewBudgets.reduce((s,x)=>s+x.amount,0)-
+viewBudgets.reduce((s,b)=>
+s+list.filter(t=>t.side==="payment"&&t.budgetItemId===b.id)
+.reduce((a,t)=>a+Number(t.amount||0),0),0)
 );
 
 document.getElementById("receiptRows").innerHTML=receipts.map(rowHTML).join("");
 document.getElementById("paymentRows").innerHTML=payments.map(rowHTML).join("");
 
-document.getElementById("receiptCashTotal").textContent=cash(sum("receipt","cash"));
-document.getElementById("receiptBankTotal").textContent=cash(sum("receipt","bank"));
-document.getElementById("paymentCashTotal").textContent=cash(sum("payment","cash"));
-document.getElementById("paymentBankTotal").textContent=cash(sum("payment","bank"));
+document.getElementById("receiptCashTotal").textContent=cash(sum("receipt","cash",list));
+document.getElementById("receiptBankTotal").textContent=cash(sum("receipt","bank",list));
+document.getElementById("paymentCashTotal").textContent=cash(sum("payment","cash",list));
+document.getElementById("paymentBankTotal").textContent=cash(sum("payment","bank",list));
 
-document.getElementById("cashBalance").textContent=cash(sum("receipt","cash")-sum("payment","cash"));
-document.getElementById("bankBalance").textContent=cash(sum("receipt","bank")-sum("payment","bank"));
+document.getElementById("cashBalance").textContent=cash(balanceFor("cash"));
+document.getElementById("bankBalance").textContent=cash(balanceFor("bank"));
 
-const sorted=entries.slice().sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
+const sorted=list.slice().sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
 
-document.getElementById("recent").innerHTML=sorted.slice(0,5).map(x=>`<tr>
-<td>${esc(x.date)}</td><td>${esc(x.details)}</td>
+document.getElementById("recent").innerHTML=sorted.slice(0,5).map(x=>`
+<tr>
+<td>${esc(x.date)}</td>
+<td>${esc(x.details)}</td>
 <td>${x.side==="receipt"?"Receipt":"Payment"}</td>
 <td>${x.account==="cash"?"Cash":"Bank"}</td>
 <td class="num">${cash(x.amount)}</td>
 </tr>`).join("");
 
-document.getElementById("allRows").innerHTML=sorted.map(x=>`<tr>
-<td>${esc(x.date)}</td><td>${esc(x.details)}</td><td>${esc(x.folio||"")}</td>
+document.getElementById("allRows").innerHTML=sorted.map(x=>`
+<tr>
+<td>${esc(x.date)}</td>
+<td>${esc(x.details)}</td>
+<td>${esc(x.folio||"")}</td>
 <td>${x.side==="receipt"?"Receipt":"Payment"}</td>
 <td>${x.account==="cash"?"Cash":"Bank"}</td>
-<td class="num">${cash(x.amount)}</td><td>${esc(x.category)}</td><td>${esc(x.status)}</td>
+<td class="num">${cash(x.amount)}</td>
+<td>${esc(x.category)}</td>
+<td>${esc(x.status)}${x.recordType==="historical"?" · Historical":""}</td>
 </tr>`).join("");
 
-document.getElementById("count").textContent=entries.length+" cash book entries";
+document.getElementById("count").textContent=list.length+" cash book entries";
 
-const categoryNames=[...new Set([...budgets.map(b=>b.category),...entries.map(t=>t.category)].filter(Boolean))];
-document.getElementById("cashCategories").innerHTML=categoryNames.map(c=>`<option value="${esc(c)}"></option>`).join("");
+const cats=[...new Set([...viewBudgets.map(b=>b.category),...list.map(t=>t.category)].filter(Boolean))];
 
-document.getElementById("budgetCategories").innerHTML=[...new Set(budgets.map(b=>b.category).filter(Boolean))].map(c=>`<option value="${esc(c)}"></option>`).join("");
+document.getElementById("cashCategories").innerHTML=cats.map(c=>`<option value="${esc(c)}"></option>`).join("");
+
+document.getElementById("budgetCategories").innerHTML=
+[...new Set(viewBudgets.map(b=>b.category))].map(c=>`<option value="${esc(c)}"></option>`).join("");
 
 const itemSelect=document.getElementById("budgetItem");
-const selectedItem=itemSelect.value;
+const selected=itemSelect.value;
+
 itemSelect.innerHTML='<option value="">Not linked to a budget item</option>'+
-budgets.map(b=>`<option value="${esc(b.id)}">${esc(b.category)} — ${esc(b.item)}</option>`).join("");
-if(budgets.some(b=>b.id===selectedItem))itemSelect.value=selectedItem;
+viewBudgets.map(b=>`<option value="${esc(b.id)}">${esc(ventureName(b.ventureId))} — ${esc(b.category)} — ${esc(b.item)}</option>`).join("");
 
-document.getElementById("budgetrows").innerHTML=budgets.map(x=>{
-const actual=entries.filter(t=>t.side==="payment"&&t.budgetItemId===x.id).reduce((a,t)=>a+Number(t.amount||0),0);
-const percent=x.amount?Math.min(100,actual/x.amount*100):0;
-const remaining=x.amount-actual;
+if(viewBudgets.some(b=>b.id===selected))itemSelect.value=selected;
+
+document.getElementById("budgetrows").innerHTML=viewBudgets.map(b=>{
+const actual=list.filter(t=>t.side==="payment"&&t.budgetItemId===b.id)
+.reduce((a,t)=>a+Number(t.amount||0),0);
+
+const pct=b.amount?Math.min(100,actual/b.amount*100):0;
+const rem=b.amount-actual;
+
 return `<div style="margin-bottom:18px">
-<strong>${esc(x.item)}</strong>
-<div class="muted">${esc(x.category)}</div>
-<span style="float:right">${cash(actual)} / ${cash(x.amount)}</span>
-<div class="bar"><span style="width:${percent}%"></span></div>
-<small>${remaining<0?"Over budget by "+cash(-remaining):"Remaining "+cash(remaining)} · ${x.amount?(actual/x.amount*100).toFixed(1):"0.0"}% used</small>
+<strong>${esc(b.item)}</strong>
+<div class="muted">${esc(ventureName(b.ventureId))} · ${esc(b.category)}</div>
+<span style="float:right">${cash(actual)} / ${cash(b.amount)}</span>
+<div class="bar"><span style="width:${pct}%"></span></div>
+<small>${rem<0?"Over budget by "+cash(-rem):"Remaining "+cash(rem)} · ${b.amount?(actual/b.amount*100).toFixed(1):"0.0"}% used</small>
 </div>`;
-}).join("")||'<p class="muted">No budget items added yet.</p>';
+}).join("")||'<p class="muted">No budget items for this view.</p>';
 
-document.getElementById("budgetrows").innerHTML+='<p class="muted">Payments not linked to a budget item remain in the Cash Book but are not included in an individual item’s actual expenditure.</p>';
+document.getElementById("budgetrows").innerHTML+=
+'<p class="muted">Only payments linked to a budget item contribute to its actual expenditure. Unlinked payments remain in the Cash Book.</p>';
+
+document.getElementById("ventureList").innerHTML=ventures.map(v=>`
+<div style="padding:10px 0;border-bottom:1px solid #eee">
+<strong>${esc(v.name)}</strong>
+<div class="muted">${esc(v.description||"No description")}</div>
+<small>${entries.filter(x=>x.ventureId===v.id).length} transactions recorded</small>
+</div>`).join("");
+
+document.getElementById("openingList").innerHTML=openings.map(o=>`
+<div class="muted">${esc(ventureName(o.ventureId))} · ${esc(o.date)} · ${o.account.toUpperCase()} · ${cash(o.amount)} · ${esc(o.status)}</div>
+`).join("")||'<p class="muted">No opening balances entered.</p>';
+
+const hist=entries.filter(x=>x.recordType==="historical")
+.sort((a,b)=>b.date.localeCompare(a.date));
+
+document.getElementById("historicalRows").innerHTML=hist.map(x=>`
+<tr>
+<td>${esc(x.date)}</td>
+<td>${esc(ventureName(x.ventureId))}</td>
+<td>${esc(x.details)}</td>
+<td>${esc(x.sourceDataset||"Historical import")}</td>
+<td>${x.side}</td>
+<td>${cash(x.amount)}</td>
+<td>${esc(x.status)}</td>
+</tr>`).join("");
+
+document.getElementById("historicalCount").textContent=
+hist.length+" historical transactions recorded.";
+
+fillVentureSelect("cbventure");
+fillVentureSelect("openingVenture");
+fillVentureSelect("histVenture");
 }
 
-document.querySelectorAll("nav button").forEach(button=>button.addEventListener("click",()=>{
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>{
 document.querySelectorAll("nav button,.panel").forEach(x=>x.classList.remove("active"));
-button.classList.add("active");
-document.getElementById(button.dataset.tab).classList.add("active");
+b.classList.add("active");
+document.getElementById(b.dataset.tab).classList.add("active");
 }));
 
+fillVentureSelect("entityFilter",true);
+
+document.getElementById("entityFilter").addEventListener("change",e=>{
+activeEntity=e.target.value;
+render();
+});
+
+document.getElementById("ventureForm").addEventListener("submit",e=>{
+e.preventDefault();
+
+const name=document.getElementById("ventureName").value.trim();
+if(!name)return;
+
+if(ventures.some(v=>v.name.toLowerCase()===name.toLowerCase())){
+alert("That venture already exists.");
+return;
+}
+
+ventures.push({
+id:"v-"+Date.now(),
+name,
+description:document.getElementById("ventureDescription").value.trim()
+});
+
+save();
+e.target.reset();
+fillVentureSelect("entityFilter",true);
+render();
+});
+
+document.getElementById("openingForm").addEventListener("submit",e=>{
+e.preventDefault();
+
+const amount=Number(document.getElementById("openingAmount").value);
+if(!(amount>=0)){alert("Enter a valid opening balance.");return}
+
+openings.push({
+id:"o-"+Date.now(),
+ventureId:document.getElementById("openingVenture").value,
+date:document.getElementById("openingDate").value,
+account:document.getElementById("openingAccount").value,
+amount,
+status:document.getElementById("openingStatus").value
+});
+
+save();
+e.target.reset();
+render();
+});
+
 document.getElementById("budgetItem").addEventListener("change",e=>{
-const item=budgets.find(b=>b.id===e.target.value);
-if(item)document.getElementById("category").value=item.category;
+const b=budgets.find(x=>x.id===e.target.value);
+if(b){
+document.getElementById("category").value=b.category;
+document.getElementById("cbventure").value=b.ventureId;
+}
 });
 
 document.getElementById("cbform").addEventListener("submit",e=>{
 e.preventDefault();
+
 const amount=Number(document.getElementById("cbamount").value);
 if(!(amount>0)){alert("Enter an amount greater than zero.");return}
 
 const side=document.getElementById("side").value;
 const budgetItemId=side==="payment"?document.getElementById("budgetItem").value:"";
-const chosenBudget=budgets.find(b=>b.id===budgetItemId);
+const b=budgets.find(x=>x.id===budgetItemId);
 
 entries.push({
 id:Date.now(),
@@ -406,9 +693,11 @@ folio:document.getElementById("folio").value.trim(),
 side,
 account:document.getElementById("account").value,
 amount,
-category:chosenBudget?chosenBudget.category:document.getElementById("category").value.trim(),
+category:b?b.category:document.getElementById("category").value.trim(),
 budgetItemId,
-status:document.getElementById("status").value
+ventureId:b?b.ventureId:document.getElementById("cbventure").value,
+status:document.getElementById("status").value,
+recordType:"current"
 });
 
 save();
@@ -417,34 +706,69 @@ e.target.reset();
 document.getElementById("cbdate").value=new Date().toLocaleDateString("en-CA");
 });
 
+document.getElementById("historicalForm").addEventListener("submit",e=>{
+e.preventDefault();
+
+const amount=Number(document.getElementById("histAmount").value);
+if(!(amount>0)){alert("Enter an amount greater than zero.");return}
+
+entries.push({
+id:Date.now(),
+date:document.getElementById("histDate").value,
+details:document.getElementById("histDetails").value.trim(),
+folio:"HIST",
+side:document.getElementById("histSide").value,
+account:document.getElementById("histAccount").value,
+amount,
+category:document.getElementById("histCategory").value.trim(),
+status:document.getElementById("histStatus").value,
+ventureId:document.getElementById("histVenture").value,
+recordType:"historical",
+sourceDataset:document.getElementById("histSource").value
+});
+
+save();
+render();
+e.target.reset();
+document.getElementById("histDate").value=new Date().toLocaleDateString("en-CA");
+});
+
 document.getElementById("contraBtn").addEventListener("click",()=>{
 const date=prompt("Date of transfer (YYYY-MM-DD):",new Date().toLocaleDateString("en-CA"));
 if(!date)return;
-if(!/^\d{4}-\d{2}-\d{2}$/.test(date)){alert("Please use YYYY-MM-DD.");return}
 
-const direction=prompt("Type CASH TO BANK or BANK TO CASH:","CASH TO BANK");
-if(!direction)return;
-const d=direction.trim().toUpperCase();
-if(!["CASH TO BANK","BANK TO CASH"].includes(d)){alert("Please enter CASH TO BANK or BANK TO CASH.");return}
+if(!/^\d{4}-\d{2}-\d{2}$/.test(date)){
+alert("Please use YYYY-MM-DD.");
+return;
+}
+
+const d=(prompt("Type CASH TO BANK or BANK TO CASH:","CASH TO BANK")||"").trim().toUpperCase();
+
+if(!["CASH TO BANK","BANK TO CASH"].includes(d)){
+alert("Please enter CASH TO BANK or BANK TO CASH.");
+return;
+}
 
 const amount=Number(prompt("Transfer amount (K):",""));
 if(!(amount>0)){alert("Enter a valid amount greater than zero.");return}
 
+const v=document.getElementById("cbventure").value;
 const details="Contra transfer: "+d.toLowerCase();
+const from=d==="CASH TO BANK"?"cash":"bank";
+const to=d==="CASH TO BANK"?"bank":"cash";
 
-if(d==="CASH TO BANK"){
-entries.push({id:Date.now(),date,details,folio:"C",side:"payment",account:"cash",amount,category:"Contra",status:"Verified"});
-entries.push({id:Date.now()+1,date,details,folio:"C",side:"receipt",account:"bank",amount,category:"Contra",status:"Verified"});
-}else{
-entries.push({id:Date.now(),date,details,folio:"C",side:"payment",account:"bank",amount,category:"Contra",status:"Verified"});
-entries.push({id:Date.now()+1,date,details,folio:"C",side:"receipt",account:"cash",amount,category:"Contra",status:"Verified"});
-}
+entries.push(
+{id:Date.now(),date,details,folio:"C",side:"payment",account:from,amount,category:"Contra",status:"Verified",ventureId:v,recordType:"current"},
+{id:Date.now()+1,date,details,folio:"C",side:"receipt",account:to,amount,category:"Contra",status:"Verified",ventureId:v,recordType:"current"}
+);
+
 save();
 render();
 });
 
 document.getElementById("budgetform").addEventListener("submit",e=>{
 e.preventDefault();
+
 const category=document.getElementById("bcat").value.trim();
 const item=document.getElementById("bitem").value.trim();
 const amount=Number(document.getElementById("bamount").value);
@@ -454,41 +778,73 @@ alert("Enter a category, specific item and amount greater than zero.");
 return;
 }
 
-budgets.push({id:"b-"+Date.now(),category,item,amount});
+const ventureId=activeEntity==="all"?
+document.getElementById("cbventure").value:activeEntity;
+
+budgets.push({
+id:"b-"+Date.now(),
+category,
+item,
+amount,
+ventureId
+});
+
 save();
 render();
 e.target.reset();
 });
 
 document.getElementById("reset").addEventListener("click",()=>{
-if(confirm("Clear local entries and restore demonstration data?")){
+if(confirm("Clear all locally stored cash book, budget, venture and opening balance records and restore the demonstration setup? This cannot be undone.")){
+
 entries=demoEntries.map(x=>({...x}));
+
 budgets=[
-{id:"b-demo-materials",category:"Materials",item:"General materials",amount:300},
-{id:"b-demo-transport",category:"Transport",item:"General transport",amount:100},
-{id:"b-demo-utilities",category:"Utilities",item:"General utilities",amount:150}
+{id:"b-demo-materials",category:"Materials",item:"General materials",amount:300,ventureId:"printing"},
+{id:"b-demo-transport",category:"Transport",item:"General transport",amount:100,ventureId:"carwash"},
+{id:"b-demo-utilities",category:"Utilities",item:"General utilities",amount:150,ventureId:"printing"}
 ];
+
+ventures=DEFAULT_VENTURES.map(x=>({...x}));
+openings=[];
+activeEntity="all";
+
 save();
+fillVentureSelect("entityFilter",true);
 render();
 }
 });
 
 document.getElementById("export").addEventListener("click",()=>{
+const list=visible(entries);
+
 const data=[
-["Date","Details","Folio","Side","Cash/Bank","Amount","Category","Status"],
-...entries.map(x=>[x.date,x.details,x.folio,x.side,x.account,x.amount,x.category,x.status])
+["Date","Venture","Details","Folio","Side","Cash/Bank","Amount","Category","Status","Record type","Source dataset"],
+...list.map(x=>[
+x.date,ventureName(x.ventureId),x.details,x.folio,x.side,x.account,
+x.amount,x.category,x.status,x.recordType,x.sourceDataset||""
+])
 ];
-const csv=data.map(row=>row.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\n");
+
+const csv=data.map(row=>row.map(v=>
+'"'+String(v??"").replace(/"/g,'""')+'"'
+).join(",")).join("\n");
+
 const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});
 const url=URL.createObjectURL(blob);
-const link=document.createElement("a");
-link.href=url;
-link.download="fd-innovations-two-column-cash-book.csv";
-link.click();
+const a=document.createElement("a");
+
+a.href=url;
+a.download="fd-innovations-cash-book.csv";
+a.click();
+
 URL.revokeObjectURL(url);
 });
 
 document.getElementById("cbdate").value=new Date().toLocaleDateString("en-CA");
+document.getElementById("histDate").value=new Date().toLocaleDateString("en-CA");
+document.getElementById("openingDate").value=new Date().toLocaleDateString("en-CA");
+
 render();
 </script>
 </body>
