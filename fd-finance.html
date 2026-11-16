@@ -55,438 +55,230 @@ form button{grid-column:1/-1}
 </style>
 </head>
 <body>
-<header>
-<div class="brand">FD INNOVATIONS</div>
-<div class="tagline">Creative Ideas. Practical Solutions.</div>
-</header>
+<header><div class="brand">FD INNOVATIONS</div><div class="tagline">Creative Ideas. Practical Solutions.</div></header>
 <main>
-<div class="notice">
-<strong>Historical import:</strong> This version includes recovered historical entries and clearly labelled summary figures. Some source records remain incomplete. Records are stored locally in this browser; do not enter confidential financial information.
-</div>
-
-<div class="top">
-<div>
-<h1>Finance &amp; Management</h1>
-<p class="muted">Monitor finances, manage operations and review performance.</p>
-</div>
-<div>
-<button class="secondary" id="export">Export Cash Book CSV</button>
-<button class="secondary" id="reset">Restore imported history</button>
-</div>
-</div>
-
+<div class="notice"><strong>Historical import:</strong> This version includes recovered historical entries and clearly labelled summary figures. Some source records remain incomplete. Records are stored locally in this browser; do not enter confidential financial information.</div>
+<div class="top"><div><h1>Finance &amp; Management</h1><p class="muted">Monitor finances, manage operations and review performance.</p></div><div><button class="secondary" id="export">Export Cash Book CSV</button> <button class="secondary" id="reset">Import missing historical entries</button></div></div>
 <div class="cards">
-<div class="card kpi"><small>Total receipts</small><strong id="income">K0.00</strong></div>
-<div class="card kpi"><small>Total payments</small><strong id="expenses">K0.00</strong></div>
-<div class="card kpi"><small>Net cash &amp; bank movement</small><strong id="net">K0.00</strong></div>
-<div class="card kpi"><small>Budget remaining</small><strong id="remaining">K0.00</strong></div>
+ <div class="card kpi"><small>Total receipts</small><strong id="income">K0.00</strong></div>
+ <div class="card kpi"><small>Total payments</small><strong id="expenses">K0.00</strong></div>
+ <div class="card kpi"><small>Net cash &amp; bank movement</small><strong id="net">K0.00</strong></div>
+ <div class="card kpi"><small>Budget remaining</small><strong id="remaining">K0.00</strong></div>
 </div>
-
 <nav>
-<button class="active" data-tab="overview">Overview</button>
-<button data-tab="cashbook">Cash Book</button>
-<button data-tab="budget">Budget</button>
-<button data-tab="operations">Operations</button>
-<button data-tab="health">Business Health</button>
-<button data-tab="datasets">Data Register</button>
+ <button class="active" data-tab="overview">Overview</button><button data-tab="cashbook">Cash Book</button><button data-tab="budget">Budget</button><button data-tab="operations">Operations</button><button data-tab="health">Business Health</button><button data-tab="datasets">Data Register</button>
 </nav>
-
 <section id="overview" class="panel active">
-<div class="cols">
-<div class="card">
-<h2>Recent Cash Book Entries</h2>
-<div class="tablewrap">
-<table>
-<thead><tr><th>Date</th><th>Details</th><th>Side</th><th>Account</th><th class="num">Amount</th></tr></thead>
-<tbody id="recent"></tbody>
-</table>
-</div>
-</div>
-<div class="card">
-<h2>Accounting Principles</h2>
-<p class="muted">Capital is not sales revenue. Drawings are not operating expenses. Allocated funds are not expenses until spent. Unverified figures must remain flagged.</p>
-<h2>Management Routine</h2>
-<p class="muted">Daily: record transactions.<br>Weekly: review budgets and inventory.<br>Monthly: prepare reports and assess performance.</p>
-</div>
-</div>
+ <div class="cols">
+  <div class="card"><h2>Recent Cash Book Entries</h2><div class="tablewrap"><table><thead><tr><th>Date</th><th>Details</th><th>Side</th><th>Account</th><th class="num">Amount</th></tr></thead><tbody id="recent"></tbody></table></div></div>
+  <div class="card"><h2>Accounting Principles</h2><p class="muted">Capital is not sales revenue. Drawings are not operating expenses. Allocated funds are not expenses until spent. Unverified figures must remain flagged.</p><h2>Management Routine</h2><p class="muted">Daily: record transactions.<br>Weekly: review budgets and inventory.<br>Monthly: prepare reports and assess performance.</p></div>
+ </div>
 </section>
-
 <section id="cashbook" class="panel">
-<div class="card" style="margin-bottom:12px">
-<h2>Enter Cash Book Item</h2>
-<form id="cbform">
-<label>Date<input type="date" id="cbdate" required></label>
-<label>Entry side<select id="side"><option value="receipt">Receipts (Debit)</option><option value="payment">Payments (Credit)</option></select></label>
-<label>Details<input id="details" required placeholder="e.g. Cash sales / Materials purchased"></label>
-<label>Folio<input id="folio" placeholder="Ledger reference"></label>
-<label>Account column<select id="account"><option value="cash">Cash</option><option value="bank">Bank</option></select></label>
-<label>Amount (K)<input type="number" id="cbamount" min="0.01" step="0.01" required></label>
-<label>Category<input id="category" list="cashCategories" placeholder="e.g. Materials" required></label>
-<label>Budget item (optional)<select id="budgetItem"><option value="">Not linked to a budget item</option></select></label>
-<label>Verification status<select id="status"><option>Unverified</option><option>Verified</option><option>Reconstructed</option><option>Pending confirmation</option></select></label>
-<button type="submit">Add Cash Book Entry</button>
-</form>
-<div class="actions"><button type="button" class="secondary" id="contraBtn">Record Contra Entry</button></div>
-<p class="muted form-note">Use the Cash or Bank column according to where the money was received or paid. A contra entry records a transfer between cash and bank.</p>
-</div>
-
-<div class="cashbook-grid">
-<div class="card" style="padding:0;overflow:hidden">
-<div class="ledger-title">RECEIPTS — DEBIT SIDE</div>
-<div class="ledger-subtitle">Money received into Cash and/or Bank</div>
-<div class="tablewrap">
-<table class="ledger-table">
-<thead>
-<tr><th rowspan="2">Date</th><th rowspan="2">Details</th><th rowspan="2">Folio</th><th colspan="2" class="money-head">Amount (K)</th></tr>
-<tr><th class="num">Cash</th><th class="num">Bank</th></tr>
-</thead>
-<tbody id="receiptRows"></tbody>
-<tfoot><tr><td colspan="3">Total receipts</td><td class="num" id="receiptCashTotal">K0.00</td><td class="num" id="receiptBankTotal">K0.00</td></tr></tfoot>
-</table>
-</div>
-</div>
-
-<div class="card" style="padding:0;overflow:hidden">
-<div class="ledger-title">PAYMENTS — CREDIT SIDE</div>
-<div class="ledger-subtitle">Money paid from Cash and/or Bank</div>
-<div class="tablewrap">
-<table class="ledger-table">
-<thead>
-<tr><th rowspan="2">Date</th><th rowspan="2">Details</th><th rowspan="2">Folio</th><th colspan="2" class="money-head">Amount (K)</th></tr>
-<tr><th class="num">Cash</th><th class="num">Bank</th></tr>
-</thead>
-<tbody id="paymentRows"></tbody>
-<tfoot><tr><td colspan="3">Total payments</td><td class="num" id="paymentCashTotal">K0.00</td><td class="num" id="paymentBankTotal">K0.00</td></tr></tfoot>
-</table>
-</div>
-</div>
-</div>
-
-<div class="balance-strip">
-<div class="card"><small class="muted">Cash balance</small><h2 id="cashBalance">K0.00</h2></div>
-<div class="card"><small class="muted">Bank balance</small><h2 id="bankBalance">K0.00</h2></div>
-</div>
-<p class="muted">Balances shown are calculated from recorded receipts less payments. Opening balances are currently zero. Contra entries are marked “C” in the folio column.</p>
-
-<div class="card" style="margin-top:12px">
-<h2>Entry Register &amp; Verification</h2>
-<div class="tablewrap">
-<table>
-<thead><tr><th>Date</th><th>Details</th><th>Folio</th><th>Side</th><th>Account</th><th class="num">Amount</th><th>Category</th><th>Status</th></tr></thead>
-<tbody id="allRows"></tbody>
-</table>
-</div>
-<p class="muted" id="count"></p>
-</div>
+ <div class="card" style="margin-bottom:12px">
+  <h2>Enter Cash Book Item</h2>
+  <form id="cbform">
+   <label>Date<input type="date" id="cbdate" required></label>
+   <label>Entry side<select id="side"><option value="receipt">Receipts (Debit)</option><option value="payment">Payments (Credit)</option></select></label>
+   <label>Details<input id="details" required placeholder="e.g. Cash sales / Materials purchased"></label>
+   <label>Folio<input id="folio" placeholder="Ledger reference"></label>
+   <label>Account column<select id="account"><option value="cash">Cash</option><option value="bank">Bank</option></select></label>
+   <label>Amount (K)<input type="number" id="cbamount" min="0.01" step="0.01" required></label>
+   <label>Category<input id="category" list="cashCategories" placeholder="e.g. Materials" required></label>
+   <label>Budget item (optional)<select id="budgetItem"><option value="">Not linked to a budget item</option></select></label>
+   <label>Verification status<select id="status"><option>Unverified</option><option>Verified</option><option>Reconstructed</option><option>Pending confirmation</option></select></label>
+   <button type="submit">Add Cash Book Entry</button>
+  </form>
+  <div class="actions"><button type="button" class="secondary" id="contraBtn">Record Contra Entry</button></div>
+  <p class="muted form-note">Use the Cash or Bank column according to where the money was received or paid. A contra entry records a transfer between cash and bank.</p>
+ </div>
+ <div class="cashbook-grid">
+  <div class="card" style="padding:0;overflow:hidden">
+   <div class="ledger-title">RECEIPTS — DEBIT SIDE</div><div class="ledger-subtitle">Money received into Cash and/or Bank</div>
+   <div class="tablewrap"><table class="ledger-table"><thead><tr><th rowspan="2">Date</th><th rowspan="2">Details</th><th rowspan="2">Folio</th><th colspan="2" class="money-head">Amount (K)</th></tr><tr><th class="num">Cash</th><th class="num">Bank</th></tr></thead><tbody id="receiptRows"></tbody><tfoot><tr><td colspan="3">Total receipts</td><td class="num" id="receiptCashTotal">K0.00</td><td class="num" id="receiptBankTotal">K0.00</td></tr></tfoot></table></div>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+   <div class="ledger-title">PAYMENTS — CREDIT SIDE</div><div class="ledger-subtitle">Money paid from Cash and/or Bank</div>
+   <div class="tablewrap"><table class="ledger-table"><thead><tr><th rowspan="2">Date</th><th rowspan="2">Details</th><th rowspan="2">Folio</th><th colspan="2" class="money-head">Amount (K)</th></tr><tr><th class="num">Cash</th><th class="num">Bank</th></tr></thead><tbody id="paymentRows"></tbody><tfoot><tr><td colspan="3">Total payments</td><td class="num" id="paymentCashTotal">K0.00</td><td class="num" id="paymentBankTotal">K0.00</td></tr></tfoot></table></div>
+  </div>
+ </div>
+ <div class="balance-strip">
+  <div class="card"><small class="muted">Cash balance</small><h2 id="cashBalance">K0.00</h2></div>
+  <div class="card"><small class="muted">Bank balance</small><h2 id="bankBalance">K0.00</h2></div>
+ </div>
+ <p class="muted">Balances shown are calculated from recorded receipts less payments. Opening balances are currently zero. Contra entries are marked “C” in the folio column.</p>
+ <div class="card" style="margin-top:12px"><h2>Entry Register &amp; Verification</h2><div class="tablewrap"><table><thead><tr><th>Date</th><th>Details</th><th>Folio</th><th>Side</th><th>Account</th><th class="num">Amount</th><th>Category</th><th>Status</th></tr></thead><tbody id="allRows"></tbody></table></div><p class="muted" id="count"></p></div>
 </section>
-
-<datalist id="cashCategories"></datalist>
-<datalist id="budgetCategories"></datalist>
-
+<datalist id="cashCategories"></datalist><datalist id="budgetCategories"></datalist>
 <section id="budget" class="panel">
-<div class="cols">
-<div class="card">
-<h2>Add Budget Item</h2>
-<form id="budgetform">
-<label>Category<input id="bcat" list="budgetCategories" placeholder="e.g. Materials" required></label>
-<label>Specific item<input id="bitem" placeholder="e.g. Printing paper" required></label>
-<label>Budget amount (K)<input type="number" id="bamount" min="0.01" step="0.01" required></label>
-<button type="submit">Add Budget Item</button>
-</form>
-<p class="muted">Enter your own categories and specific items. You can add multiple items under the same category.</p>
-</div>
-<div class="card">
-<h2>Budget Items — Budget Versus Actual</h2>
-<div id="budgetrows"></div>
-</div>
-</div>
+ <div class="cols">
+  <div class="card"><h2>Add Budget Item</h2><form id="budgetform"><label>Category<input id="bcat" list="budgetCategories" placeholder="e.g. Materials" required></label><label>Specific item<input id="bitem" placeholder="e.g. Printing paper" required></label><label>Budget amount (K)<input type="number" id="bamount" min="0.01" step="0.01" required></label><button type="submit">Add Budget Item</button></form><p class="muted">Enter your own categories and specific items. You can add multiple items under the same category.</p></div>
+  <div class="card"><h2>Budget Items — Budget Versus Actual</h2><div id="budgetrows"></div></div>
+ </div>
 </section>
-
-<section id="operations" class="panel">
-<div class="cards">
-<div class="card"><h2>Sales &amp; Customers</h2><p class="muted">Track sales, enquiries, orders and repeat customers.</p></div>
-<div class="card"><h2>Inventory</h2><p class="muted">Track materials purchased, stock and usage.</p></div>
-<div class="card"><h2>Projects</h2><p class="muted">Track deliverables, deadlines and project budgets.</p></div>
-<div class="card"><h2>Marketing</h2><p class="muted">Plan content, campaigns and marketing results.</p></div>
-</div>
-<div class="card" style="margin-top:12px">
-<h2>Operational Targets</h2>
-<p class="muted">Future feature: set targets, planned amounts, actual spending, deadlines and progress.</p>
-</div>
+<section id="operations" class="panel"><div class="cards">
+ <div class="card"><h2>Sales &amp; Customers</h2><p class="muted">Track sales, enquiries, orders and repeat customers.</p></div>
+ <div class="card"><h2>Inventory</h2><p class="muted">Track materials purchased, stock and usage.</p></div>
+ <div class="card"><h2>Projects</h2><p class="muted">Track deliverables, deadlines and project budgets.</p></div>
+ <div class="card"><h2>Marketing</h2><p class="muted">Plan content, campaigns and marketing results.</p></div>
+ </div><div class="card" style="margin-top:12px"><h2>Operational Targets</h2><p class="muted">Future feature: set targets, planned amounts, actual spending, deadlines and progress.</p></div>
 </section>
-
-<section id="health" class="panel">
-<div class="cards">
-<div class="card"><h2>Financial Health</h2><p class="muted">Revenue, costs, profit and cash position.</p></div>
-<div class="card"><h2>Market Health</h2><p class="muted">Customer feedback, demand, competitors and pricing.</p></div>
-<div class="card"><h2>Operational Health</h2><p class="muted">Delivery, stock control and productivity.</p></div>
-<div class="card"><h2>Growth</h2><p class="muted">Customer acquisition and repeat sales.</p></div>
-</div>
-<div class="card" style="margin-top:12px">
-<h2>Corrective Action Tracker</h2>
-<p class="muted">Future feature: identify a problem, record an action, set a deadline and monitor the outcome.</p>
-</div>
+<section id="health" class="panel"><div class="cards">
+ <div class="card"><h2>Financial Health</h2><p class="muted">Revenue, costs, profit and cash position.</p></div>
+ <div class="card"><h2>Market Health</h2><p class="muted">Customer feedback, demand, competitors and pricing.</p></div>
+ <div class="card"><h2>Operational Health</h2><p class="muted">Delivery, stock control and productivity.</p></div>
+ <div class="card"><h2>Growth</h2><p class="muted">Customer acquisition and repeat sales.</p></div>
+ </div><div class="card" style="margin-top:12px"><h2>Corrective Action Tracker</h2><p class="muted">Future feature: identify a problem, record an action, set a deadline and monitor the outcome.</p></div>
 </section>
-
-<section id="datasets" class="panel">
-<div class="card">
-<h2>Historical Datasets &amp; Recovered Figures</h2>
-<p class="muted">Entries marked Reconstructed are transcribed from recovered conversation records, not independently checked against original source sheets. Summary figures are not added to the Cash Book to avoid double-counting.</p>
-<div class="tablewrap">
-<table>
-<thead><tr><th>Dataset</th><th>Period</th><th>Type</th><th>Status</th></tr></thead>
-<tbody>
-<tr><td>001 Household expenses</td><td>Oct–Nov 2024</td><td>Household</td><td>Reconciliation pending</td></tr>
-<tr><td>002 Personal expenses</td><td>Not specified</td><td>Personal</td><td>Period to confirm</td></tr>
-<tr><td>003 Financial reconstruction</td><td>27 Feb–14 Mar 2025</td><td>Personal &amp; business</td><td>Draft</td></tr>
-<tr><td>004 Car wash review</td><td>Jan–24 Nov 2024</td><td>Business operations</td><td>Incomplete records</td></tr>
-<tr><td>005 FD financial records</td><td>16 Aug–23 Nov 2024</td><td>Business accounts</td><td>Reconciliation pending</td></tr>
-<tr><td>006 Operations &amp; targets</td><td>To confirm</td><td>Expenses &amp; allocations</td><td>Classification pending</td></tr>
-<tr><td>007 Business management</td><td>Ongoing</td><td>Requirements</td><td>Captured</td></tr>
-<tr><td>008 Business health check</td><td>Ongoing</td><td>Performance framework</td><td>Captured</td></tr>
-</tbody>
-</table>
-</div>
-<p class="muted">Household and personal records are intentionally excluded from FD Innovations business accounts.</p>
-</div>
-
+<section id="datasets" class="panel"><div class="card"><h2>Historical Datasets &amp; Recovered Figures</h2><p class="muted">Entries marked Reconstructed are transcribed from recovered conversation records, not independently checked against original source sheets. Summary figures are not added to the Cash Book to avoid double-counting.</p><div class="tablewrap"><table><thead><tr><th>Dataset</th><th>Period</th><th>Type</th><th>Status</th></tr></thead><tbody>
+<tr><td>001 Household expenses</td><td>Oct–Nov 2024</td><td>Household</td><td>Reconciliation pending</td></tr><tr><td>002 Personal expenses</td><td>Not specified</td><td>Personal</td><td>Period to confirm</td></tr><tr><td>003 Financial reconstruction</td><td>27 Feb–14 Mar 2025</td><td>Personal &amp; business</td><td>Draft</td></tr><tr><td>004 Car wash review</td><td>Jan–24 Nov 2024</td><td>Business operations</td><td>Incomplete records</td></tr><tr><td>005 FD financial records</td><td>16 Aug–23 Nov 2024</td><td>Business accounts</td><td>Reconciliation pending</td></tr><tr><td>006 Operations &amp; targets</td><td>To confirm</td><td>Expenses &amp; allocations</td><td>Classification pending</td></tr><tr><td>007 Business management</td><td>Ongoing</td><td>Requirements</td><td>Captured</td></tr><tr><td>008 Business health check</td><td>Ongoing</td><td>Performance framework</td><td>Captured</td></tr>
+</tbody></table></div><p class="muted">Household and personal records are intentionally excluded from FD Innovations business accounts.</p></div>
 <div class="cards" style="margin-top:12px">
-<div class="card">
-<h2>FD Innovations · 16 Aug–23 Nov 2024</h2>
-<p>Reported sales: <strong>K3,903</strong></p>
-<p>Capital introduced: K913</p>
-<p>Labour: K338</p>
-<p>Chomba drawings: K263</p>
-<span class="tag">Summary — reconciliation pending</span>
-<p class="muted">These totals are not yet represented as individual dated Cash Book entries.</p>
-</div>
-
-<div class="card">
-<h2>Alternative trial balance · 30 Nov 2024</h2>
-<p>Debits: K1,787 · Credits: K5,116</p>
-<p>Capital: K1,213 · Sales: K3,903</p>
-<p>Expenses: K1,026 · Labour: K193</p>
-<p>Chomba: K263 · Clever: K305</p>
-<span class="tag">Separate reported snapshot — not merged</span>
-</div>
-
-<div class="card">
-<h2>Business reconstruction · 27 Feb–14 Mar 2025</h2>
-<p>Makozo printing (27 Feb): K600</p>
-<p>Makozo printing (7 Mar): K250</p>
-<p>Yango cash-in (date unavailable): K2,000</p>
-<p><strong>Reported business income: K2,850</strong></p>
-<p>Listed business expenses: K535 (dates not fully available)</p>
-<span class="tag">Partial transaction import</span>
-<p class="muted">The eight listed expense amounts total K535. The earlier reconstructed expense list needs source verification before individual dated posting.</p>
-</div>
-
-<div class="card">
-<h2>Car wash · earlier reported phase</h2>
-<p>Reported revenue: K1,018 from 21 cars</p>
-<p>Recorded labour since opening: K120</p>
-<p>ZESCO: K50 · Washing paste: K10 · Thread tape: K10</p>
-<p>Separate amount owed: K333</p>
-<span class="tag">Separate earlier record — not merged with Aug–Sep sales</span>
-</div>
-</div>
-</section>
-
+ <div class="card"><h2>FD Innovations · 16 Aug–23 Nov 2024</h2><p>Reported sales: <strong>K3,903</strong></p><p>Capital introduced: K913</p><p>Labour: K338</p><p>Chomba drawings: K263</p><span class="tag">Summary — reconciliation pending</span><p class="muted">These totals are not yet represented as individual dated Cash Book entries.</p></div>
+ <div class="card"><h2>Alternative trial balance · 30 Nov 2024</h2><p>Debits: K1,787 · Credits: K5,116</p><p>Capital: K1,213 · Sales: K3,903</p><p>Expenses: K1,026 · Labour: K193</p><p>Chomba: K263 · Clever: K305</p><span class="tag">Separate reported snapshot — not merged</span></div>
+ <div class="card"><h2>Business reconstruction · 27 Feb–14 Mar 2025</h2><p>Makozo printing (27 Feb): K600</p><p>Makozo printing (7 Mar): K250</p><p>Yango cash-in (date unavailable): K2,000</p><p><strong>Reported business income: K2,850</strong></p><p>Listed business expenses: K535 (dates not fully available)</p><span class="tag">Partial transaction import</span><p class="muted">The separate Car Wash expense entries in the Cash Book total K923, while an earlier summary reported K963. The difference requires source verification. The Feb–Mar 2025 business reconstruction has a separate expense total of K535.</p></div>
+ <div class="card"><h2>Car wash · earlier reported phase</h2><p>Reported revenue: K1,018 from 21 cars</p><p>Recorded labour since opening: K120</p><p>ZESCO: K50 · Washing paste: K10 · Thread tape: K10</p><p>Separate amount owed: K333</p><span class="tag">Separate earlier record — not merged with Aug–Sep sales</span></div>
+</div></section>
 <div class="footer">FD Innovations · Finance &amp; Management Prototype · Not connected to secure online storage</div>
 </main>
-
 <script>
 const historicalEntries=[
-{id:1001,date:"2024-08-27",details:"[Car Wash] Sales — 4 cars",folio:"Historical",side:"receipt",account:"cash",amount:220,category:"Sales",status:"Reconstructed"},
-{id:1002,date:"2024-08-28",details:"[Car Wash] Sales — 1 car",folio:"Historical",side:"receipt",account:"cash",amount:40,category:"Sales",status:"Reconstructed"},
-{id:1003,date:"2024-08-30",details:"[Car Wash] Sales — 1 car",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
-{id:1004,date:"2024-08-31",details:"[Car Wash] Sales — 1 car",folio:"Historical",side:"receipt",account:"cash",amount:40,category:"Sales",status:"Reconstructed"},
-{id:1005,date:"2024-09-01",details:"[Car Wash] Sales — 5 cars",folio:"Historical",side:"receipt",account:"cash",amount:180,category:"Sales",status:"Reconstructed"},
-{id:1006,date:"2024-09-02",details:"[Car Wash] Sales — 1 car",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
-{id:1007,date:"2024-09-03",details:"[Car Wash] Sales — 1 car",folio:"Historical",side:"receipt",account:"cash",amount:60,category:"Sales",status:"Reconstructed"},
-{id:1008,date:"2024-09-06",details:"[Car Wash] Sales — 2 cars",folio:"Historical",side:"receipt",account:"cash",amount:88,category:"Sales",status:"Reconstructed"},
-{id:1009,date:"2024-09-07",details:"[Car Wash] Sales — 2 cars",folio:"Historical",side:"receipt",account:"cash",amount:80,category:"Sales",status:"Reconstructed"},
-{id:1010,date:"2024-09-08",details:"[Car Wash] Sales — 2 cars",folio:"Historical",side:"receipt",account:"cash",amount:80,category:"Sales",status:"Reconstructed"},
-{id:1011,date:"2024-09-09",details:"[Car Wash] Sales — 1 car",folio:"Historical",side:"receipt",account:"cash",amount:40,category:"Sales",status:"Reconstructed"},
-{id:1012,date:"2024-09-10",details:"[Car Wash] Sales — 1 car",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
-
-{id:1020,date:"2024-08-16",details:"[Car Wash] Black paint",folio:"Historical",side:"payment",account:"cash",amount:120,category:"Materials",status:"Reconstructed"},
-{id:1021,date:"2024-08-16",details:"[Car Wash] Paint brushes",folio:"Historical",side:"payment",account:"cash",amount:45,category:"Materials",status:"Reconstructed"},
-{id:1022,date:"2024-08-16",details:"[Car Wash] Thinners",folio:"Historical",side:"payment",account:"cash",amount:35,category:"Materials",status:"Reconstructed"},
-{id:1023,date:"2024-08-26",details:"[Car Wash] Sheen x2",folio:"Historical",side:"payment",account:"cash",amount:110,category:"Materials",status:"Reconstructed"},
-{id:1024,date:"2024-08-26",details:"[Car Wash] Boom",folio:"Historical",side:"payment",account:"cash",amount:30,category:"Materials",status:"Reconstructed"},
-{id:1025,date:"2024-09-01",details:"[Car Wash] Hacksaw",folio:"Historical",side:"payment",account:"cash",amount:45,category:"Equipment",status:"Reconstructed"},
-{id:1026,date:"2024-09-01",details:"[Car Wash] Spray paint",folio:"Historical",side:"payment",account:"cash",amount:43,category:"Materials",status:"Reconstructed"},
-{id:1027,date:"2024-09-01",details:"[Car Wash] Thread tape",folio:"Historical",side:"payment",account:"cash",amount:10,category:"Materials",status:"Reconstructed"},
-{id:1028,date:"2024-09-01",details:"[Car Wash] Fuel",folio:"Historical",side:"payment",account:"cash",amount:70,category:"Transport",status:"Reconstructed"},
-{id:1029,date:"2024-09-01",details:"[Car Wash] Labour",folio:"Historical",side:"payment",account:"cash",amount:50,category:"Labour",status:"Reconstructed"},
-{id:1030,date:"2024-09-06",details:"[Car Wash] Labour",folio:"Historical",side:"payment",account:"cash",amount:30,category:"Labour",status:"Reconstructed"},
-{id:1031,date:"2024-09-07",details:"[Car Wash] Labour",folio:"Historical",side:"payment",account:"cash",amount:20,category:"Labour",status:"Reconstructed"},
-{id:1032,date:"2024-09-07",details:"[Car Wash] ZESCO",folio:"Historical",side:"payment",account:"cash",amount:50,category:"Utilities",status:"Reconstructed"},
-{id:1033,date:"2024-09-08",details:"[Car Wash] Boom",folio:"Historical",side:"payment",account:"cash",amount:10,category:"Materials",status:"Reconstructed"},
-{id:1034,date:"2024-09-08",details:"[Car Wash] Labour",folio:"Historical",side:"payment",account:"cash",amount:20,category:"Labour",status:"Reconstructed"},
-{id:1035,date:"2024-09-18",details:"[Car Wash] Labour — Mwansa Sydney",folio:"Historical",side:"payment",account:"cash",amount:23,category:"Labour",status:"Reconstructed"},
-{id:1036,date:"2024-09-30",details:"[Car Wash] Sheen",folio:"Historical",side:"payment",account:"cash",amount:62,category:"Materials",status:"Reconstructed"},
-{id:1037,date:"2024-09-30",details:"[Car Wash] Pine gel",folio:"Historical",side:"payment",account:"cash",amount:40,category:"Materials",status:"Reconstructed"},
-{id:1038,date:"2024-09-30",details:"[Car Wash] Labour",folio:"Historical",side:"payment",account:"cash",amount:50,category:"Labour",status:"Reconstructed"},
-{id:1039,date:"2024-09-30",details:"[Car Wash] Transport",folio:"Historical",side:"payment",account:"cash",amount:50,category:"Transport",status:"Reconstructed"},
-{id:1040,date:"2024-09-30",details:"[Car Wash] Sugar",folio:"Historical",side:"payment",account:"cash",amount:10,category:"Other",status:"Reconstructed"},
-
-{id:1050,date:"2025-02-27",details:"[FD Innovations] Makozo — sweatshirt printing",folio:"Historical",side:"receipt",account:"cash",amount:600,category:"Sales",status:"Reconstructed"},
-{id:1051,date:"2025-03-07",details:"[FD Innovations] Makozo — sweatshirt printing",folio:"Historical",side:"receipt",account:"cash",amount:250,category:"Sales",status:"Reconstructed"}
+ // Car wash sales register: 27 August–10 September 2024 (22 cars; K958).
+ {id:1001,date:"2024-08-27",details:"[Car Wash] Sales — 4 cars",folio:"Historical",side:"receipt",account:"cash",amount:220,category:"Sales",status:"Reconstructed"},
+ {id:1002,date:"2024-08-28",details:"[Car Wash] Sales — 1 car",folio:"Historical",side:"receipt",account:"cash",amount:40,category:"Sales",status:"Reconstructed"},
+ {id:1003,date:"2024-08-30",details:"[Car Wash] Sales — 1 car",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ {id:1004,date:"2024-08-31",details:"[Car Wash] Sales — 1 car",folio:"Historical",side:"receipt",account:"cash",amount:40,category:"Sales",status:"Reconstructed"},
+ {id:1005,date:"2024-09-01",details:"[Car Wash] Sales — 5 cars",folio:"Historical",side:"receipt",account:"cash",amount:180,category:"Sales",status:"Reconstructed"},
+ {id:1006,date:"2024-09-02",details:"[Car Wash] Sales — 1 car",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ {id:1007,date:"2024-09-03",details:"[Car Wash] Sales — 1 car",folio:"Historical",side:"receipt",account:"cash",amount:60,category:"Sales",status:"Reconstructed"},
+ {id:1008,date:"2024-09-06",details:"[Car Wash] Sales — 2 cars",folio:"Historical",side:"receipt",account:"cash",amount:88,category:"Sales",status:"Reconstructed"},
+ {id:1009,date:"2024-09-07",details:"[Car Wash] Sales — 2 cars",folio:"Historical",side:"receipt",account:"cash",amount:80,category:"Sales",status:"Reconstructed"},
+ {id:1010,date:"2024-09-08",details:"[Car Wash] Sales — 2 cars",folio:"Historical",side:"receipt",account:"cash",amount:80,category:"Sales",status:"Reconstructed"},
+ {id:1011,date:"2024-09-09",details:"[Car Wash] Sales — 1 car",folio:"Historical",side:"receipt",account:"cash",amount:40,category:"Sales",status:"Reconstructed"},
+ {id:1012,date:"2024-09-10",details:"[Car Wash] Sales — 1 car",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ // Car wash expenses. Dates/descriptions retained as available in the recovered record.
+ {id:1020,date:"2024-08-16",details:"[Car Wash] Black paint",folio:"Historical",side:"payment",account:"cash",amount:120,category:"Materials",status:"Reconstructed"},
+ {id:1021,date:"2024-08-16",details:"[Car Wash] Paint brushes",folio:"Historical",side:"payment",account:"cash",amount:45,category:"Materials",status:"Reconstructed"},
+ {id:1022,date:"2024-08-16",details:"[Car Wash] Thinners",folio:"Historical",side:"payment",account:"cash",amount:35,category:"Materials",status:"Reconstructed"},
+ {id:1023,date:"2024-08-26",details:"[Car Wash] Sheen x2",folio:"Historical",side:"payment",account:"cash",amount:110,category:"Materials",status:"Reconstructed"},
+ {id:1024,date:"2024-08-26",details:"[Car Wash] Boom",folio:"Historical",side:"payment",account:"cash",amount:30,category:"Materials",status:"Reconstructed"},
+ {id:1025,date:"2024-09-01",details:"[Car Wash] Hacksaw",folio:"Historical",side:"payment",account:"cash",amount:45,category:"Equipment",status:"Reconstructed"},
+ {id:1026,date:"2024-09-01",details:"[Car Wash] Spray paint",folio:"Historical",side:"payment",account:"cash",amount:43,category:"Materials",status:"Reconstructed"},
+ {id:1027,date:"2024-09-01",details:"[Car Wash] Thread tape",folio:"Historical",side:"payment",account:"cash",amount:10,category:"Materials",status:"Reconstructed"},
+ {id:1028,date:"2024-09-01",details:"[Car Wash] Fuel",folio:"Historical",side:"payment",account:"cash",amount:70,category:"Transport",status:"Reconstructed"},
+ {id:1029,date:"2024-09-01",details:"[Car Wash] Labour",folio:"Historical",side:"payment",account:"cash",amount:50,category:"Labour",status:"Reconstructed"},
+ {id:1030,date:"2024-09-06",details:"[Car Wash] Labour",folio:"Historical",side:"payment",account:"cash",amount:30,category:"Labour",status:"Reconstructed"},
+ {id:1031,date:"2024-09-07",details:"[Car Wash] Labour",folio:"Historical",side:"payment",account:"cash",amount:20,category:"Labour",status:"Reconstructed"},
+ {id:1032,date:"2024-09-07",details:"[Car Wash] ZESCO",folio:"Historical",side:"payment",account:"cash",amount:50,category:"Utilities",status:"Reconstructed"},
+ {id:1033,date:"2024-09-08",details:"[Car Wash] Boom",folio:"Historical",side:"payment",account:"cash",amount:10,category:"Materials",status:"Reconstructed"},
+ {id:1034,date:"2024-09-08",details:"[Car Wash] Labour",folio:"Historical",side:"payment",account:"cash",amount:20,category:"Labour",status:"Reconstructed"},
+ {id:1035,date:"2024-09-18",details:"[Car Wash] Labour — Mwansa Sydney",folio:"Historical",side:"payment",account:"cash",amount:23,category:"Labour",status:"Reconstructed"},
+ {id:1036,date:"2024-09-30",details:"[Car Wash] Sheen",folio:"Historical",side:"payment",account:"cash",amount:62,category:"Materials",status:"Reconstructed"},
+ {id:1037,date:"2024-09-30",details:"[Car Wash] Pine gel",folio:"Historical",side:"payment",account:"cash",amount:40,category:"Materials",status:"Reconstructed"},
+ {id:1038,date:"2024-09-30",details:"[Car Wash] Labour",folio:"Historical",side:"payment",account:"cash",amount:50,category:"Labour",status:"Reconstructed"},
+ {id:1039,date:"2024-09-30",details:"[Car Wash] Transport",folio:"Historical",side:"payment",account:"cash",amount:50,category:"Transport",status:"Reconstructed"},
+ {id:1040,date:"2024-09-30",details:"[Car Wash] Sugar",folio:"Historical",side:"payment",account:"cash",amount:10,category:"Other",status:"Reconstructed"},
+ // Business reconstruction: dated Makozo printing receipts only.
+ {id:1050,date:"2025-02-27",details:"[FD Innovations] Makozo — sweatshirt printing",folio:"Historical",side:"receipt",account:"cash",amount:600,category:"Sales",status:"Reconstructed"},
+ {id:1051,date:"2025-03-07",details:"[FD Innovations] Makozo — sweatshirt printing",folio:"Historical",side:"receipt",account:"cash",amount:250,category:"Sales",status:"Reconstructed"}
 ];
-
-function loadEntries(){
- const saved=localStorage.getItem("fd_cashbook");
- if(saved){
-  try{
-   const parsed=JSON.parse(saved);
-   if(Array.isArray(parsed)&&parsed.length&&parsed.every(x=>x.status==="Demonstration"))return historicalEntries.map(x=>({...x}));
-   return parsed;
-  }catch(e){}
- }
- const old=localStorage.getItem("fd_tx");
- if(old){
-  try{
-   return JSON.parse(old).filter(x=>["Income","Expense","Capital","Drawing"].includes(x.type)).map((x,i)=>({
-    id:Date.now()+i,date:x.date,details:x.description||"Migrated entry",folio:"",side:["Income","Capital"].includes(x.type)?"receipt":"payment",account:"cash",amount:Number(x.amount)||0,category:x.category||"Other",status:x.status||"Unverified"
-   }));
-  }catch(e){}
- }
- return historicalEntries.map(x=>({...x}));
+function entryKey(x){
+ return [x.date||"",x.details||"",x.side||"",x.account||"",Number(x.amount||0),x.category||""].join("|").toLowerCase();
 }
-
+function loadEntries(){
+ let saved=[];
+ try{
+  const raw=localStorage.getItem("fd_cashbook");
+  const parsed=raw?JSON.parse(raw):[];
+  if(Array.isArray(parsed)) saved=parsed.filter(x=>x && typeof x==="object");
+ }catch(e){ console.warn("Could not read saved Cash Book; using recovered history.",e); }
+ // Merge imported history into saved records. Keep user-entered entries and avoid duplicates.
+ const keys=new Set(saved.map(entryKey));
+ const merged=saved.filter(x=>x.status!=="Demonstration");
+ historicalEntries.forEach(x=>{
+  const key=entryKey(x);
+  if(!keys.has(key)){ merged.push({...x}); keys.add(key); }
+ });
+ // Migrate the old transaction register only when there are no saved Cash Book entries.
+ if(merged.length===0){
+  try{
+   const old=localStorage.getItem("fd_tx");
+   if(old){
+    const migrated=JSON.parse(old).filter(x=>["Income","Expense","Capital","Drawing"].includes(x.type)).map((x,i)=>({
+     id:Date.now()+i,date:x.date,details:x.description||"Migrated entry",folio:"",side:["Income","Capital"].includes(x.type)?"receipt":"payment",account:"cash",amount:Number(x.amount)||0,category:x.category||"Other",status:x.status||"Unverified"
+    }));
+    migrated.forEach(x=>merged.push(x));
+   }
+  }catch(e){ console.warn("Could not migrate earlier transaction register.",e); }
+ }
+ return merged;
+}
 let entries=loadEntries();
 let budgets=JSON.parse(localStorage.getItem("fd_budgets")||"null")||[];
+// Upgrade older category-only budgets without losing their saved amounts.
 budgets=budgets.map((b,i)=>({...b,id:b.id||("b-"+(i+1)),item:b.item||("General "+String(b.category||"budget").toLowerCase())}));
-
 const cash=n=>"K"+Number(n||0).toLocaleString("en-ZM",{minimumFractionDigits:2,maximumFractionDigits:2});
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-
-function save(){
- localStorage.setItem("fd_cashbook",JSON.stringify(entries));
- localStorage.setItem("fd_budgets",JSON.stringify(budgets));
-}
-
-function sum(side,account){
- return entries.filter(x=>x.side===side&&x.account===account).reduce((a,x)=>a+Number(x.amount||0),0);
-}
-
-function rowHTML(x){
- return `<tr><td>${esc(x.date)}</td><td>${esc(x.details)}</td><td>${esc(x.folio||"")}</td><td class="num">${x.account==="cash"?cash(x.amount):"—"}</td><td class="num">${x.account==="bank"?cash(x.amount):"—"}</td></tr>`;
-}
-
+function save(){localStorage.setItem("fd_cashbook",JSON.stringify(entries));localStorage.setItem("fd_budgets",JSON.stringify(budgets))}
+function sum(side,account){return entries.filter(x=>x.side===side&&x.account===account).reduce((a,x)=>a+Number(x.amount||0),0)}
+function rowHTML(x){return `<tr><td>${esc(x.date)}</td><td>${esc(x.details)}</td><td>${esc(x.folio||"")}</td><td class="num">${x.account==="cash"?cash(x.amount):"—"}</td><td class="num">${x.account==="bank"?cash(x.amount):"—"}</td></tr>`}
 function render(){
  const receipts=entries.filter(x=>x.side==="receipt").sort((a,b)=>a.date.localeCompare(b.date)||a.id-b.id);
  const payments=entries.filter(x=>x.side==="payment").sort((a,b)=>a.date.localeCompare(b.date)||a.id-b.id);
- const receiptTotal=receipts.reduce((s,x)=>s+x.amount,0);
- const paymentTotal=payments.reduce((s,x)=>s+x.amount,0);
-
+ const receiptTotal=receipts.reduce((s,x)=>s+x.amount,0),paymentTotal=payments.reduce((s,x)=>s+x.amount,0);
  document.getElementById("income").textContent=cash(receiptTotal);
  document.getElementById("expenses").textContent=cash(paymentTotal);
  document.getElementById("net").textContent=cash(receiptTotal-paymentTotal);
-
- document.getElementById("remaining").textContent=cash(
-  budgets.reduce((s,x)=>s+x.amount,0)-
-  budgets.reduce((s,b)=>s+entries.filter(t=>t.side==="payment"&&t.budgetItemId===b.id).reduce((a,t)=>a+Number(t.amount||0),0),0)
- );
-
+ document.getElementById("remaining").textContent=cash(budgets.reduce((s,x)=>s+x.amount,0)-budgets.reduce((s,b)=>s+entries.filter(t=>t.side==="payment"&&t.budgetItemId===b.id).reduce((a,t)=>a+Number(t.amount||0),0),0));
  document.getElementById("receiptRows").innerHTML=receipts.map(rowHTML).join("");
  document.getElementById("paymentRows").innerHTML=payments.map(rowHTML).join("");
-
  document.getElementById("receiptCashTotal").textContent=cash(sum("receipt","cash"));
  document.getElementById("receiptBankTotal").textContent=cash(sum("receipt","bank"));
  document.getElementById("paymentCashTotal").textContent=cash(sum("payment","cash"));
  document.getElementById("paymentBankTotal").textContent=cash(sum("payment","bank"));
-
  document.getElementById("cashBalance").textContent=cash(sum("receipt","cash")-sum("payment","cash"));
  document.getElementById("bankBalance").textContent=cash(sum("receipt","bank")-sum("payment","bank"));
-
  const sorted=entries.slice().sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
-
- document.getElementById("recent").innerHTML=sorted.slice(0,5).map(x=>
-  `<tr><td>${esc(x.date)}</td><td>${esc(x.details)}</td><td>${x.side==="receipt"?"Receipt":"Payment"}</td><td>${x.account==="cash"?"Cash":"Bank"}</td><td class="num">${cash(x.amount)}</td></tr>`
- ).join("");
-
- document.getElementById("allRows").innerHTML=sorted.map(x=>
-  `<tr><td>${esc(x.date)}</td><td>${esc(x.details)}</td><td>${esc(x.folio||"")}</td><td>${x.side==="receipt"?"Receipt":"Payment"}</td><td>${x.account==="cash"?"Cash":"Bank"}</td><td class="num">${cash(x.amount)}</td><td>${esc(x.category)}</td><td>${esc(x.status)}</td></tr>`
- ).join("");
-
+ document.getElementById("recent").innerHTML=sorted.slice(0,5).map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(x.details)}</td><td>${x.side==="receipt"?"Receipt":"Payment"}</td><td>${x.account==="cash"?"Cash":"Bank"}</td><td class="num">${cash(x.amount)}</td></tr>`).join("");
+ document.getElementById("allRows").innerHTML=sorted.map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(x.details)}</td><td>${esc(x.folio||"")}</td><td>${x.side==="receipt"?"Receipt":"Payment"}</td><td>${x.account==="cash"?"Cash":"Bank"}</td><td class="num">${cash(x.amount)}</td><td>${esc(x.category)}</td><td>${esc(x.status)}</td></tr>`).join("");
  document.getElementById("count").textContent=entries.length+" cash book entries";
-
  const categoryNames=[...new Set([...budgets.map(b=>b.category),...entries.map(t=>t.category)].filter(Boolean))];
  document.getElementById("cashCategories").innerHTML=categoryNames.map(c=>`<option value="${esc(c)}"></option>`).join("");
  document.getElementById("budgetCategories").innerHTML=[...new Set(budgets.map(b=>b.category).filter(Boolean))].map(c=>`<option value="${esc(c)}"></option>`).join("");
-
- const itemSelect=document.getElementById("budgetItem");
- const selectedItem=itemSelect.value;
+ const itemSelect=document.getElementById("budgetItem"),selectedItem=itemSelect.value;
  itemSelect.innerHTML='<option value="">Not linked to a budget item</option>'+budgets.map(b=>`<option value="${esc(b.id)}">${esc(b.category)} — ${esc(b.item)}</option>`).join("");
  if(budgets.some(b=>b.id===selectedItem))itemSelect.value=selectedItem;
-
  document.getElementById("budgetrows").innerHTML=budgets.map(x=>{
   const actual=entries.filter(t=>t.side==="payment"&&t.budgetItemId===x.id).reduce((a,t)=>a+Number(t.amount||0),0);
-  const percent=x.amount?Math.min(100,actual/x.amount*100):0;
-  const remaining=x.amount-actual;
+  const percent=x.amount?Math.min(100,actual/x.amount*100):0,remaining=x.amount-actual;
   return `<div style="margin-bottom:18px"><strong>${esc(x.item)}</strong><div class="muted">${esc(x.category)}</div><span style="float:right">${cash(actual)} / ${cash(x.amount)}</span><div class="bar"><span style="width:${percent}%"></span></div><small>${remaining<0?"Over budget by "+cash(-remaining):"Remaining "+cash(remaining)} · ${x.amount?(actual/x.amount*100).toFixed(1):"0.0"}% used</small></div>`;
  }).join("")||'<p class="muted">No budget items added yet.</p>';
-
  document.getElementById("budgetrows").innerHTML+='<p class="muted">Payments not linked to a budget item remain in the Cash Book but are not included in an individual item’s actual expenditure.</p>';
 }
-
 document.querySelectorAll("nav button").forEach(button=>button.addEventListener("click",()=>{
  document.querySelectorAll("nav button,.panel").forEach(x=>x.classList.remove("active"));
- button.classList.add("active");
- document.getElementById(button.dataset.tab).classList.add("active");
+ button.classList.add("active");document.getElementById(button.dataset.tab).classList.add("active");
 }));
-
 document.getElementById("budgetItem").addEventListener("change",e=>{
  const item=budgets.find(b=>b.id===e.target.value);
  if(item)document.getElementById("category").value=item.category;
 });
-
 document.getElementById("cbform").addEventListener("submit",e=>{
  e.preventDefault();
  const amount=Number(document.getElementById("cbamount").value);
  if(!(amount>0)){alert("Enter an amount greater than zero.");return}
-
- const side=document.getElementById("side").value;
- const budgetItemId=side==="payment"?document.getElementById("budgetItem").value:"";
+ const side=document.getElementById("side").value,budgetItemId=side==="payment"?document.getElementById("budgetItem").value:"";
  const chosenBudget=budgets.find(b=>b.id===budgetItemId);
-
- entries.push({
-  id:Date.now(),
-  date:document.getElementById("cbdate").value,
-  details:document.getElementById("details").value.trim(),
-  folio:document.getElementById("folio").value.trim(),
-  side,
-  account:document.getElementById("account").value,
-  amount,
-  category:chosenBudget?chosenBudget.category:document.getElementById("category").value.trim(),
-  budgetItemId,
-  status:document.getElementById("status").value
- });
-
- save();
- render();
- e.target.reset();
- document.getElementById("cbdate").value=new Date().toLocaleDateString("en-CA");
+ entries.push({id:Date.now(),date:document.getElementById("cbdate").value,details:document.getElementById("details").value.trim(),folio:document.getElementById("folio").value.trim(),side,account:document.getElementById("account").value,amount,category:chosenBudget?chosenBudget.category:document.getElementById("category").value.trim(),budgetItemId,status:document.getElementById("status").value});
+ save();render();e.target.reset();document.getElementById("cbdate").value=new Date().toLocaleDateString("en-CA");
 });
-
 document.getElementById("contraBtn").addEventListener("click",()=>{
- const date=prompt("Date of transfer (YYYY-MM-DD):",new Date().toLocaleDateString("en-CA"));
- if(!date)return;
+ const date=prompt("Date of transfer (YYYY-MM-DD):",new Date().toLocaleDateString("en-CA"));if(!date)return;
  if(!/^\d{4}-\d{2}-\d{2}$/.test(date)){alert("Please use YYYY-MM-DD.");return}
-
- const direction=prompt("Type CASH TO BANK or BANK TO CASH:","CASH TO BANK");
- if(!direction)return;
- const d=direction.trim().toUpperCase();
- if(!["CASH TO BANK","BANK TO CASH"].includes(d)){alert("Please enter CASH TO BANK or BANK TO CASH.");return}
-
- const amount=Number(prompt("Transfer amount (K):",""));
- if(!(amount>0)){alert("Enter a valid amount greater than zero.");return}
-
+ const direction=prompt("Type CASH TO BANK or BANK TO CASH:","CASH TO BANK");if(!direction)return;
+ const d=direction.trim().toUpperCase();if(!["CASH TO BANK","BANK TO CASH"].includes(d)){alert("Please enter CASH TO BANK or BANK TO CASH.");return}
+ const amount=Number(prompt("Transfer amount (K):",""));if(!(amount>0)){alert("Enter a valid amount greater than zero.");return}
  const details="Contra transfer: "+d.toLowerCase();
-
  if(d==="CASH TO BANK"){
   entries.push({id:Date.now(),date,details,folio:"C",side:"payment",account:"cash",amount,category:"Contra",status:"Verified"});
   entries.push({id:Date.now()+1,date,details,folio:"C",side:"receipt",account:"bank",amount,category:"Contra",status:"Verified"});
@@ -494,45 +286,31 @@ document.getElementById("contraBtn").addEventListener("click",()=>{
   entries.push({id:Date.now(),date,details,folio:"C",side:"payment",account:"bank",amount,category:"Contra",status:"Verified"});
   entries.push({id:Date.now()+1,date,details,folio:"C",side:"receipt",account:"cash",amount,category:"Contra",status:"Verified"});
  }
-
- save();
- render();
+ save();render();
 });
-
 document.getElementById("budgetform").addEventListener("submit",e=>{
- e.preventDefault();
- const category=document.getElementById("bcat").value.trim();
- const item=document.getElementById("bitem").value.trim();
- const amount=Number(document.getElementById("bamount").value);
-
+ e.preventDefault();const category=document.getElementById("bcat").value.trim(),item=document.getElementById("bitem").value.trim(),amount=Number(document.getElementById("bamount").value);
  if(!category||!item||!(amount>0)){alert("Enter a category, specific item and amount greater than zero.");return}
-
  budgets.push({id:"b-"+Date.now(),category,item,amount});
- save();
- render();
- e.target.reset();
+ save();render();e.target.reset();
 });
-
 document.getElementById("reset").addEventListener("click",()=>{
- if(confirm("Restore the imported historical entries? Any locally added entries will be replaced.")){
-  entries=historicalEntries.map(x=>({...x}));
-  save();
-  render();
- }
+ const before=entries.length;
+ const keys=new Set(entries.map(entryKey));
+ let added=0;
+ historicalEntries.forEach(x=>{
+  const key=entryKey(x);
+  if(!keys.has(key)){entries.push({...x});keys.add(key);added++;}
+ });
+ save();render();
+ alert(added?`Imported ${added} missing historical entries. Your existing Cash Book entries and budgets were preserved.`:`All ${historicalEntries.length} imported historical entries are already present. No records were changed.`);
 });
-
 document.getElementById("export").addEventListener("click",()=>{
  const data=[["Date","Details","Folio","Side","Cash/Bank","Amount","Category","Status"],...entries.map(x=>[x.date,x.details,x.folio,x.side,x.account,x.amount,x.category,x.status])];
  const csv=data.map(row=>row.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\n");
- const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});
- const url=URL.createObjectURL(blob);
- const link=document.createElement("a");
- link.href=url;
- link.download="fd-innovations-two-column-cash-book.csv";
- link.click();
- URL.revokeObjectURL(url);
+ const blob=new Blob([csv],{type:"text/csv;charset=utf-8"}),url=URL.createObjectURL(blob),link=document.createElement("a");
+ link.href=url;link.download="fd-innovations-two-column-cash-book.csv";link.click();URL.revokeObjectURL(url);
 });
-
 document.getElementById("cbdate").value=new Date().toLocaleDateString("en-CA");
 render();
 </script>
