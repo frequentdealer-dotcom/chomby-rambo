@@ -38,7 +38,8 @@ form button{grid-column:1/-1}
 .bar span{display:block;height:100%;background:var(--yellow)}
 .tag{background:#eee;border-radius:20px;padding:3px 8px;font-size:11px}
 .footer{text-align:center;color:var(--muted);font-size:11px;margin-top:30px}
-.cashbook-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+.cashbook-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start;min-width:0}
+.cashbook-grid>.card{min-width:0}
 .ledger-title{font-weight:800;background:#111;color:#fff;padding:10px;border-bottom:4px solid var(--yellow)}
 .ledger-subtitle{font-size:11px;color:var(--muted);padding:8px 10px;background:#fafafa}
 .ledger-table{min-width:590px}
@@ -49,7 +50,7 @@ form button{grid-column:1/-1}
 .balance-strip .card{padding:12px}
 .form-note{grid-column:1/-1}
 .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-@media(max-width:850px){.cashbook-grid{grid-template-columns:1fr}}
+@media(max-width:850px){.cashbook-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.ledger-title{font-size:12px;padding:8px}.ledger-subtitle{font-size:10px;padding:7px}.ledger-table{min-width:500px}}
 @media(max-width:720px){.cards{grid-template-columns:1fr 1fr}.cols{grid-template-columns:1fr}}
 @media(max-width:420px){form{grid-template-columns:1fr}.top h1{font-size:22px}}
 </style>
@@ -180,7 +181,58 @@ const historicalEntries=[
  {id:1040,date:"2024-09-30",details:"[Car Wash] Sugar",folio:"Historical",side:"payment",account:"cash",amount:10,category:"Other",status:"Reconstructed"},
  // Business reconstruction: dated Makozo printing receipts only.
  {id:1050,date:"2025-02-27",details:"[FD Innovations] Makozo — sweatshirt printing",folio:"Historical",side:"receipt",account:"cash",amount:600,category:"Sales",status:"Reconstructed"},
- {id:1051,date:"2025-03-07",details:"[FD Innovations] Makozo — sweatshirt printing",folio:"Historical",side:"receipt",account:"cash",amount:250,category:"Sales",status:"Reconstructed"}
+ {id:1051,date:"2025-03-07",details:"[FD Innovations] Makozo — sweatshirt printing",folio:"Historical",side:"receipt",account:"cash",amount:250,category:"Sales",status:"Reconstructed"},
+ // Car Wash October–November 2024 sales transcription. The invalid 31 November entry is kept undated.
+ {id:1060,date:"2024-10-30",details:"[Car Wash] Sales",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ {id:1061,date:"2024-11-01",details:"[Car Wash] Sales",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ {id:1062,date:"2024-11-02",details:"[Car Wash] Sales",folio:"Historical",side:"receipt",account:"cash",amount:35,category:"Sales",status:"Reconstructed"},
+ {id:1063,date:"2024-11-02",details:"[Car Wash] Sales",folio:"Historical",side:"receipt",account:"cash",amount:80,category:"Sales",status:"Reconstructed"},
+ {id:1064,date:"2024-11-04",details:"[Car Wash] Sales",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ {id:1065,date:"2024-11-05",details:"[Car Wash] Sales",folio:"Historical",side:"receipt",account:"cash",amount:25,category:"Sales",status:"Reconstructed"},
+ {id:1066,date:"2024-11-06",details:"[Car Wash] Sales",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ {id:1067,date:"2024-11-06",details:"[Car Wash] Sales — second entry",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ {id:1068,date:"2024-11-07",details:"[Car Wash] Sales",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ {id:1069,date:"2024-11-09",details:"[Car Wash] Sales",folio:"Historical",side:"receipt",account:"cash",amount:25,category:"Sales",status:"Reconstructed"},
+ {id:1070,date:"2024-11-09",details:"[Car Wash] Sales — second entry",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ {id:1071,date:"2024-11-09",details:"[Car Wash] Sales — third entry",folio:"Historical",side:"receipt",account:"cash",amount:25,category:"Sales",status:"Reconstructed"},
+ {id:1072,date:"2024-11-09",details:"[Car Wash] Sales — fourth entry",folio:"Historical",side:"receipt",account:"cash",amount:35,category:"Sales",status:"Reconstructed"},
+ {id:1073,date:"2024-11-10",details:"[Car Wash] Sales",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ {id:1074,date:"2024-11-11",details:"[Car Wash] Sales",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ {id:1075,date:"2024-11-15",details:"[Car Wash] Sales",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ {id:1076,date:"2024-11-18",details:"[Car Wash] Sales",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ {id:1077,date:"2024-11-19",details:"[Car Wash] Sales",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ {id:1078,date:"2024-11-20",details:"[Car Wash] Sales",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ {id:1079,date:"2024-11-20",details:"[Car Wash] Sales — second entry",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Reconstructed"},
+ {id:1080,date:"",details:"[Car Wash] Sales — source date recorded as 31 November 2024 (invalid date); amount retained undated",folio:"Historical",side:"receipt",account:"cash",amount:50,category:"Sales",status:"Pending confirmation"},
+ // Car Wash remittances to Chomba are recorded as drawings/payouts, not new sales.
+ {id:1090,date:"2024-09-01",details:"[Car Wash] Remittance to Chomba — drawings",folio:"Historical",side:"payment",account:"cash",amount:210,category:"Drawings",status:"Reconstructed"},
+ {id:1091,date:"2024-09-02",details:"[Car Wash] Remittance to Chomba — drawings",folio:"Historical",side:"payment",account:"cash",amount:60,category:"Drawings",status:"Reconstructed"},
+ {id:1092,date:"2024-09-03",details:"[Car Wash] Remittance to Chomba — drawings",folio:"Historical",side:"payment",account:"cash",amount:30,category:"Drawings",status:"Reconstructed"},
+ {id:1093,date:"2024-09-06",details:"[Car Wash] Remittance to Chomba — drawings",folio:"Historical",side:"payment",account:"cash",amount:43,category:"Drawings",status:"Reconstructed"},
+ {id:1094,date:"2024-09-07",details:"[Car Wash] Remittance to Chomba — drawings",folio:"Historical",side:"payment",account:"cash",amount:10,category:"Drawings",status:"Reconstructed"},
+ {id:1095,date:"2024-09-08",details:"[Car Wash] Remittance to Chomba — drawings",folio:"Historical",side:"payment",account:"cash",amount:10,category:"Drawings",status:"Reconstructed"},
+ {id:1096,date:"2024-09-09",details:"[Car Wash] Remittance to Chomba — drawings",folio:"Historical",side:"payment",account:"cash",amount:40,category:"Drawings",status:"Reconstructed"},
+ {id:1097,date:"2024-09-10",details:"[Car Wash] Remittance to Chomba — drawings",folio:"Historical",side:"payment",account:"cash",amount:50,category:"Drawings",status:"Reconstructed"},
+ {id:1098,date:"2024-09-14",details:"[Car Wash] Remittance to Chomba — drawings",folio:"Historical",side:"payment",account:"cash",amount:20,category:"Drawings",status:"Reconstructed"},
+ // Feb–March 2025 reconstruction: individual expenses, dates unavailable in the recovered record.
+ {id:1100,date:"",details:"[FD Innovations] Pens — date not recorded",folio:"Historical",side:"payment",account:"cash",amount:60,category:"Office supplies",status:"Reconstructed"},
+ {id:1101,date:"",details:"[FD Innovations] Stapler — date not recorded",folio:"Historical",side:"payment",account:"cash",amount:100,category:"Office supplies",status:"Reconstructed"},
+ {id:1102,date:"",details:"[FD Innovations] Staples — date not recorded",folio:"Historical",side:"payment",account:"cash",amount:35,category:"Office supplies",status:"Reconstructed"},
+ {id:1103,date:"",details:"[FD Innovations] Legs — date not recorded",folio:"Historical",side:"payment",account:"cash",amount:60,category:"Materials",status:"Reconstructed"},
+ {id:1104,date:"",details:"[FD Innovations] Screwdriver — date not recorded",folio:"Historical",side:"payment",account:"cash",amount:25,category:"Tools",status:"Reconstructed"},
+ {id:1105,date:"",details:"[FD Innovations] Screws — date not recorded",folio:"Historical",side:"payment",account:"cash",amount:15,category:"Materials",status:"Reconstructed"},
+ {id:1106,date:"",details:"[FD Innovations] Paint and brushes — date not recorded",folio:"Historical",side:"payment",account:"cash",amount:120,category:"Materials",status:"Reconstructed"},
+ {id:1107,date:"",details:"[FD Innovations] Gas/fuel — date not recorded",folio:"Historical",side:"payment",account:"cash",amount:120,category:"Fuel",status:"Reconstructed"},
+ // Yango cash-in: business receipt, date unavailable in recovered record.
+ {id:1110,date:"",details:"[FD Innovations] Yango cash-in — date not recorded",folio:"Historical",side:"receipt",account:"cash",amount:2000,category:"Business income",status:"Reconstructed"},
+ // Earlier Car Wash phase: aggregate receipt and individual payouts were separately reported.
+ {id:1120,date:"",details:"[Car Wash] Earlier phase sales — 21 cars; aggregate receipt, date not recorded",folio:"Historical summary",side:"receipt",account:"cash",amount:1018,category:"Sales",status:"Reconstructed"},
+ {id:1121,date:"",details:"[Car Wash] Earlier phase labour — date not recorded",folio:"Historical summary",side:"payment",account:"cash",amount:120,category:"Labour",status:"Reconstructed"},
+ {id:1122,date:"",details:"[Car Wash] Earlier phase ZESCO — date not recorded",folio:"Historical summary",side:"payment",account:"cash",amount:50,category:"Utilities",status:"Reconstructed"},
+ {id:1123,date:"",details:"[Car Wash] Earlier phase washing paste — date not recorded",folio:"Historical summary",side:"payment",account:"cash",amount:10,category:"Materials",status:"Reconstructed"},
+ {id:1124,date:"",details:"[Car Wash] Earlier phase thread tape — date not recorded",folio:"Historical summary",side:"payment",account:"cash",amount:10,category:"Materials",status:"Reconstructed"},
+ // FD Innovations capital introduced is a receipt, kept separate from sales.
+ {id:1125,date:"",details:"[FD Innovations] Capital introduced — reported aggregate, dates not recorded",folio:"Historical summary",side:"receipt",account:"cash",amount:913,category:"Capital",status:"Reconstructed"}
 ];
 function entryKey(x){
  return [x.date||"",x.details||"",x.side||"",x.account||"",Number(x.amount||0),x.category||""].join("|").toLowerCase();
@@ -221,7 +273,7 @@ const cash=n=>"K"+Number(n||0).toLocaleString("en-ZM",{minimumFractionDigits:2,m
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function save(){localStorage.setItem("fd_cashbook",JSON.stringify(entries));localStorage.setItem("fd_budgets",JSON.stringify(budgets))}
 function sum(side,account){return entries.filter(x=>x.side===side&&x.account===account).reduce((a,x)=>a+Number(x.amount||0),0)}
-function rowHTML(x){return `<tr><td>${esc(x.date)}</td><td>${esc(x.details)}</td><td>${esc(x.folio||"")}</td><td class="num">${x.account==="cash"?cash(x.amount):"—"}</td><td class="num">${x.account==="bank"?cash(x.amount):"—"}</td></tr>`}
+function rowHTML(x){return `<tr><td>${esc(x.date||"Undated")}</td><td>${esc(x.details)}</td><td>${esc(x.folio||"")}</td><td class="num">${x.account==="cash"?cash(x.amount):"—"}</td><td class="num">${x.account==="bank"?cash(x.amount):"—"}</td></tr>`}
 function render(){
  const receipts=entries.filter(x=>x.side==="receipt").sort((a,b)=>a.date.localeCompare(b.date)||a.id-b.id);
  const payments=entries.filter(x=>x.side==="payment").sort((a,b)=>a.date.localeCompare(b.date)||a.id-b.id);
@@ -239,8 +291,8 @@ function render(){
  document.getElementById("cashBalance").textContent=cash(sum("receipt","cash")-sum("payment","cash"));
  document.getElementById("bankBalance").textContent=cash(sum("receipt","bank")-sum("payment","bank"));
  const sorted=entries.slice().sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
- document.getElementById("recent").innerHTML=sorted.slice(0,5).map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(x.details)}</td><td>${x.side==="receipt"?"Receipt":"Payment"}</td><td>${x.account==="cash"?"Cash":"Bank"}</td><td class="num">${cash(x.amount)}</td></tr>`).join("");
- document.getElementById("allRows").innerHTML=sorted.map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(x.details)}</td><td>${esc(x.folio||"")}</td><td>${x.side==="receipt"?"Receipt":"Payment"}</td><td>${x.account==="cash"?"Cash":"Bank"}</td><td class="num">${cash(x.amount)}</td><td>${esc(x.category)}</td><td>${esc(x.status)}</td></tr>`).join("");
+ document.getElementById("recent").innerHTML=sorted.slice(0,5).map(x=>`<tr><td>${esc(x.date||"Undated")}</td><td>${esc(x.details)}</td><td>${x.side==="receipt"?"Receipt":"Payment"}</td><td>${x.account==="cash"?"Cash":"Bank"}</td><td class="num">${cash(x.amount)}</td></tr>`).join("");
+ document.getElementById("allRows").innerHTML=sorted.map(x=>`<tr><td>${esc(x.date||"Undated")}</td><td>${esc(x.details)}</td><td>${esc(x.folio||"")}</td><td>${x.side==="receipt"?"Receipt":"Payment"}</td><td>${x.account==="cash"?"Cash":"Bank"}</td><td class="num">${cash(x.amount)}</td><td>${esc(x.category)}</td><td>${esc(x.status)}</td></tr>`).join("");
  document.getElementById("count").textContent=entries.length+" cash book entries";
  const categoryNames=[...new Set([...budgets.map(b=>b.category),...entries.map(t=>t.category)].filter(Boolean))];
  document.getElementById("cashCategories").innerHTML=categoryNames.map(c=>`<option value="${esc(c)}"></option>`).join("");
