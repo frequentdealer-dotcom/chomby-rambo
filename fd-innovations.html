@@ -533,7 +533,37 @@
   font-size: 28px;
   cursor: pointer;
 }
+/* MAIN NAVIGATION */
 
+.site-nav {
+  background: #171717;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.site-nav a {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.site-nav a:hover,
+.site-nav a.active {
+  color: #FFD230;
+}
+
+@media (max-width: 500px) {
+  .site-nav {
+    gap: 18px;
+  }
+}
   </style>
 </head>
 
